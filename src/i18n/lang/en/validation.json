@@ -1,0 +1,24 @@
+{
+  "auth": {
+    "username": {
+      "required": "Username is required",
+      "min": "Must be at least 3 characters",
+      "max": "Cannot exceed 15 characters",
+      "regex": "Must only contain lowercase letters and numbers"
+    },
+    "email": {
+      "required": "Email is required",
+      "valid_email": "Must be a valid email address"
+    },
+    "password": {
+      "required": "Password is required",
+      "min": "Must be at least 8 characters",
+      "max": "Cannot exceed 15 characters",
+      "regex": "Must only contain lowercase letters and numbers"
+    },
+    "password_confirmation": {
+      "required": "Password confirmation is required",
+      "password_mismatch": "Passwords do not match"
+    }
+  }
+}

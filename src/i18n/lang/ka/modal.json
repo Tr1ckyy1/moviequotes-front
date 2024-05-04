@@ -1,0 +1,12 @@
+{
+  "verification_sent_header_text": "გმადლობთ!",
+  "verification_sent_paragraph_text": "გთხოვთ, შეამოწმოთ თქვენი ელ.ფოსტა და მიყვეთ ინსტრუქციებს თქვენი ანგარიშის გასააქტიურებლად",
+  "verification_sent_button_text": "ჩემ ფოსტაზე გადასვლა",
+  "verified_paragraph_text": "თქვენი ანგარიში ვერიფიცირებულია",
+  "verified_already_header_text": "ვერიფიცირებული!",
+  "verified_already_paragraph_text": "თქვენი ანგარიში უკვე ვერიფიცირებულია",
+  "expired_header_text": "ბმული ვადაგასულია",
+  "expired_paragraph_text_verification": "გამოუყენებლობის გამო, ვერიფიკაციის ბმულს ვადა გაუვიდა",
+  "expired_paragraph_text_reset": "გამოუყენებლობის გამო, პაროლის აღდგენის ბმულს ვადა გაუვიდა",
+  "expired_button_text": "ახალი ბმულის მოთხოვნა"
+}

@@ -1,0 +1,12 @@
+{
+  "verification_sent_header_text": "Thank you!",
+  "verification_sent_paragraph_text": "Please check your email and follow the instructions to activate your account",
+  "verification_sent_button_text": "Go to my email",
+  "verified_paragraph_text": "Your account has been activated",
+  "verified_already_header_text": "Verified already!",
+  "verified_already_paragraph_text": "Your account has already been verified",
+  "expired_header_text": "Link expired",
+  "expired_paragraph_text_verification": "Verification link has expired, because you haven't used it",
+  "expired_paragraph_text_reset": "Password reset link has expired, because you haven't used it",
+  "expired_button_text": "Request another link"
+}
