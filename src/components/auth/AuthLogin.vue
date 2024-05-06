@@ -60,7 +60,7 @@
 <script setup lang="ts">
 import GoogleIcon from '@/components/icons/GoogleIcon.vue'
 
-import AuthModal from '@/ui/AuthModal.vue'
+import AuthModal from '@/ui/modals/AuthModal.vue'
 import BaseInput from '@/components/BaseInput.vue'
 import { Field, useForm } from 'vee-validate'
 import * as yup from 'yup'
@@ -79,7 +79,7 @@ import { useRouter } from 'vue-router'
 const { t } = useI18n()
 
 const modalStore = useModalStore()
-const { setUser } = useAuthStore()
+const authStore = useAuthStore()
 const router = useRouter()
 
 const formLoading = ref(false)
@@ -103,7 +103,7 @@ const login = handleSubmit(async (values) => {
     formLoading.value = true
     await loginApi(values)
     modalStore.closeLoginModal()
-    setUser(true)
+    authStore.setUser(true)
     router.replace({ name: 'dashboard' })
   } catch (error: any) {
     if (error.response.status === 401) {

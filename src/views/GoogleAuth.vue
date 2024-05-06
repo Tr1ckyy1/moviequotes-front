@@ -15,19 +15,19 @@ const {
   query: { code }
 } = useRoute()
 
-const { setUser, setGoogleError } = useAuthStore()
+const authStore = useAuthStore()
 
 const router = useRouter()
 async function googleSignupCallback() {
   if (code) {
     try {
       await googleSignupCallbackApi({ code: code.toString() })
-      setUser(true)
+      authStore.setUser(true)
       if (!localStorage.getItem('loggedIn')) localStorage.setItem('loggedIn', 'true')
       router.replace({ name: 'dashboard' })
     } catch (err: any) {
       if (err.response?.data?.error) {
-        setGoogleError(err.response?.data?.error)
+        authStore.setGoogleError(err.response?.data?.error)
       }
       router.replace({ name: 'home' })
     }

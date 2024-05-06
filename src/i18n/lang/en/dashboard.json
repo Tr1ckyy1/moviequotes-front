@@ -1,0 +1,8 @@
+{
+  "new_quote": "Write new quote",
+  "search": "Search by",
+  "search_modal": "Search",
+  "search_at": "Enter {'@'} to search movies",
+  "search_hashtag": "Enter {'#'} to search quotes",
+  "search_focused": "Enter {'@'} to search movies, Enter {'#'} to search quotes"
+}

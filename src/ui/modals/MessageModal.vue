@@ -74,7 +74,7 @@ async function resendVerification() {
       if (err.response.status === 500) {
         modalStore.closeVerificationModal()
       }
-      if (err.response.status === 403 && err.response.data?.already_verified) {
+      if (err.response.status === 400 && err.response.data?.already_verified) {
         modalStore.openVerificationModal({
           buttonText: t('auth.header_login_text'),
           headerText: t('modal.verified_already_header_text'),

@@ -7,6 +7,7 @@ export default {
         screen: '100dvh'
       },
       colors: {
+        main: '#DDCCAA',
         'red-main': '#E31221',
         'blue-main': '#0D6EFD',
         'modal-bg': '#222030',
@@ -16,6 +17,9 @@ export default {
         progress: {
           '100%': { right: '100%' }
         }
+      },
+      borderRadius: {
+        llg: '10px'
       }
     }
   },

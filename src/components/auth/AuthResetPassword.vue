@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import AuthModal from '@/ui/AuthModal.vue'
+import AuthModal from '@/ui/modals/AuthModal.vue'
 import BaseInput from '@/components/BaseInput.vue'
 import { useForm } from 'vee-validate'
 import * as yup from 'yup'
@@ -50,7 +50,7 @@ import { useI18n } from 'vue-i18n'
 import { useModalStore } from '@/stores/ModalStore'
 import { resetPassword as resetPasswordApi } from '@/services/api/auth'
 import { ref } from 'vue'
-import ArrowLeft from '@/ui/ArrowLeft.vue'
+import ArrowLeft from '@/components/icons/ArrowLeft.vue'
 import { useRoute } from 'vue-router'
 import type { ResetPassword } from '@/types'
 
@@ -98,7 +98,7 @@ const resetPassword = handleSubmit(async (values) => {
       mode: 'verified'
     })
   } catch (error: any) {
-    if (error.response?.status === 403 && error.response?.data?.expired) {
+    if (error.response?.status === 400 && error.response?.data?.expired) {
       modalStore.closeResetPasswordModal()
       modalStore.openVerificationModal({
         headerText: t('modal.expired_header_text'),

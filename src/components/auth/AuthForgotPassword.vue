@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import AuthModal from '@/ui/AuthModal.vue'
+import AuthModal from '@/ui/modals/AuthModal.vue'
 import BaseInput from '@/components/BaseInput.vue'
 import { useForm } from 'vee-validate'
 import * as yup from 'yup'
@@ -42,7 +42,7 @@ import { useI18n } from 'vue-i18n'
 import { useModalStore } from '@/stores/ModalStore'
 import { forgotPassword as forgotPasswordApi, logout } from '@/services/api/auth'
 import { ref } from 'vue'
-import ArrowLeft from '@/ui/ArrowLeft.vue'
+import ArrowLeft from '@/components/icons/ArrowLeft.vue'
 
 const { t } = useI18n()
 

@@ -21,10 +21,10 @@ export async function login(data: Login) {
 }
 
 export async function logout() {
-  const { setUser } = useAuthStore()
+  const authStore = useAuthStore()
   await instance.post('/api/logout')
   if (localStorage.getItem('loggedIn')) localStorage.removeItem('loggedIn')
-  setUser(false)
+  authStore.setUser(false)
 }
 
 export async function verifyUser({ id, hash, expires, signature }: Queries) {

@@ -66,7 +66,7 @@
 <script setup lang="ts">
 import GoogleIcon from '@/components/icons/GoogleIcon.vue'
 
-import AuthModal from '@/ui/AuthModal.vue'
+import AuthModal from '@/ui/modals/AuthModal.vue'
 import BaseInput from '@/components/BaseInput.vue'
 import { useForm } from 'vee-validate'
 import * as yup from 'yup'

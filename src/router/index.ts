@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import MovieQuotes from '../views/MovieQuotes.vue'
 import DashboardView from '../views/DashboardView.vue'
 import GoogleAuth from '@/views/GoogleAuth.vue'
 import { useAuthStore } from '@/stores/AuthStore'
@@ -18,19 +19,26 @@ const router = createRouter({
       component: GoogleAuth
     },
     {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: DashboardView,
-      meta: { requiresAuth: true }
+      path: '/movie-quotes',
+      name: 'movie-quotes',
+      component: MovieQuotes,
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: '',
+          name: 'dashboard',
+          component: DashboardView,
+          meta: { requiresAuth: true }
+        }
+      ]
     }
-  ]
-  // scrollBehavior(_, _1, savedPosition) {
-  //   console.log(savedPosition)
-  //   if (savedPosition) {
-  //     return savedPosition
-  //   }
-  //   return { left: 0, top: 0 }
-  // }
+  ],
+  scrollBehavior(_, _1, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    }
+    return { left: 0, top: 0 }
+  }
 })
 
 router.beforeEach(function (to) {

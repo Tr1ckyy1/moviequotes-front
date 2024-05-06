@@ -84,7 +84,7 @@ async function sendVerificationRequest() {
         mode: 'verified'
       })
     } catch (err: any) {
-      if (err.response.status === 403) {
+      if (err.response.status === 400) {
         if (err.response.data?.already_verified) {
           modalStore.openVerificationModal({
             buttonText: t('auth.header_login_text'),
@@ -114,7 +114,7 @@ async function sendVerificationRequest() {
       await checkTokenValidity({ token: token.toString(), email: email.toString() })
       modalStore.openResetPasswordModal()
     } catch (err: any) {
-      if (err.response?.status === 403 && err.response?.data?.expired) {
+      if (err.response?.status === 400 && err.response?.data?.expired) {
         modalStore.openVerificationModal({
           headerText: t('modal.expired_header_text'),
           paragraphText: t('modal.expired_paragraph_text_reset'),

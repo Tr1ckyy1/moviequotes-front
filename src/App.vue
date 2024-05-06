@@ -1,14 +1,12 @@
 <template>
-  <RouterView name="header" />
-
   <RouterView />
 </template>
 
 <script setup lang="ts">
 import { getCsrfCookie } from './plugins/axios'
 import { useAuthStore } from './stores/AuthStore'
-const { setUser } = useAuthStore()
+const authStore = useAuthStore()
 getCsrfCookie()
 
-if (localStorage.getItem('loggedIn')) setUser(true)
+if (localStorage.getItem('loggedIn')) authStore.setUser(true)
 </script>

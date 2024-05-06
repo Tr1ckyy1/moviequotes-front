@@ -38,7 +38,7 @@
   </main>
 
   <footer
-    class="text-[#DDCCAA] bg-gradient-to-r from-[#181623] via-[#191725] to-[#0D0B14] p-5 lg:px-14 lg:text-lg text-base"
+    class="text-main bg-gradient-to-r from-[#181623] via-[#191725] to-[#0D0B14] py-4 px-7 lg:px-14 lg:text-lg text-base"
   >
     © 2024 {{ t('footer.text') }}.
   </footer>
