@@ -20,7 +20,7 @@
     >
       <div
         class="hover:bg-[#1a1b26]"
-        :class="{ 'bg-[#1a1b26]': opt.text === selectedOption }"
+        :class="opt.text === selectedOption ? 'bg-[#1a1b26]' : 'bg-[#24222F]'"
         v-for="opt in options"
         :key="opt.value"
         @click="selectOption(opt.value)"

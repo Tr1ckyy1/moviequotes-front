@@ -1,6 +1,6 @@
 <template>
   <TheHeader />
-  <main class="pt-5 lg:px-14 bg-[#191725] text-white lg:grid lg:grid-cols-[1fr_auto_1fr] lg:gap-10">
+  <main class="pt-5 lg:px-14 bg-[#191725] text-white lg:grid lg:grid-cols-[1fr_auto_1fr]">
     <TheSidebar class="hidden lg:block" />
     <RouterView />
   </main>

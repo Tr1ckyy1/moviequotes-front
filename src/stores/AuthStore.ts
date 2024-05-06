@@ -1,8 +1,13 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 export const useAuthStore = defineStore('AuthStore', () => {
+  type UserData = {
+    username: string
+    profileImage: string | null
+  }
+
   const userLoggedIn = ref(false)
-  const userData = ref({
+  const userData = ref<UserData>({
     username: '',
     profileImage: null
   })
@@ -22,7 +27,7 @@ export const useAuthStore = defineStore('AuthStore', () => {
     userLoggedIn.value = payload
   }
 
-  function setUserData(payload) {
+  function setUserData(payload: UserData) {
     userData.value = payload
   }
 

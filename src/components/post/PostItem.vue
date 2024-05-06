@@ -23,14 +23,20 @@
       <span class="flex gap-4 items-center">10 <LikesIcon /></span>
     </div>
     <CommentItem />
-    <!-- <CommentItem /> -->
     <CommentItem />
     <div class="flex gap-4">
-      <img src="@/assets/avatar.png" />
+      <div class="w-10 h-10 lg:w-[52px] lg:h-[52px] shrink-0">
+        <img
+          v-if="userData?.profileImage"
+          :src="userData?.profileImage"
+          class="object-cover rounded-full h-full w-full"
+        />
+        <img v-else src="@/assets/avatar.png" class="object-cover h-full w-full" />
+      </div>
       <input
         type="text"
-        class="flex-grow bg-[#24222F] rounded-llg outline-none px-4 text-[#CED4DA] placeholder:text-[#CED4DA]"
-        placeholder="Write a comment"
+        class="w-full bg-[#24222F] rounded-llg outline-none px-4 text-[#CED4DA] placeholder:text-[#CED4DA]"
+        :placeholder="t('dashboard.write_comment')"
       />
     </div>
   </div>
@@ -40,4 +46,10 @@
 import CommentsIcon from '@/components/icons/CommentsIcon.vue'
 import LikesIcon from '@/components/icons/LikesIcon.vue'
 import CommentItem from './CommentItem.vue'
+import { useAuthStore } from '@/stores/AuthStore'
+import { storeToRefs } from 'pinia'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+const { userData } = storeToRefs(useAuthStore())
 </script>

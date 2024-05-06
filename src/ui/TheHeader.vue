@@ -68,11 +68,14 @@ const pageLoading = ref(false)
 async function user() {
   try {
     pageLoading.value = true
-    const { data } = await getUser()
+    const {
+      data: { data }
+    } = await getUser()
     authStore.setUserData({
       username: data.username,
       profileImage: data.profile_image
     })
+    console.log(data)
   } catch (err: any) {
     if (err.response?.status === 401) logoutApi()
   } finally {
