@@ -1,6 +1,8 @@
 <template>
   <TheHeader />
-  <main class="pt-5 lg:px-14 bg-dark-secondary text-white lg:grid lg:grid-cols-[1fr_2fr_1fr]">
+  <main
+    class="pt-5 lg:px-14 bg-dark-secondary text-white lg:grid lg:grid-cols-[1fr_2fr_1fr] min-h-screen"
+  >
     <TheSidebar class="hidden lg:block" />
     <RouterView />
   </main>

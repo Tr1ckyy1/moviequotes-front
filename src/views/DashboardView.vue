@@ -1,5 +1,5 @@
 <template>
-  <section class="lg:space-y-4 relative max-w-screen-lg">
+  <section class="lg:space-y-4 relative">
     <div class="flex gap-7">
       <div
         @click="openQuotesModal"

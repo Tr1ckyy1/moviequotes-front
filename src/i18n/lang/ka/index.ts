@@ -5,6 +5,7 @@ import validation from './validation.json'
 import modal from './modal.json'
 import dashboard from './dashboard.json'
 import sidebar from './sidebar.json'
+import profile from './profile.json'
 const translations = {
   auth,
   landing,
@@ -13,6 +14,7 @@ const translations = {
   modal,
   dashboard,
   sidebar,
+  profile,
   loading: 'იტვირთება',
   error: 'შეცდომა'
 }

@@ -25,6 +25,12 @@ export async function logout() {
   await instance.post('/api/logout')
   if (localStorage.getItem('loggedIn')) localStorage.removeItem('loggedIn')
   authStore.setUser(false)
+  authStore.setUserData({
+    username: '',
+    email: '',
+    profileImage: null,
+    google: null
+  })
 }
 
 export async function verifyUser({ id, hash, expires, signature }: Queries) {

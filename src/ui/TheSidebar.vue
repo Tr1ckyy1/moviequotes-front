@@ -1,7 +1,10 @@
 <template>
   <aside class="space-y-10 text-white text-xl">
     <div class="flex items-center gap-4">
-      <div class="w-10 h-10 lg:h-14 lg:w-14 shrink-0">
+      <div
+        class="w-10 h-10 lg:h-14 lg:w-14 shrink-0 rounded-full"
+        :class="{ 'border-2 border-red-main': route.name === 'edit-profile' }"
+      >
         <img
           v-if="userData?.profileImage"
           :src="userData?.profileImage"
@@ -11,19 +14,23 @@
       </div>
       <div class="whitespace-nowrap">
         <h1>{{ userData?.username }}</h1>
-        <p class="text-grey-secondary lg:cursor-pointer text-sm">{{ t('sidebar.edit_profile') }}</p>
+        <RouterLink
+          :to="{ name: 'edit-profile' }"
+          class="text-grey-secondary lg:cursor-pointer text-sm"
+          >{{ t('sidebar.edit_profile') }}</RouterLink
+        >
       </div>
     </div>
     <RouterLink
       :to="{ name: 'dashboard' }"
       class="flex items-center gap-7 lg:cursor-pointer lg:pl-3 w-fit"
     >
-      <HomeIcon :class="name === 'dashboard' ? 'fill-red-main' : 'fill-white'" /><span>{{
+      <HomeIcon :class="route.name === 'dashboard' ? 'fill-red-main' : 'fill-white'" /><span>{{
         t('sidebar.news_feed')
       }}</span>
     </RouterLink>
     <RouterLink to="/" class="flex items-center gap-7 lg:cursor-pointer lg:pl-3 w-fit">
-      <MovieListIcon :class="name === 'dashboard' ? 'fill-red-main' : 'fill-white'" />
+      <MovieListIcon :class="route.name === 'dashboard' ? 'fill-red-main' : 'fill-white'" />
       <span>{{ t('sidebar.movies_list') }}</span>
     </RouterLink>
   </aside>
@@ -37,7 +44,7 @@ import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 
-const { name } = useRoute()
+const route = useRoute()
 const { t } = useI18n()
 const { userData } = storeToRefs(useAuthStore())
 </script>

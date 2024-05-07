@@ -3,13 +3,17 @@ import { ref } from 'vue'
 export const useAuthStore = defineStore('AuthStore', () => {
   type UserData = {
     username: string
+    email: string
     profileImage: string | null
+    google: string | null
   }
 
   const userLoggedIn = ref(false)
   const userData = ref<UserData>({
     username: '',
-    profileImage: null
+    email: '',
+    profileImage: null,
+    google: null
   })
   const googleErrorToast = ref(false)
   const toastMessage = ref('')

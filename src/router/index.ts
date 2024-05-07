@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import MovieQuotes from '../views/MovieQuotes.vue'
 import DashboardView from '../views/DashboardView.vue'
+import ProfileEdit from '../views/ProfileEdit.vue'
 import GoogleAuth from '@/views/GoogleAuth.vue'
 import { useAuthStore } from '@/stores/AuthStore'
 
@@ -27,8 +28,12 @@ const router = createRouter({
         {
           path: '',
           name: 'dashboard',
-          component: DashboardView,
-          meta: { requiresAuth: true }
+          component: DashboardView
+        },
+        {
+          path: '/edit-profile',
+          name: 'edit-profile',
+          component: ProfileEdit
         }
       ]
     }

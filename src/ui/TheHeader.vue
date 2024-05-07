@@ -20,7 +20,11 @@
       </button>
       <ControlLanguages />
 
-      <SearchIcon class="lg:hidden" @click="openSearchModal" />
+      <SearchIcon
+        class="lg:hidden"
+        @click="openSearchModal"
+        v-if="router.currentRoute.value.name === 'dashboard'"
+      />
 
       <NotificationIcon />
     </div>
@@ -57,7 +61,7 @@ import ControlLanguages from '@/components/ControlLanguages.vue'
 import HeaderModal from '@/components/dashboard/modals/HeaderModal.vue'
 import TheSidebar from './TheSidebar.vue'
 import { logout as logoutApi } from '@/services/api/auth'
-import { useRouter } from 'vue-router'
+import { onBeforeRouteUpdate, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { ref } from 'vue'
 import { useAuthStore } from '@/stores/AuthStore'
@@ -69,29 +73,9 @@ const searchModal = ref(false)
 const { t } = useI18n()
 
 const router = useRouter()
-
 const authStore = useAuthStore()
 
 const pageLoading = ref(false)
-
-async function user() {
-  try {
-    pageLoading.value = true
-    const {
-      data: { data }
-    } = await getUser()
-    authStore.setUserData({
-      username: data.username,
-      profileImage: data.profile_image
-    })
-  } catch (err: any) {
-    if (err.response?.status === 401) logoutApi()
-  } finally {
-    pageLoading.value = false
-  }
-}
-
-user()
 
 async function logout() {
   await logoutApi()
@@ -117,4 +101,29 @@ function openSearchModal() {
 function closeSearchModal() {
   searchModal.value = false
 }
+
+async function user() {
+  try {
+    pageLoading.value = true
+    const {
+      data: { data }
+    } = await getUser()
+    authStore.setUserData({
+      username: data.username,
+      email: data.email,
+      profileImage: data.profile_image,
+      google: data.google_id
+    })
+  } catch (err: any) {
+    if (err.response?.status === 401) logoutApi()
+  } finally {
+    pageLoading.value = false
+  }
+}
+
+user()
+
+onBeforeRouteUpdate(() => {
+  if (sidebarModal.value) closeSidebarModal()
+})
 </script>

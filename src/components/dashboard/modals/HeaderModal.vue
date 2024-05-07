@@ -21,7 +21,7 @@
       class="lg:hidden text-white fixed top-0 left-0 bg-dark-main z-[52] no-scroll"
       :class="
         mode === 'sidebar'
-          ? 'w-[90%] flex flex-col justify-between p-7 py-5 h-4/5'
+          ? 'w-[90%] flex flex-col justify-between p-7 py-5 max-h-4/5 gap-6 min-h-fit'
           : 'w-full h-full'
       "
       v-if="modalOpen"

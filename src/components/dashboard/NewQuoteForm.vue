@@ -1,6 +1,6 @@
 <template>
   <form
-    class="bg-[#0D0B14] h-full overflow-y-auto lg:max-w-screen-lg scrollbar-none lg:min-h-fit lg:max-h-[] max-h-[50rem] lg:rounded-xl"
+    class="bg-[#0D0B14] h-full overflow-y-auto scrollbar-none lg:min-h-fit lg:max-h-[] max-h-[50rem] lg:rounded-xl"
   >
     <header class="flex items-center p-7 border-b border-[#EFEFEF33]">
       <h1 class="capitalize font-semibold text-xl mx-auto">
