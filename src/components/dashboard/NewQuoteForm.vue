@@ -1,6 +1,6 @@
 <template>
   <form
-    class="bg-[#0D0B14] max-h-[80%] overflow-y-auto lg:max-w-screen-lg scrollbar-none lg:max-h-[95%] lg:rounded-xl"
+    class="bg-[#0D0B14] h-full overflow-y-auto lg:max-w-screen-lg scrollbar-none lg:min-h-fit lg:max-h-[] max-h-[50rem] lg:rounded-xl"
   >
     <header class="flex items-center p-7 border-b border-[#EFEFEF33]">
       <h1 class="capitalize font-semibold text-xl mx-auto">
@@ -22,22 +22,22 @@
       </section>
       <div class="relative">
         <textarea
-          class="resize-none w-full bg-transparent border border-[#6C757D] px-4 py-2 rounded-[4px] text-[#6C757D] placeholder:text-[#6C757D] outline-none"
+          class="resize-none w-full bg-transparent border border-grey-main pl-4 pr-11 py-2 rounded-[4px] text-grey-main placeholder:text-grey-main outline-none scrollbar-thin scrollbar-track-transparent scrollbar-thumb-dark-third"
           placeholder="New quote"
           rows="3"
         ></textarea>
-        <p class="absolute right-4 top-4 bg-[#11101A]">Eng</p>
+        <p class="absolute right-4 top-4 bg-dark-main">Eng</p>
       </div>
       <div class="relative">
         <textarea
-          class="resize-none w-full bg-transparent border border-[#6C757D] px-4 py-2 rounded-[4px] text-[#6C757D] placeholder:text-[#6C757D] outline-none"
+          class="resize-none w-full bg-transparent border border-grey-main pl-4 pr-11 py-2 rounded-[4px] text-grey-main placeholder:text-grey-main outline-none scrollbar-thin scrollbar-track-transparent scrollbar-thumb-dark-third"
           placeholder="ახალი ციტატა"
           rows="3"
         ></textarea>
-        <p class="absolute right-4 top-4 bg-[#11101A]">ქარ</p>
+        <p class="absolute right-4 top-4 bg-dark-main">ქარ</p>
       </div>
 
-      <div class="border border-[#6C757D] flex items-center px-4 py-8 gap-4">
+      <div class="border border-grey-main flex items-center px-4 py-8 gap-4">
         <CameraIcon />
         <p class="lg:hidden">{{ t('modal.upload_image') }}</p>
         <p class="hidden lg:block">{{ t('modal.upload_image_desktop') }}</p>
@@ -54,7 +54,7 @@
         <MovieListIcon class="fill-white" />
         <p>{{ t('modal.choose_movie') }}</p>
         <div class="ml-auto lg:cursor-pointer">
-          <ArrowDown class="w-4 h-4" />
+          <ArrowDown width="16" height="16" />
         </div>
       </div>
       <button

@@ -11,7 +11,7 @@
       </div>
       <div class="whitespace-nowrap">
         <h1>{{ userData?.username }}</h1>
-        <p class="text-[#CED4DA] lg:cursor-pointer text-sm">{{ t('sidebar.edit_profile') }}</p>
+        <p class="text-grey-secondary lg:cursor-pointer text-sm">{{ t('sidebar.edit_profile') }}</p>
       </div>
     </div>
     <RouterLink

@@ -11,7 +11,13 @@ export default {
         'red-main': '#E31221',
         'blue-main': '#0D6EFD',
         'modal-bg': '#222030',
-        'red-toast': '#F04349'
+        'red-toast': '#F04349',
+        'dark-main': '#11101A',
+        'dark-secondary': '#191725',
+        'dark-third': '#24222F',
+        'grey-main': '#6C757D',
+        'grey-secondary': '#CED4DA',
+        'grey-rare': '#EFEFEF4D'
       },
       keyframes: {
         progress: {

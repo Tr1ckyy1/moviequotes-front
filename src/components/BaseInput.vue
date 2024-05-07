@@ -7,10 +7,10 @@
         :type="inputType"
         :placeholder="placeholder"
         :name="name"
-        class="border peer border-[#CED4DA] text-[#6C757D] placeholder:text-[#6C757D] bg-[#CED4DA] pl-4 py-2 pr-9 outline-none rounded-[4px] placeholder-shown:bg-white"
+        class="border peer border-grey-secondary text-grey-main placeholder:text-grey-main bg-grey-secondary pl-4 py-2 pr-9 outline-none rounded-[4px] placeholder-shown:bg-white"
         :class="{
           'border-red-main': error,
-          'focus:border-[rgba(13,110,253,0.25)] focus:bg-[#CED4DA]': !error,
+          'focus:border-[rgba(13,110,253,0.25)] focus:bg-grey-secondary': !error,
           'border-[#198754]': !error,
           'pr-[60px]': input === 'password'
         }"
@@ -51,20 +51,19 @@ import HideIcon from '@/components/icons/HideIcon.vue'
 import { Field, ErrorMessage } from 'vee-validate'
 import { computed, ref } from 'vue'
 
-const {
-  title,
-  placeholder = '',
-  input = 'text',
-  name = '',
-  id
-} = defineProps<{
+type Props = {
   title: string
   placeholder?: string
   input?: string
   name?: string
   id: string
   error?: string
-}>()
+}
+const { title, placeholder, input, name, id, error } = withDefaults(defineProps<Props>(), {
+  placeholder: '',
+  input: 'text',
+  name: ''
+})
 
 const passwordIsVisible = ref(false)
 const inputType = computed(() => {

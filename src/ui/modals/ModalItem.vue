@@ -8,7 +8,7 @@
     <div
       v-if="modalIsOpen"
       @click.self="closeModal"
-      class="fixed inset-0 bg-black/10 z-10 backdrop-blur flex items-center justify-center"
+      class="fixed inset-0 bg-black/10 z-10 backdrop-blur flex items-center justify-center no-scroll"
     >
       <slot></slot>
     </div>
@@ -16,9 +16,13 @@
 </template>
 
 <script setup lang="ts">
-const { modalIsOpen = false } = defineProps<{
+type Props = {
   modalIsOpen: boolean
-}>()
+}
+
+withDefaults(defineProps<Props>(), {
+  modalIsOpen: false
+})
 
 const emit = defineEmits<{
   (e: 'close-modal'): void

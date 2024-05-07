@@ -8,7 +8,7 @@
     <div
       v-if="modalOpen"
       @click.self="closeModal"
-      class="fixed inset-0 bg-black/30 z-[55] lg:z-40 lg:top-0 lg:pt-20 lg:grid lg:grid-cols-[1fr_2fr_1fr] lg:px-14"
+      class="fixed inset-0 bg-black/30 z-[55] lg:z-40 lg:top-0 lg:pt-20 lg:grid lg:grid-cols-[1fr_2fr_1fr] lg:px-14 no-scroll"
     >
       <div class="hidden lg:block" @click="closeModal"></div>
       <slot></slot>

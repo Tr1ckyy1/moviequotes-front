@@ -23,7 +23,7 @@
         modalStore.verificationModalInfo.paragraphText ===
         t('auth.modal_forgot_password.request_sent_paragraph')
       "
-      class="text-[#6C757D] cursor-pointer"
+      class="text-grey-main cursor-pointer"
     >
       {{ t('auth.modal_forgot_password.request_sent_skip') }}
     </p>

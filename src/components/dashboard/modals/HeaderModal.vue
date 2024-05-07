@@ -7,7 +7,7 @@
   >
     <div
       @click.self="closeModal"
-      class="fixed inset-0 bg-black/50 z-20 block lg:hidden"
+      class="fixed inset-0 bg-black/50 z-[51] block lg:hidden"
       v-if="modalOpen"
     ></div>
   </Transition>
@@ -18,8 +18,12 @@
     leave-to-class="-translate-x-full"
   >
     <div
-      class="lg:hidden text-white fixed top-0 left-0 bg-[#11101A] h-4/5 z-30"
-      :class="mode === 'sidebar' ? 'w-[90%] flex flex-col justify-between p-7 py-5' : 'w-full'"
+      class="lg:hidden text-white fixed top-0 left-0 bg-dark-main z-[52] no-scroll"
+      :class="
+        mode === 'sidebar'
+          ? 'w-[90%] flex flex-col justify-between p-7 py-5 h-4/5'
+          : 'w-full h-full'
+      "
       v-if="modalOpen"
     >
       <slot></slot>

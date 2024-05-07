@@ -40,15 +40,15 @@
     </form>
     <button
       @click="googleSignupRedirect"
-      class="flex items-center w-full border border-[#CED4DA] text-lg justify-center gap-4 text-white rounded-[4px] py-2 px-4 lg:hover:bg-white lg:hover:text-[#181623] lg:hover:duration-300 lg:w-2/3 lg:mx-auto group"
+      class="flex items-center w-full border border-grey-secondary text-lg justify-center gap-4 text-white rounded-[4px] py-2 px-4 lg:hover:bg-white lg:hover:text-[#181623] lg:hover:duration-300 lg:w-2/3 lg:mx-auto group"
     >
       <GoogleIcon
-        class="fill-[#CED4DA] sm:group-hover:fill-[#181623] sm:group-hover:duration-300"
+        class="fill-grey-secondary sm:group-hover:fill-[#181623] sm:group-hover:duration-300"
       />
       {{ t('auth.google_login') }}
     </button>
 
-    <p class="text-[#6C757D] flex items-center gap-2 justify-center">
+    <p class="text-grey-main flex items-center gap-2 justify-center">
       {{ t('auth.dont_have_account') }}
       <span @click="openModal('signup')" class="text-blue-main underline lg:cursor-pointer">
         {{ t('auth.header_signup_text') }}

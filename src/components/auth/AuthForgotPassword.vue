@@ -25,7 +25,7 @@
 
     <button
       @click="backToLogin"
-      class="cursor-pointer text-[#6C757D] flex items-center gap-2 mx-auto"
+      class="cursor-pointer text-grey-main flex items-center gap-2 mx-auto"
     >
       <ArrowLeft />
       {{ t('auth.modal_forgot_password.back') }}

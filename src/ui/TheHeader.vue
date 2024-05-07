@@ -2,7 +2,7 @@
   <LoadingPage v-if="pageLoading" />
   <header
     v-else
-    class="bg-[#24222F] w-full border-b border-b-[#22203033] py-5 px-7 flex justify-between items-center lg:px-14 sticky top-0 z-50"
+    class="bg-dark-third w-full border-b border-b-[#22203033] py-5 px-7 flex justify-between items-center lg:px-14 sticky top-0 z-50"
   >
     <RouterLink
       @click="scrollToTop"
@@ -34,15 +34,15 @@
   </HeaderModal>
 
   <HeaderModal :modalOpen="searchModal" @close-modal="closeSearchModal">
-    <header class="flex border-b border-[#EFEFEF4D] px-7 py-5 items-center gap-6">
-      <ArrowLeft class="w-4 h-4" @click="closeSearchModal" />
+    <header class="flex border-b border-grey-rare px-7 py-5 items-center gap-6">
+      <ArrowLeft width="16" height="16" @click="closeSearchModal" />
       <input
         type="text"
         class="outline-none bg-transparent placeholder:text-white w-full"
         :placeholder="t('dashboard.search_modal')"
       />
     </header>
-    <main class="text-[#CED4DA] px-16 py-7 space-y-7">
+    <main class="text-grey-secondary px-16 py-7 space-y-7">
       <p>{{ t('dashboard.search_at') }}</p>
       <p>{{ t('dashboard.search_hashtag') }}</p>
     </main>

@@ -3,8 +3,8 @@
     <div class="flex gap-7">
       <div
         @click="openQuotesModal"
-        class="lg:bg-[#24222F] pb-5 px-7 pt-0 lg:pt-4 lg:rounded-llg w-full flex gap-4 items-center lg:cursor-pointer"
-        :class="searchFocused && 'w-fit'"
+        class="lg:bg-dark-third pb-5 px-7 pt-0 lg:pt-4 lg:rounded-llg flex gap-4 items-center lg:cursor-pointer"
+        :class="searchFocused ? 'w-fit' : 'w-full'"
       >
         <NewQuoteIcon />
         <p class="whitespace-nowrap">{{ t('dashboard.new_quote') }}</p>
@@ -16,7 +16,7 @@
       >
         <SearchIcon class="self-center" />
         <input
-          class="outline-none text-xl text-right bg-transparent focus:text-left focus:w-full text-[#CED4DA] placeholder:text-[#CED4DA] focus:border-b focus:border-[#EFEFEF4D]"
+          class="outline-none text-xl text-right bg-transparent focus:text-left focus:w-full text-grey-secondary placeholder:text-grey-secondary focus:border-b focus:border-grey-rare"
           :class="locale === 'ka' ? 'w-16' : 'w-24'"
           id="dashboard-search"
           @focus="searchFocused = true"
