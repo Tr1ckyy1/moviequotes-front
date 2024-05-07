@@ -8,7 +8,7 @@
     <div
       v-if="modalIsOpen"
       @click.self="closeModal"
-      class="fixed inset-0 bg-black/10 z-[100] backdrop-blur flex items-center justify-center"
+      class="fixed inset-0 bg-black/10 z-10 backdrop-blur flex items-center justify-center"
     >
       <slot></slot>
     </div>

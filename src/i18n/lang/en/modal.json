@@ -8,5 +8,10 @@
   "expired_header_text": "Link expired",
   "expired_paragraph_text_verification": "Verification link has expired, because you haven't used it",
   "expired_paragraph_text_reset": "Password reset link has expired, because you haven't used it",
-  "expired_button_text": "Request another link"
+  "expired_button_text": "Request another link",
+  "upload_image": "Upload image",
+  "upload_image_desktop": "Drag & drop your image here or",
+  "choose_file": "Choose file",
+  "choose_movie": "Choose movie",
+  "post": "Post"
 }

@@ -8,5 +8,10 @@
   "expired_header_text": "ბმული ვადაგასულია",
   "expired_paragraph_text_verification": "გამოუყენებლობის გამო, ვერიფიკაციის ბმულს ვადა გაუვიდა",
   "expired_paragraph_text_reset": "გამოუყენებლობის გამო, პაროლის აღდგენის ბმულს ვადა გაუვიდა",
-  "expired_button_text": "ახალი ბმულის მოთხოვნა"
+  "expired_button_text": "ახალი ბმულის მოთხოვნა",
+  "upload_image": "ატვირთეთ სურათი",
+  "upload_image_desktop": "ჩააგდეთ სურათი აქ ან",
+  "choose_file": "აირჩიეთ ფაილი",
+  "choose_movie": "აირჩიეთ ფილმი",
+  "post": "დაპოსტვა"
 }

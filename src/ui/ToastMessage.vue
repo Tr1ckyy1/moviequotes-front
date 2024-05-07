@@ -7,7 +7,7 @@
   >
     <div
       v-if="googleErrorToast"
-      class="flex items-center z-[999] gap-6 fixed top-4 left-1/2 -translate-x-1/2 font-raleway py-3 rounded-lg px-8 bg-gradient-to-r to-[#242C32] to-35% overflow-hidden from-red-900 bg-green-400 w-[90%] max-w-screen-sm"
+      class="flex items-center z-40 gap-6 fixed top-4 left-1/2 -translate-x-1/2 font-raleway py-3 rounded-lg px-8 bg-gradient-to-r to-[#242C32] to-35% overflow-hidden from-red-900 bg-green-400 w-[90%] max-w-screen-sm"
     >
       <div class="bg-toast-red/10 p-1 rounded-full">
         <svg

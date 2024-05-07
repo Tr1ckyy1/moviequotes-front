@@ -1,22 +1,8 @@
 <template>
-  <BurgerMenuModal
-    @close-modal="closeSidebarModal"
-    :modalOpen="sidebarModal"
-    @logout="logout"
-    :logoutText="t('auth.logout_button')"
-  />
-  <SearchModal
-    :modalOpen="searchModal"
-    @close-modal="closeSearchModal"
-    :searchText="t('dashboard.search_modal')"
-    :searchAt="t('dashboard.search_at')"
-    :searchHashtag="t('dashboard.search_hashtag')"
-  />
   <LoadingPage v-if="pageLoading" />
-
   <header
     v-else
-    class="bg-[#24222F] w-full border-b border-b-[#22203033] py-5 px-7 flex justify-between items-center lg:px-14 sticky top-0"
+    class="bg-[#24222F] w-full border-b border-b-[#22203033] py-5 px-7 flex justify-between items-center lg:px-14 sticky top-0 z-50"
   >
     <RouterLink
       @click="scrollToTop"
@@ -39,14 +25,37 @@
       <NotificationIcon />
     </div>
   </header>
+
+  <HeaderModal :modalOpen="sidebarModal" @close-modal="closeSidebarModal" mode="sidebar">
+    <TheSidebar />
+    <button @click="logout" class="border border-white py-2 px-4 rounded-[4px] w-fit block">
+      {{ t('auth.logout_button') }}
+    </button>
+  </HeaderModal>
+
+  <HeaderModal :modalOpen="searchModal" @close-modal="closeSearchModal">
+    <header class="flex border-b border-[#EFEFEF4D] px-7 py-5 items-center gap-6">
+      <ArrowLeft class="w-4 h-4" @click="closeSearchModal" />
+      <input
+        type="text"
+        class="outline-none bg-transparent placeholder:text-white w-full"
+        :placeholder="t('dashboard.search_modal')"
+      />
+    </header>
+    <main class="text-[#CED4DA] px-16 py-7 space-y-7">
+      <p>{{ t('dashboard.search_at') }}</p>
+      <p>{{ t('dashboard.search_hashtag') }}</p>
+    </main>
+  </HeaderModal>
 </template>
 <script setup lang="ts">
 import BurgerMenuIcon from '@/components/icons/BurgerMenuIcon.vue'
 import SearchIcon from '@/components/icons/SearchIcon.vue'
 import NotificationIcon from '@/components/icons/NotificationIcon.vue'
+import ArrowLeft from '@/components/icons/ArrowLeft.vue'
 import ControlLanguages from '@/components/ControlLanguages.vue'
-import BurgerMenuModal from './modals/BurgerMenuModal.vue'
-import SearchModal from './modals/SearchModal.vue'
+import HeaderModal from '@/components/dashboard/modals/HeaderModal.vue'
+import TheSidebar from './TheSidebar.vue'
 import { logout as logoutApi } from '@/services/api/auth'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
@@ -75,7 +84,6 @@ async function user() {
       username: data.username,
       profileImage: data.profile_image
     })
-    console.log(data)
   } catch (err: any) {
     if (err.response?.status === 401) logoutApi()
   } finally {
