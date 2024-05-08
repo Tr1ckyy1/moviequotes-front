@@ -4,12 +4,12 @@
     v-else
     class="bg-dark-third w-full border-b border-b-[#22203033] py-5 px-7 flex justify-between items-center lg:px-14 sticky top-0 z-50"
   >
-    <RouterLink
-      @click="scrollToTop"
-      :to="{ name: 'dashboard' }"
-      class="hidden lg:block uppercase text-main font-semibold text-lg"
-      >movie quotes</RouterLink
+    <div
+      @click="navigate"
+      class="hidden lg:block uppercase text-main font-semibold text-lg cursor-pointer"
     >
+      movie quotes
+    </div>
     <BurgerMenuIcon class="lg:hidden" @click="openSidebarModal" />
     <div class="flex gap-5 items-center lg:flex-row-reverse lg:gap-8">
       <button
@@ -82,7 +82,8 @@ async function logout() {
   router.replace({ name: 'home' })
 }
 
-function scrollToTop() {
+function navigate() {
+  if (router.currentRoute.value.name !== 'dashboard') router.push({ name: 'dashboard' })
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 

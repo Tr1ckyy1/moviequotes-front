@@ -1,5 +1,7 @@
 {
   "my_profile": "My profile",
   "upload_new_photo": "Upload new photo",
-  "edit": "Edit"
+  "edit": "Edit",
+  "cancel": "Cancel",
+  "save_changes": "Save Changes"
 }

@@ -11,11 +11,11 @@
 
     <div
       v-if="modalShowing"
-      class="absolute w-full bg-transparent border-x border-b border-dark-third]"
+      class="absolute w-full bg-transparent border-x border-b border-dark-third"
     >
       <div
         class="hover:bg-[#1a1b26]"
-        :class="opt.text === selectedOption ? 'bg-[#1a1b26]' : 'bg-dark-third]'"
+        :class="opt.text === selectedOption ? 'bg-[#1a1b26]' : 'bg-dark-third'"
         v-for="opt in options"
         :key="opt.value"
         @click="selectOption(opt.value)"

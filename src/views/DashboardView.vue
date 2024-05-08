@@ -3,7 +3,7 @@
     <div class="flex gap-7">
       <div
         @click="openQuotesModal"
-        class="lg:bg-dark-third pb-5 px-7 pt-0 lg:pt-4 lg:rounded-llg flex gap-4 items-center lg:cursor-pointer"
+        class="lg:bg-dark-third p-7 pt-0 lg:pt-4 lg:rounded-llg flex gap-4 items-center lg:cursor-pointer"
         :class="searchFocused ? 'w-fit' : 'w-full'"
       >
         <NewQuoteIcon />
