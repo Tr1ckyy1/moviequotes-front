@@ -4,13 +4,16 @@
       <h1 class="text-2xl hidden lg:block">{{ t('profile.my_profile') }}</h1>
       <ArrowLeft class="lg:hidden" @click="goBack" width="16" height="16" />
     </div>
+
+    <ProfileEditModal v-if="editUsernameModal" @close="closeEditUsername" />
     <div
-      class="bg-dark-third min-h-screen lg:h-auto py-5 px-7 lg:mt-32 lg:bg-dark-main lg:relative lg:py-20"
+      v-else
+      class="bg-dark-third min-h-screen lg:min-h-fit py-5 px-7 lg:mt-32 lg:bg-dark-main lg:relative lg:py-20"
     >
       <div
         class="flex justify-center flex-col items-center gap-2 lg:absolute lg:top-0 lg:-translate-y-1/2 lg:left-1/2 lg:-translate-x-1/2"
       >
-        <div class="lg:w-48 lg:h-48 h-14 w-14 shrink-0">
+        <div class="w-48 h-48 shrink-0">
           <img
             v-if="userData?.profileImage"
             :src="userData?.profileImage"
@@ -35,7 +38,11 @@
             >
               {{ userData.username }}
             </p>
-            <button class="text-grey-secondary text-lg ml-auto" type="button">
+            <button
+              @click="openEditUsername"
+              class="text-grey-secondary text-lg ml-auto"
+              type="button"
+            >
               {{ t('profile.edit') }}
             </button>
           </div>
@@ -91,12 +98,15 @@ import ArrowLeft from '@/components/icons/ArrowLeft.vue'
 import { useAuthStore } from '@/stores/AuthStore'
 import { storeToRefs } from 'pinia'
 import { useForm, Field } from 'vee-validate'
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
+import ProfileEditModal from '@/components/profile/ProfileEditModal.vue'
 
 const { userData } = storeToRefs(useAuthStore())
 const router = useRouter()
 const { t } = useI18n()
+const editUsernameModal = ref(false)
 
 const { handleSubmit } = useForm()
 
@@ -106,5 +116,13 @@ const upload = handleSubmit(async (values) => {
 
 function goBack() {
   router.go(-1)
+}
+
+function openEditUsername() {
+  editUsernameModal.value = true
+}
+
+function closeEditUsername() {
+  editUsernameModal.value = false
 }
 </script>
