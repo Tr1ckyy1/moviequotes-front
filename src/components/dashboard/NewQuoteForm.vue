@@ -51,7 +51,7 @@
         <input id="file-upload" type="file" accept="image/*" hidden />
       </div>
       <div class="border border-black flex items-center px-4 py-8 gap-4 bg-black">
-        <MovieListIcon class="fill-white" />
+        <MovieListIcon />
         <p>{{ t('modal.choose_movie') }}</p>
         <div class="ml-auto lg:cursor-pointer">
           <ArrowDown width="16" height="16" />

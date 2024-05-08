@@ -25,12 +25,12 @@
       :to="{ name: 'dashboard' }"
       class="flex items-center gap-7 lg:cursor-pointer lg:pl-3 w-fit"
     >
-      <HomeIcon :class="route.name === 'dashboard' ? 'fill-red-main' : 'fill-white'" /><span>{{
+      <HomeIcon :currentPage="route.name === 'dashboard'" /><span>{{
         t('sidebar.news_feed')
       }}</span>
     </RouterLink>
     <RouterLink to="/" class="flex items-center gap-7 lg:cursor-pointer lg:pl-3 w-fit">
-      <MovieListIcon :class="route.name === 'dashboard' ? 'fill-red-main' : 'fill-white'" />
+      <MovieListIcon :currentPage="route.name === 'dashboard'" />
       <span>{{ t('sidebar.movies_list') }}</span>
     </RouterLink>
   </aside>

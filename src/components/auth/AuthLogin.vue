@@ -34,7 +34,7 @@
         class="flex justify-center gap-4 items-center mt-6 w-full bg-red-main border border-red-main text-white rounded-[4px] py-2 lg:enabled:hover:bg-white lg:enabled:hover:text-red-main lg:hover:duration-300 disabled:cursor-not-allowed"
         :disabled="formLoading"
       >
-        <LoadingSpinnerMini class="text-white fill-red-main" v-if="formLoading" />
+        <LoadingSpinnerMini v-if="formLoading" />
         {{ !formLoading ? t('auth.header_login_text') : t('loading') }}
       </button>
     </form>

@@ -1,5 +1,12 @@
 <template>
-  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    width="32"
+    height="32"
+    viewBox="0 0 32 32"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    :class="currentPage ? 'fill-red-main' : 'fill-white'"
+  >
     <path
       fill-rule="evenodd"
       clip-rule="evenodd"
@@ -12,3 +19,9 @@
     />
   </svg>
 </template>
+
+<script setup lang="ts">
+defineProps<{
+  currentPage?: boolean
+}>()
+</script>

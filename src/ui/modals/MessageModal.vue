@@ -12,7 +12,7 @@
       class="flex justify-center gap-4 items-center w-full bg-red-main border border-red-main rounded-[4px] py-2 px-10 lg:enabled:hover:bg-white lg:enabled:hover:text-red-main lg:enabled:hover:duration-300 disabled:cursor-not-allowed"
       :disabled="buttonLoading"
     >
-      <LoadingSpinnerMini class="text-white fill-red-main" v-if="buttonLoading" />
+      <LoadingSpinnerMini v-if="buttonLoading" />
 
       {{ buttonLoading ? t('loading') : modalStore.verificationModalInfo.buttonText }}
     </button>
