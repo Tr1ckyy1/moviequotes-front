@@ -17,7 +17,7 @@
       </p>
       <img
         src="@/assets/landing-image-1-desktop.png"
-        class="rounded-xl min-h-[12rem] w-full object-cover max-h-[31rem]"
+        class="rounded-llg min-h-[12rem] w-full object-cover max-h-[31rem]"
       />
       <div class="flex items-center gap-6 border-b border-grey-rare pb-4">
         <span class="flex gap-4 items-center">3 <CommentsIcon /></span>

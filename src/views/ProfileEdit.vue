@@ -9,7 +9,7 @@
     />
 
     <form v-else @submit="upload" enctype="multipart/form-data">
-      <div class="p-7 pt-0 lg:px-14">
+      <div class="p-7 pt-0 lg:px-0">
         <h1 class="text-2xl hidden lg:block">{{ t('profile.my_profile') }}</h1>
         <ArrowLeft class="lg:hidden" @click="goBack" width="16" height="16" />
       </div>
