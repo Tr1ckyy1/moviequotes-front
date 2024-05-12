@@ -24,10 +24,10 @@
 
       <button
         class="flex justify-center gap-4 items-center mt-6 w-full bg-red-main border border-red-main text-white rounded-[4px] py-2 lg:enabled:hover:bg-white lg:enabled:hover:text-red-main lg:hover:duration-300 disabled:cursor-not-allowed"
-        :disabled="formLoading"
+        :disabled="isSubmitting"
       >
-        <LoadingSpinnerMini v-if="formLoading" />
-        {{ !formLoading ? t('auth.modal_reset_password.button_text') : t('loading') }}
+        <LoadingSpinnerMini v-if="isSubmitting" />
+        {{ !isSubmitting ? t('auth.modal_reset_password.button_text') : t('loading') }}
       </button>
     </form>
 
@@ -49,7 +49,6 @@ import * as yup from 'yup'
 import { useI18n } from 'vue-i18n'
 import { useModalStore } from '@/stores/ModalStore'
 import { resetPassword as resetPasswordApi } from '@/services/api/auth'
-import { ref } from 'vue'
 import ArrowLeft from '@/components/icons/ArrowLeft.vue'
 import { useRoute } from 'vue-router'
 import type { ResetPassword } from '@/types'
@@ -60,8 +59,6 @@ const { t } = useI18n()
 const {
   query: { token, email }
 } = useRoute()
-
-const formLoading = ref(false)
 
 const schema = yup.object().shape({
   password: yup
@@ -77,7 +74,9 @@ const schema = yup.object().shape({
     .oneOf([yup.ref('password')], t('validation.auth.password_confirmation.password_mismatch'))
 })
 
-const { handleSubmit, errors, setFieldError } = useForm<ResetPassword>({ validationSchema: schema })
+const { handleSubmit, errors, setFieldError, isSubmitting } = useForm<ResetPassword>({
+  validationSchema: schema
+})
 
 function backToLogin() {
   modalStore.closeResetPasswordModal()
@@ -86,7 +85,6 @@ function backToLogin() {
 
 const resetPassword = handleSubmit(async (values) => {
   try {
-    formLoading.value = true
     if (typeof token === 'string' && typeof email === 'string')
       await resetPasswordApi({ ...values, token, email })
     modalStore.closeResetPasswordModal()
@@ -113,8 +111,6 @@ const resetPassword = handleSubmit(async (values) => {
         setFieldError(fieldName as keyof ResetPassword, error.response.data.errors[fieldName])
       }
     }
-  } finally {
-    formLoading.value = false
   }
 })
 </script>

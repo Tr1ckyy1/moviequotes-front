@@ -1,8 +1,8 @@
 <template>
   <div
-    class="py-7 px-7 lg:rounded-xl bg-dark-main lg:text-xl flex flex-col justify-between max-h-[52rem] lg:max-h-[70rem] gap-7"
+    class="py-7 px-7 lg:rounded-xl bg-dark-main lg:text-xl grid grid-rows-[1fr_auto_1fr] max-h-[52rem] lg:max-h-[70rem] gap-7"
   >
-    <div class="overflow-y-auto scrollbar-none space-y-4">
+    <div class="space-y-4">
       <div class="flex items-center gap-4">
         <div class="w-10 h-10 lg:w-[52px] lg:h-[52px]">
           <img
@@ -23,13 +23,16 @@
         <span class="flex gap-4 items-center">3 <CommentsIcon /></span>
         <span class="flex gap-4 items-center">10 <LikesIcon /></span>
       </div>
+    </div>
+    <div
+      class="overflow-y-auto scrollbar-thin scrollbar-thumb-grey-rare/10 scrollbar- scrollbar-track-transparent space-y-4"
+    >
       <CommentItem />
       <CommentItem />
       <CommentItem />
       <CommentItem />
       <CommentItem />
     </div>
-
     <div class="flex gap-4">
       <div class="w-10 h-10 lg:w-[52px] lg:h-[52px] shrink-0">
         <img

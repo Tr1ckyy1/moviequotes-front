@@ -39,10 +39,10 @@
       />
       <button
         class="flex justify-center gap-4 items-center mt-6 w-full bg-red-main border border-red-main text-white rounded-[4px] py-2 lg:enabled:hover:bg-white lg:enabled:hover:text-red-main lg:hover:duration-300 disabled:cursor-not-allowed"
-        :disabled="formLoading"
+        :disabled="isSubmitting"
       >
-        <LoadingSpinnerMini  v-if="formLoading" />
-        {{ !formLoading ? t('auth.get_started_button') : t('loading') }}
+        <LoadingSpinnerMini v-if="isSubmitting" />
+        {{ !isSubmitting ? t('auth.get_started_button') : t('loading') }}
       </button>
     </form>
     <button
@@ -76,7 +76,6 @@ import {
   logout
 } from '@/services/api/auth'
 import { useI18n } from 'vue-i18n'
-import { ref } from 'vue'
 import { useModalStore } from '@/stores/ModalStore'
 import type { Signup } from '@/types'
 
@@ -113,15 +112,13 @@ function openLoginModal() {
   modalStore.openLoginModal()
 }
 
-const formLoading = ref(false)
 
-const { handleSubmit, setFieldError, errors } = useForm<Signup>({
+const { handleSubmit, setFieldError, errors,isSubmitting } = useForm<Signup>({
   validationSchema: schema
 })
 
 const signup = handleSubmit(async (values) => {
   try {
-    formLoading.value = true
     await signupApi(values)
     modalStore.setEmailUrl(values.email)
     modalStore.closeSignupModal()
@@ -141,9 +138,7 @@ const signup = handleSubmit(async (values) => {
         setFieldError(fieldName as keyof Signup, error.response.data.errors[fieldName])
       }
     }
-  } finally {
-    formLoading.value = false
-  }
+  } 
 })
 
 async function googleSignupRedirect() {

@@ -16,10 +16,10 @@
 
       <button
         class="flex justify-center gap-4 items-center mt-6 w-full bg-red-main border border-red-main text-white rounded-[4px] py-2 lg:enabled:hover:bg-white lg:enabled:hover:text-red-main lg:hover:duration-300 disabled:cursor-not-allowed"
-        :disabled="formLoading"
+        :disabled="isSubmitting"
       >
-        <LoadingSpinnerMini v-if="formLoading" />
-        {{ !formLoading ? t('auth.modal_forgot_password.button_text') : t('loading') }}
+        <LoadingSpinnerMini v-if="isSubmitting" />
+        {{ !isSubmitting ? t('auth.modal_forgot_password.button_text') : t('loading') }}
       </button>
     </form>
 
@@ -41,14 +41,12 @@ import * as yup from 'yup'
 import { useI18n } from 'vue-i18n'
 import { useModalStore } from '@/stores/ModalStore'
 import { forgotPassword as forgotPasswordApi, logout } from '@/services/api/auth'
-import { ref } from 'vue'
 import ArrowLeft from '@/components/icons/ArrowLeft.vue'
 
 const { t } = useI18n()
 
 const modalStore = useModalStore()
 
-const formLoading = ref(false)
 
 const schema = yup.object().shape({
   email: yup
@@ -57,7 +55,7 @@ const schema = yup.object().shape({
     .email(t('validation.auth.email.valid_email'))
 })
 
-const { handleSubmit, errors, setFieldError } = useForm({ validationSchema: schema })
+const { handleSubmit, errors, setFieldError,isSubmitting } = useForm({ validationSchema: schema })
 
 function backToLogin() {
   modalStore.closeForgotPasswordModal()
@@ -66,7 +64,6 @@ function backToLogin() {
 
 const forgotPassword = handleSubmit(async (values) => {
   try {
-    formLoading.value = true
     await forgotPasswordApi(values.email)
     modalStore.setEmailUrl(values.email)
     modalStore.closeForgotPasswordModal()
@@ -86,8 +83,6 @@ const forgotPassword = handleSubmit(async (values) => {
         setFieldError(fieldName, error.response.data.errors[fieldName])
       }
     }
-  } finally {
-    formLoading.value = false
-  }
+  } 
 })
 </script>

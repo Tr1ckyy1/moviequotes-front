@@ -17,13 +17,10 @@ export default {
         'dark-third': '#24222F',
         'grey-main': '#6C757D',
         'grey-secondary': '#CED4DA',
-        'grey-rare': '#EFEFEF4D'
+        'grey-rare': '#EFEFEF4D',
+        'profile-green': '#198754'
       },
-      keyframes: {
-        progress: {
-          '100%': { right: '100%' }
-        }
-      },
+
       borderRadius: {
         llg: '10px'
       }

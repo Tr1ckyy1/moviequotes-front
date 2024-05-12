@@ -27,7 +27,11 @@ async function googleSignupCallback() {
       router.replace({ name: 'dashboard' })
     } catch (err: any) {
       if (err.response?.data?.error) {
-        authStore.setGoogleError(err.response?.data?.error)
+        authStore.setToast({
+          open: true,
+          text: err.response?.data.error,
+          mode: 'error'
+        })
       }
       router.replace({ name: 'home' })
     }

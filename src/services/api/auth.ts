@@ -1,6 +1,7 @@
-import { instance, getCsrfCookie } from '@/plugins/axios'
+import { instance } from '@/plugins/axios'
 import { useAuthStore } from '@/stores/AuthStore'
 import type { Signup, Queries, Login, ResetPassword, TokenValidity } from '@/types'
+import router from '@/router'
 export async function signup(data: Signup) {
   await instance.post('/api/signup', data)
 }
@@ -14,8 +15,6 @@ export async function googleSignupCallback(code: Object) {
 }
 
 export async function login(data: Login) {
-  // await getCsrfCookie()
-
   await instance.post('/api/login', data)
   if (!localStorage.getItem('loggedIn')) localStorage.setItem('loggedIn', 'true')
 }
@@ -31,6 +30,7 @@ export async function logout() {
     profileImage: null,
     google: null
   })
+  router.replace({ name: 'home' })
 }
 
 export async function verifyUser({ id, hash, expires, signature }: Queries) {
