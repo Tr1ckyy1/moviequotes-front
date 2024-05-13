@@ -146,7 +146,7 @@ import ProfilePasswordModal from '@/components/profile/ProfilePasswordModal.vue'
 import ProfilePasswordInput from '@/components/profile/ProfilePasswordInput.vue'
 import { onMounted } from 'vue'
 import { watchEffect } from 'vue'
-import { updateUserProfile } from '@/services/api/user'
+import { getUser, updateUserProfile } from '@/services/api/user'
 import { watch } from 'vue'
 import { computed } from 'vue'
 import LoadingPage from '@/ui/LoadingPage.vue'
@@ -181,27 +181,24 @@ const buttonsVisible = computed(() => {
 const upload = handleSubmit(async (values) => {
   try {
     const { data } = await updateUserProfile(values)
-    console.log(data)
+    const {
+      data: { data: user }
+    } = await getUser()
+
     authStore.setToast({
       open: true,
       text: data.message ?? data,
       mode: 'success'
     })
+
     window.scrollTo(0, 0)
 
-    if (values.profile_image && data.image) {
-      authStore.setUserData({
-        ...authStore.userData,
-        profileImage: data.image
-      })
-    }
+    authStore.setUserData({
+      ...authStore.userData,
+      username: user.username,
+      profileImage: user.profile_image
+    })
 
-    if (values.username) {
-      authStore.setUserData({
-        ...authStore.userData,
-        username: values.username
-      })
-    }
     if (values.password && data.password_message) {
       logout()
       authStore.setToast({ open: true, text: data.password_message, mode: 'success' })

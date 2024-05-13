@@ -33,10 +33,3 @@ instance.interceptors.response.use(
     return Promise.reject(error)
   }
 )
-
-instance.interceptors.request.use(async (config) => {
-  if (config.method?.toUpperCase() === 'POST') {
-    await getCsrfCookie()
-  }
-  return config
-})
