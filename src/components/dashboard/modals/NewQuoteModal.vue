@@ -11,7 +11,7 @@
       class="fixed inset-0 bg-black/30 z-[55] lg:z-40 lg:top-0 lg:pt-24 lg:pb-4 no-scroll lg:px-14"
     >
       <form
-        class="bg-[#0D0B14] h-full lg:max-h-[50rem] overflow-y-auto scrollbar-none lg:ml-[calc(20%_+80px)] xl:ml-[20%] lg:rounded-xl lg:w-[55%]"
+        class="bg-[#0D0B14] h-full lg:max-h-[50rem] overflow-y-auto scrollbar-none lg:ml-[calc(25%_+80px)] xl:ml-[25%] lg:rounded-xl lg:w-[55%]"
       >
         <header class="flex items-center p-7 border-b border-[#EFEFEF33]">
           <h1 class="capitalize font-semibold text-xl mx-auto">

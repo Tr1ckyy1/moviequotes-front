@@ -112,8 +112,7 @@ function openLoginModal() {
   modalStore.openLoginModal()
 }
 
-
-const { handleSubmit, setFieldError, errors,isSubmitting } = useForm<Signup>({
+const { handleSubmit, setFieldError, errors, isSubmitting } = useForm<Signup>({
   validationSchema: schema
 })
 
@@ -138,7 +137,7 @@ const signup = handleSubmit(async (values) => {
         setFieldError(fieldName as keyof Signup, error.response.data.errors[fieldName])
       }
     }
-  } 
+  }
 })
 
 async function googleSignupRedirect() {

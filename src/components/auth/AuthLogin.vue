@@ -81,7 +81,6 @@ const modalStore = useModalStore()
 const authStore = useAuthStore()
 const router = useRouter()
 
-
 const schema = yup.object().shape({
   email: yup
     .string()
@@ -90,7 +89,9 @@ const schema = yup.object().shape({
   password: yup.string().trim().required(t('validation.auth.password.required'))
 })
 
-const { handleSubmit, errors, setFieldError,isSubmitting } = useForm<Login>({ validationSchema: schema })
+const { handleSubmit, errors, setFieldError, isSubmitting } = useForm<Login>({
+  validationSchema: schema
+})
 
 function openModal(mode: string) {
   modalStore.closeLoginModal()

@@ -12,11 +12,11 @@
       <label
         class="hidden lg:flex lg:cursor-pointer gap-4"
         for="dashboard-search"
-        :class="searchFocused && 'w-full'"
+        :class="searchFocused && 'w-full border-b border-grey-rare'"
       >
         <SearchIcon class="self-center" />
         <input
-          class="outline-none text-xl text-right bg-transparent focus:text-left focus:w-full text-grey-secondary placeholder:text-grey-secondary focus:border-b focus:border-grey-rare"
+          class="outline-none text-xl text-right bg-transparent focus:text-left focus:w-full text-grey-secondary placeholder:text-grey-secondary"
           :class="locale === 'ka' ? 'w-16' : 'w-24'"
           id="dashboard-search"
           @focus="searchFocused = true"
