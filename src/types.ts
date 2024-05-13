@@ -40,3 +40,10 @@ export type Toast = {
   text: string
   mode: string
 }
+
+export type Movie = {
+  // url: string
+  title: string
+  year: string | number
+  totalQuotes: string | number
+}

@@ -1,5 +1,5 @@
 <template>
-  <section class="px-7 lg:px-0 space-y-8 overflow-y-scroll max-h-screen no-scroll scrollbar-none">
+  <section class="px-7 lg:px-0 space-y-8">
     <header class="flex justify-between gap-10">
       <h1 class="text-2xl">{{ t('list.title', { number: 25 }) }}</h1>
       <div class="flex min-w-fit gap-3">
@@ -32,12 +32,12 @@
       </div>
     </header>
     <main class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-y-10 gap-x-6">
-      <MovieListItem title="Lord of the rings" year="2021" totalQuotes="10" />
-      <MovieListItem title="Lord of the rings" year="2021" totalQuotes="10" />
-      <MovieListItem title="Lord of the rings" year="2021" totalQuotes="10" />
-      <MovieListItem title="Lord of the rings" year="2021" totalQuotes="10" />
-      <MovieListItem title="Lord of the rings" year="2021" totalQuotes="10" />
-      <MovieListItem title="Lord of the rings" year="2021" totalQuotes="10" />
+      <MovieListItem
+        v-for="(movie, index) in moviesList"
+        :key="movie.id"
+        :movie="movie"
+        :class="index === moviesList.length - 1 && 'pb-16 lg:pb-[6rem]'"
+      />
     </main>
   </section>
 </template>
@@ -47,6 +47,31 @@ import MovieListItem from '@/components/movies-list/MovieListItem.vue'
 import SearchIcon from '@/components/icons/SearchIcon.vue'
 import { useI18n } from 'vue-i18n'
 import { ref } from 'vue'
+
+const moviesList = ref([
+  { id: 1, title: 'random title', year: 2001, totalQuotes: 4 },
+  { id: 2, title: 'random title', year: 2001, totalQuotes: 4 },
+  { id: 3, title: 'random title', year: 2001, totalQuotes: 4 },
+  { id: 4, title: 'random title', year: 2001, totalQuotes: 4 },
+  { id: 5, title: 'random title', year: 2001, totalQuotes: 4 },
+  { id: 6, title: 'random title', year: 2001, totalQuotes: 4 },
+  { id: 7, title: 'random title', year: 2001, totalQuotes: 4 },
+  { id: 8, title: 'random title', year: 2001, totalQuotes: 4 },
+  { id: 9, title: 'random title', year: 2001, totalQuotes: 4 },
+  { id: 11, title: 'random title', year: 2001, totalQuotes: 4 },
+  { id: 12, title: 'random title', year: 2001, totalQuotes: 4 },
+  { id: 13, title: 'random title', year: 2001, totalQuotes: 4 },
+  { id: 14, title: 'random title', year: 2001, totalQuotes: 4 },
+  { id: 15, title: 'random title', year: 2001, totalQuotes: 4 },
+  { id: 16, title: 'random title', year: 2001, totalQuotes: 4 },
+  { id: 17, title: 'random title', year: 2001, totalQuotes: 4 },
+  { id: 18, title: 'random title', year: 2001, totalQuotes: 4 },
+  { id: 19, title: 'random title', year: 2001, totalQuotes: 4 },
+  { id: 20, title: 'random title', year: 2001, totalQuotes: 4 },
+  { id: 21, title: 'random title', year: 2001, totalQuotes: 4 },
+  { id: 22, title: 'random title', year: 2001, totalQuotes: 4 },
+  { id: 23, title: 'random title', year: 2001, totalQuotes: 4 }
+])
 
 const searchFocused = ref(false)
 const { t } = useI18n()
