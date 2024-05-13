@@ -16,7 +16,6 @@
     "axios": "^1.6.8",
     "js-cookie": "^3.0.5",
     "pinia": "^2.1.7",
-    "tailwind-scrollbar": "^3.1.0",
     "vee-validate": "^4.12.6",
     "vue": "^3.4.21",
     "vue-i18n": "^9.13.1",

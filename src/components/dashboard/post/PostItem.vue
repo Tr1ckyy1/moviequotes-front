@@ -24,9 +24,7 @@
         <span class="flex gap-4 items-center">10 <LikesIcon /></span>
       </div>
     </div>
-    <div
-      class="overflow-y-auto scrollbar-thin scrollbar-thumb-grey-rare/10 scrollbar- scrollbar-track-transparent space-y-4"
-    >
+    <div class="overflow-y-auto scrollbar space-y-4">
       <CommentItem />
       <CommentItem />
       <CommentItem />

@@ -33,7 +33,7 @@
           </section>
           <div class="relative">
             <textarea
-              class="resize-none w-full bg-transparent border border-grey-main pl-4 pr-11 py-2 rounded-[4px] text-white italic placeholder:text-grey-main outline-none scrollbar-thin scrollbar-track-transparent scrollbar-thumb-dark-third"
+              class="resize-none w-full bg-transparent border border-grey-main pl-4 pr-11 py-2 rounded-[4px] text-white italic placeholder:text-grey-main outline-none scrollbar-none"
               placeholder="New quote"
               rows="3"
             ></textarea>
@@ -41,7 +41,7 @@
           </div>
           <div class="relative">
             <textarea
-              class="resize-none w-full bg-transparent border border-grey-main pl-4 pr-11 py-2 rounded-[4px] text-white italic placeholder:text-grey-main outline-none scrollbar-thin scrollbar-track-transparent scrollbar-thumb-dark-third"
+              class="resize-none w-full bg-transparent border border-grey-main pl-4 pr-11 py-2 rounded-[4px] text-white italic placeholder:text-grey-main outline-none scrollbar-none"
               placeholder="ახალი ციტატა"
               rows="3"
             ></textarea>
