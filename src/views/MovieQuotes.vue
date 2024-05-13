@@ -8,7 +8,7 @@
       class="hidden lg:block lg:w-1/4"
       :class="route.name === 'movies-list' && 'sticky top-0'"
     />
-    <RouterView :class="route.name !== 'movies-list' && 'w-[55%]'" class="pb-7" />
+    <RouterView :class="route.name !== 'movies-list' && 'lg:w-[55%]'" class="pb-7" />
   </main>
 </template>
 
