@@ -181,6 +181,7 @@ const buttonsVisible = computed(() => {
 const upload = handleSubmit(async (values) => {
   try {
     const { data } = await updateUserProfile(values)
+    console.log(data)
     authStore.setToast({
       open: true,
       text: data.message ?? data,
@@ -188,7 +189,7 @@ const upload = handleSubmit(async (values) => {
     })
     window.scrollTo(0, 0)
 
-    if (values.profile_image) {
+    if (values.profile_image && data.image) {
       authStore.setUserData({
         ...authStore.userData,
         profileImage: data.image
@@ -201,10 +202,11 @@ const upload = handleSubmit(async (values) => {
         username: values.username
       })
     }
-    if (values.password) {
+    if (values.password && data.password_message) {
       logout()
-      authStore.setToast({ open: true, text: data, mode: 'success' })
+      authStore.setToast({ open: true, text: data.password_message, mode: 'success' })
     }
+
     if (editUsernameInput.value) editUsernameInput.value = false
     if (editPasswordInput.value) editPasswordInput.value = false
     resetField('profile_image')

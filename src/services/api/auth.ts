@@ -23,6 +23,7 @@ export async function logout() {
   const authStore = useAuthStore()
   await instance.post('/api/logout')
   if (localStorage.getItem('loggedIn')) localStorage.removeItem('loggedIn')
+  router.replace({ name: 'home' })
   authStore.setUser(false)
   authStore.setUserData({
     username: '',
@@ -30,7 +31,6 @@ export async function logout() {
     profileImage: null,
     google: null
   })
-  router.replace({ name: 'home' })
 }
 
 export async function verifyUser({ id, hash, expires, signature }: Queries) {

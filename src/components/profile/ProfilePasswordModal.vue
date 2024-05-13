@@ -148,7 +148,7 @@ async function updateUserData() {
       password_confirmation: store.value.confirm
     })
     logout()
-    setToast({ open: true, text: data, mode: 'success' })
+    setToast({ open: true, text: data.password_message, mode: 'success' })
   } catch (err: any) {
     if (err.response?.data?.errors?.password || err.response?.data?.errors?.password_confirmation) {
       let errorText = ''

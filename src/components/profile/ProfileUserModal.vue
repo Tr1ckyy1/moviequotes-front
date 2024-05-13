@@ -93,7 +93,7 @@ async function updateUserData() {
     })
     authStore.setToast({
       open: true,
-      text: data,
+      text: data.message,
       mode: 'success'
     })
   } catch (err: any) {
