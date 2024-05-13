@@ -1,5 +1,5 @@
 <template>
-  <aside class="space-y-10 text-white text-xl">
+  <aside class="space-y-10 text-white text-xl whitespace-nowrap">
     <div class="flex items-center gap-4">
       <div
         class="w-10 h-10 lg:h-14 lg:w-14 shrink-0 rounded-full"
@@ -29,8 +29,11 @@
         t('sidebar.news_feed')
       }}</span>
     </RouterLink>
-    <RouterLink to="/" class="flex items-center gap-7 lg:cursor-pointer lg:pl-3 w-fit">
-      <MovieListIcon :currentPage="route.name === 'dashboard'" />
+    <RouterLink
+      :to="{ name: 'movies-list' }"
+      class="flex items-center gap-7 lg:cursor-pointer lg:pl-3 w-fit"
+    >
+      <MovieListIcon :currentPage="route.name === 'movies-list'" />
       <span>{{ t('sidebar.movies_list') }}</span>
     </RouterLink>
   </aside>

@@ -1,5 +1,8 @@
 <template>
-  <LoadingPage v-if="pageLoading" />
+  <LoadingPage
+    v-if="pageLoading"
+    class="bg-gradient-to-r from-dark-main via-[#08080D] to-[#08080D] from-100% via-100% to-0%"
+  />
   <header
     v-else
     class="bg-dark-third w-full border-b border-b-[#22203033] py-5 px-7 flex justify-between items-center lg:px-14 sticky top-0 z-50"
@@ -41,6 +44,7 @@
     <header class="flex border-b border-grey-rare px-7 py-5 items-center gap-6">
       <ArrowLeft width="16" height="16" @click="closeSearchModal" />
       <input
+        ref="inputRef"
         type="text"
         class="outline-none bg-transparent placeholder:text-white w-full"
         :placeholder="t('dashboard.search_modal')"
@@ -66,20 +70,22 @@ import { useI18n } from 'vue-i18n'
 import { ref } from 'vue'
 import { useAuthStore } from '@/stores/AuthStore'
 import { getUser } from '@/services/api/user'
+import { onMounted } from 'vue'
+import { watchEffect } from 'vue'
+import { onUpdated } from 'vue'
 
 const sidebarModal = ref(false)
 const searchModal = ref(false)
+const pageLoading = ref(false)
+const inputRef = ref<HTMLInputElement | null>(null)
 
 const { t } = useI18n()
 
 const router = useRouter()
 const authStore = useAuthStore()
 
-const pageLoading = ref(false)
-
 async function logout() {
   await logoutApi()
-  router.replace({ name: 'home' })
 }
 
 function navigate() {
@@ -116,15 +122,42 @@ async function user() {
       google: data.google_id
     })
   } catch (err: any) {
-    if (err.response?.status === 401) logoutApi()
+    if (err.response?.status === 401) {
+      logoutApi()
+      authStore.setToast({
+        open: true,
+        text: t('auth.session_expired'),
+        mode: 'error'
+      })
+    }
   } finally {
     pageLoading.value = false
   }
 }
 
-user()
+onUpdated(() => {
+  if (inputRef.value) inputRef.value.focus()
+})
 
 onBeforeRouteUpdate(() => {
   if (sidebarModal.value) closeSidebarModal()
+})
+
+onMounted(() => {
+  user()
+  watchEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 1024) {
+        if (sidebarModal.value) closeSidebarModal()
+        if (searchModal.value) closeSearchModal()
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  })
 })
 </script>

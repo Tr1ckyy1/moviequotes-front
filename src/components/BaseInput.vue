@@ -39,7 +39,7 @@
         v-if="passwordIsVisible"
       />
     </div>
-    <ErrorMessage class="text-red-500" :name="name" />
+    <ErrorMessage class="text-red-main" :name="name" />
   </div>
 </template>
 
@@ -51,19 +51,20 @@ import HideIcon from '@/components/icons/HideIcon.vue'
 import { Field, ErrorMessage } from 'vee-validate'
 import { computed, ref } from 'vue'
 
-type Props = {
+const {
+  title,
+  placeholder = '',
+  input = 'text',
+  name = '',
+  id
+} = defineProps<{
   title: string
   placeholder?: string
   input?: string
   name?: string
   id: string
   error?: string
-}
-const { title, placeholder, input, name, id, error } = withDefaults(defineProps<Props>(), {
-  placeholder: '',
-  input: 'text',
-  name: ''
-})
+}>()
 
 const passwordIsVisible = ref(false)
 const inputType = computed(() => {

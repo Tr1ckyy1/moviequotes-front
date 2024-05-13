@@ -4,5 +4,12 @@
   "edit": "Edit",
   "cancel": "Cancel",
   "save_changes": "Save Changes",
-  "new_username": "Enter new username"
+  "new_username": "Enter new username",
+  "make_changes_question": "Are you sure to make changes?",
+  "confirm": "Confirm",
+  "new_password": "Enter new password",
+  "new_password_confirm": "Confirm new password",
+  "password_should_contain": "Passwords should contain:",
+  "password_min": "8 or more characters",
+  "password_max": "15 lowercase characters"
 }

@@ -1,58 +1,45 @@
 <template>
   <Transition
-    enter-active-class="duration-300"
-    leave-active-class="duration-300"
-    enter-from-class="opacity-0"
-    leave-to-class="opacity-0"
+    enter-active-class="duration-150"
+    leave-active-class="duration-150"
+    enter-from-class="-translate-y-full"
+    leave-to-class="-translate-y-full"
   >
     <div
-      v-if="googleErrorToast"
-      class="flex items-center z-40 gap-6 fixed top-4 left-1/2 -translate-x-1/2 font-raleway py-3 rounded-lg px-8 bg-gradient-to-r to-[#242C32] to-35% overflow-hidden from-red-900 bg-green-400 w-[90%] max-w-screen-sm"
+      v-if="authStore.toast.open"
+      class="w-[90%] max-w-screen-sm border fixed top-20 left-1/2 -translate-x-1/2 rounded-[4px] p-4 flex justify-between items-center gap-1 z-[999]"
+      :class="
+        authStore.toast.mode === 'error'
+          ? 'bg-[#ffe4e4] border-[#f1afaa]'
+          : 'bg-[#D1E7DD] border-[#BADBCC]'
+      "
     >
-      <div class="bg-toast-red/10 p-1 rounded-full">
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+      <div class="flex items-center gap-3">
+        <div
+          class="w-6 h-6 rounded-full shrink-0 flex items-center justify-center"
+          :class="authStore.toast.mode === 'error' ? 'bg-red-main' : 'bg-[#0F5132]'"
         >
-          <mask
-            id="mask0_41_302"
-            style="mask-type: alpha"
-            maskUnits="userSpaceOnUse"
-            x="0"
-            y="0"
-            width="24"
-            height="24"
-          >
-            <rect width="24" height="24" fill="#D9D9D9" />
-          </mask>
-          <g mask="url(#mask0_41_302)">
-            <path
-              d="M8.4 17L12 13.4L15.6 17L17 15.6L13.4 12L17 8.4L15.6 7L12 10.6L8.4 7L7 8.4L10.6 12L7 15.6L8.4 17ZM12 22C10.6167 22 9.31667 21.7373 8.1 21.212C6.88333 20.6873 5.825 19.975 4.925 19.075C4.025 18.175 3.31267 17.1167 2.788 15.9C2.26267 14.6833 2 13.3833 2 12C2 10.6167 2.26267 9.31667 2.788 8.1C3.31267 6.88333 4.025 5.825 4.925 4.925C5.825 4.025 6.88333 3.31233 8.1 2.787C9.31667 2.26233 10.6167 2 12 2C13.3833 2 14.6833 2.26233 15.9 2.787C17.1167 3.31233 18.175 4.025 19.075 4.925C19.975 5.825 20.6873 6.88333 21.212 8.1C21.7373 9.31667 22 10.6167 22 12C22 13.3833 21.7373 14.6833 21.212 15.9C20.6873 17.1167 19.975 18.175 19.075 19.075C18.175 19.975 17.1167 20.6873 15.9 21.212C14.6833 21.7373 13.3833 22 12 22Z"
-              fill="#F04248"
-            />
-          </g>
-        </svg>
+          <XIcon v-if="authStore.toast.mode === 'error'" color="#fff" width="10" height="10" />
+          <CheckmarkIcon v-else color="white" width="12" height="12" />
+        </div>
+        <h1 :class="authStore.toast.mode === 'error' ? 'text-red-main' : 'text-[#0F5132]'">
+          {{ authStore.toast.text }}
+        </h1>
       </div>
-
-      <div>
-        <h1 class="text-white font-extrabold">{{ t('error') }}</h1>
-        <p class="text-[#C8C5C5] text-sm">{{ message }}</p>
-      </div>
-      <div
-        class="before:absolute before:bottom-0 before:right-0 before:h-full before:w-full rounded-b-lg absolute bottom-0 w-full h-1 left-0 before:animate-[progress_5000ms_linear_forwards] before:bg-red-toast"
-      ></div>
+      <XIcon
+        @click="authStore.closeToast"
+        color="#00000060"
+        width="16"
+        height="16"
+        class="shrink-0 cursor-pointer"
+      />
     </div>
   </Transition>
 </template>
-
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-const { t } = useI18n()
-defineProps<{
-  googleErrorToast: boolean
-  message: string
-}>()
+import CheckmarkIcon from '@/components/icons/CheckmarkIcon.vue'
+import XIcon from '@/components/icons/XIcon.vue'
+import { useAuthStore } from '@/stores/AuthStore'
+
+const authStore = useAuthStore()
 </script>

@@ -3,7 +3,7 @@
     <div class="flex gap-7">
       <div
         @click="openQuotesModal"
-        class="lg:bg-dark-third p-7 pt-0 lg:pt-4 lg:rounded-llg flex gap-4 items-center lg:cursor-pointer"
+        class="lg:bg-dark-third p-7 pt-0 lg:py-4 lg:rounded-llg flex gap-4 items-center lg:cursor-pointer"
         :class="searchFocused ? 'w-fit' : 'w-full'"
       >
         <NewQuoteIcon />
@@ -12,11 +12,11 @@
       <label
         class="hidden lg:flex lg:cursor-pointer gap-4"
         for="dashboard-search"
-        :class="searchFocused && 'w-full'"
+        :class="searchFocused && 'w-full border-b border-grey-rare'"
       >
         <SearchIcon class="self-center" />
         <input
-          class="outline-none text-xl text-right bg-transparent focus:text-left focus:w-full text-grey-secondary placeholder:text-grey-secondary focus:border-b focus:border-grey-rare"
+          class="outline-none text-xl text-right bg-transparent focus:text-left focus:w-full text-grey-secondary placeholder:text-grey-secondary"
           :class="locale === 'ka' ? 'w-16' : 'w-24'"
           id="dashboard-search"
           @focus="searchFocused = true"
@@ -31,9 +31,7 @@
       <PostItem />
       <PostItem />
     </div>
-    <NewQuoteModal :modalOpen="quotesModal" @close-modal="closeQuotesModal">
-      <NewQuoteForm @close-modal="closeQuotesModal" />
-    </NewQuoteModal>
+    <NewQuoteModal :modalOpen="quotesModal" @close-modal="closeQuotesModal" />
   </section>
 </template>
 
@@ -41,7 +39,6 @@
 import NewQuoteIcon from '@/components/icons/NewQuoteIcon.vue'
 import SearchIcon from '@/components/icons/SearchIcon.vue'
 import NewQuoteModal from '@/components/dashboard/modals/NewQuoteModal.vue'
-import NewQuoteForm from '@/components/dashboard/NewQuoteForm.vue'
 import PostItem from '@/components/dashboard/post/PostItem.vue'
 
 import { ref } from 'vue'

@@ -27,3 +27,16 @@ export type TokenValidity = {
   email: string
   token: string
 }
+
+export type UserData = {
+  username?: string
+  password?: string
+  password_confirmation?: string
+  profile_image?: File
+}
+
+export type Toast = {
+  open: boolean
+  text: string
+  mode: string
+}

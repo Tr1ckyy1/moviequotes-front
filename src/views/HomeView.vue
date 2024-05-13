@@ -1,9 +1,4 @@
 <template>
-  <ToastMessage
-    v-if="authStore.googleErrorToast"
-    :googleErrorToast="authStore.googleErrorToast"
-    :message="authStore.toastMessage"
-  />
   <HomeHeader
     :headerText="t('landing.header_text_line_one')"
     :headerTextSpan="t('landing.header_text_line_two')"
@@ -47,12 +42,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import HomeParallax from '@/components/home/HomeParallax.vue'
-
-import { useAuthStore } from '@/stores/AuthStore'
-import ToastMessage from '@/ui/ToastMessage.vue'
 import HomeHeader from '@/components/home/HomeHeader.vue'
 
 const { t } = useI18n()
-
-const authStore = useAuthStore()
 </script>

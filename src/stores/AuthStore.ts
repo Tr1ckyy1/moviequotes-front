@@ -1,3 +1,4 @@
+import type { Toast } from '@/types'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 export const useAuthStore = defineStore('AuthStore', () => {
@@ -9,22 +10,33 @@ export const useAuthStore = defineStore('AuthStore', () => {
   }
 
   const userLoggedIn = ref(false)
+
   const userData = ref<UserData>({
     username: '',
     email: '',
     profileImage: null,
     google: null
   })
-  const googleErrorToast = ref(false)
-  const toastMessage = ref('')
 
-  function setGoogleError(payload: string) {
-    googleErrorToast.value = true
-    toastMessage.value = payload
+  const toast = ref<Toast>({
+    open: false,
+    text: '',
+    mode: ''
+  })
+
+  function setToast(payload: Toast) {
+    toast.value = payload
     setTimeout(() => {
-      googleErrorToast.value = false
-      toastMessage.value = ''
+      closeToast()
     }, 5000)
+  }
+
+  function closeToast() {
+    toast.value = {
+      open: false,
+      text: '',
+      mode: ''
+    }
   }
 
   function setUser(payload: boolean) {
@@ -38,10 +50,10 @@ export const useAuthStore = defineStore('AuthStore', () => {
   return {
     userLoggedIn,
     setUser,
-    setGoogleError,
-    googleErrorToast,
-    toastMessage,
     setUserData,
-    userData
+    userData,
+    toast,
+    setToast,
+    closeToast
   }
 })

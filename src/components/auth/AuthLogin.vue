@@ -32,10 +32,10 @@
       </div>
       <button
         class="flex justify-center gap-4 items-center mt-6 w-full bg-red-main border border-red-main text-white rounded-[4px] py-2 lg:enabled:hover:bg-white lg:enabled:hover:text-red-main lg:hover:duration-300 disabled:cursor-not-allowed"
-        :disabled="formLoading"
+        :disabled="isSubmitting"
       >
-        <LoadingSpinnerMini v-if="formLoading" />
-        {{ !formLoading ? t('auth.header_login_text') : t('loading') }}
+        <LoadingSpinnerMini v-if="isSubmitting" />
+        {{ !isSubmitting ? t('auth.header_login_text') : t('loading') }}
       </button>
     </form>
     <button
@@ -71,7 +71,6 @@ import {
   googleSignupRedirect as googleSignupRedirectApi,
   logout
 } from '@/services/api/auth'
-import { ref } from 'vue'
 import type { Login } from '@/types'
 import { useAuthStore } from '@/stores/AuthStore'
 import { useRouter } from 'vue-router'
@@ -82,8 +81,6 @@ const modalStore = useModalStore()
 const authStore = useAuthStore()
 const router = useRouter()
 
-const formLoading = ref(false)
-
 const schema = yup.object().shape({
   email: yup
     .string()
@@ -92,7 +89,9 @@ const schema = yup.object().shape({
   password: yup.string().trim().required(t('validation.auth.password.required'))
 })
 
-const { handleSubmit, errors, setFieldError } = useForm<Login>({ validationSchema: schema })
+const { handleSubmit, errors, setFieldError, isSubmitting } = useForm<Login>({
+  validationSchema: schema
+})
 
 function openModal(mode: string) {
   modalStore.closeLoginModal()
@@ -100,7 +99,6 @@ function openModal(mode: string) {
 }
 const login = handleSubmit(async (values) => {
   try {
-    formLoading.value = true
     await loginApi(values)
     modalStore.closeLoginModal()
     authStore.setUser(true)
@@ -114,8 +112,6 @@ const login = handleSubmit(async (values) => {
         setFieldError(fieldName as keyof Login, error.response.data.errors[fieldName])
       }
     }
-  } finally {
-    formLoading.value = false
   }
 })
 
