@@ -36,7 +36,7 @@
         v-for="(movie, index) in moviesList"
         :key="movie.id"
         :movie="movie"
-        :class="index === moviesList.length - 1 && 'pb-16 lg:pb-[6rem]'"
+        :class="index === moviesList.length - 1 && 'pb-16 lg:pb-[6.5rem]'"
       />
     </main>
   </section>

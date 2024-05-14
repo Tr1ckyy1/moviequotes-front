@@ -16,6 +16,9 @@ export async function updateUserProfile(data: UserData) {
   return await instance.post('/api/update-profile', formData, {
     headers: {
       'Content-Type': 'multipart/form-data'
+    },
+    params: {
+      _method: 'PATCH'
     }
   })
 }
