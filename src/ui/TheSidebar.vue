@@ -6,8 +6,8 @@
         :class="{ 'border-2 border-red-main': route.name === 'edit-profile' }"
       >
         <img
-          v-if="userData?.profileImage"
-          :src="userData?.profileImage"
+          v-if="userData?.profile_image"
+          :src="userData?.profile_image"
           class="object-cover rounded-full h-full w-full"
         />
         <img v-else src="@/assets/avatar.png" class="object-cover h-full w-full" />

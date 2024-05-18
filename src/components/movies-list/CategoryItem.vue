@@ -1,11 +1,11 @@
 <template>
-  <div
+  <li
     class="bg-grey-main w-fit flex items-center gap-4"
     :class="id ? 'rounded-sm px-2 py-0.5' : 'rounded px-3 py-1.5'"
   >
     <span class="text-sm" :class="id ? 'text-sm' : 'text-lg font-bold'">{{ props.name }}</span>
     <SmallXIcon v-if="id" @click="removeItem" />
-  </div>
+  </li>
 </template>
 
 <script setup lang="ts">

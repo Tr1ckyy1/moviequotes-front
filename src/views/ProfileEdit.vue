@@ -23,8 +23,8 @@
           <div class="w-48 h-48 shrink-0">
             <img
               ref="imageRef"
-              v-if="authStore.userData?.profileImage"
-              :src="authStore.userData?.profileImage"
+              v-if="authStore.userData?.profile_image"
+              :src="authStore.userData?.profile_image"
               class="object-cover rounded-full h-full w-full"
             />
             <img
@@ -168,8 +168,8 @@ const editPasswordInput = ref(false)
 const imageRef = ref<HTMLImageElement | null>(null)
 
 const shouldShowPasswordEdit = computed(() => {
-  if (authStore.userData.google) return false
-  if (!authStore.userData.google && editPasswordInput.value) return false
+  if (authStore.userData.google_id) return false
+  if (!authStore.userData.google_id && editPasswordInput.value) return false
   return true
 })
 
@@ -196,7 +196,7 @@ const upload = handleSubmit(async (values) => {
     authStore.setUserData({
       ...authStore.userData,
       username: user.username,
-      profileImage: user.profile_image
+      profile_image: user.profile_image
     })
 
     if (values.password && data.password_message) {
@@ -233,7 +233,7 @@ function cancelForm() {
   if (editUsernameInput.value) editUsernameInput.value = false
   if (editPasswordInput.value) editPasswordInput.value = false
   if (values.profile_image && imageRef.value) {
-    imageRef.value.src = authStore.userData.profileImage ?? defaultAvatar
+    imageRef.value.src = authStore.userData.profile_image ?? defaultAvatar
     resetField('profile_image')
   }
 }

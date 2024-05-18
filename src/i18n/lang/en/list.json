@@ -4,5 +4,7 @@
   "edit_movie_button": "Edit movie",
   "search": "Search",
   "choose_category": "Choose Categories",
-  "replace_photo": "replace photo"
+  "replace_photo": "replace photo",
+  "no_movies_message": "No movies were found in your list",
+  "go_to_movies": "Go to my movies"
 }

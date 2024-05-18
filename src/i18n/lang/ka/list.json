@@ -4,5 +4,7 @@
   "edit_movie_button": "ფილმის რედაქტირება",
   "search": "ძებნა",
   "choose_category": "აირჩიეთ კატეგორიები",
-  "replace_photo": "შეცვალეთ სურათი"
+  "replace_photo": "შეცვალეთ სურათი",
+  "no_movies_message": "თქვენს სიაში ფილმები ვერ მოიძებნა",
+  "go_to_movies": "ჩემს ფილმებზე გადასვლა"
 }

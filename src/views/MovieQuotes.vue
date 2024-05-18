@@ -3,7 +3,7 @@
   <main
     class="pt-7 lg:px-14 bg-dark-secondary text-white lg:flex min-h-screen md:gap-20 xl:gap-4"
     :class="
-      route.path.includes('movies-list') && ' overflow-y-scroll h-screen scrollbar-none no-scroll'
+      route.path.includes('movies-list') && 'overflow-y-scroll h-screen scrollbar-none no-scroll'
     "
   >
     <TheSidebar

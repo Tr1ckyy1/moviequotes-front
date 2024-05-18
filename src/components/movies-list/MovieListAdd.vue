@@ -15,8 +15,8 @@
         <section class="flex items-center gap-5">
           <div class="w-10 h-10 lg:h-14 lg:w-14 shrink-0">
             <img
-              v-if="userData?.profileImage"
-              :src="userData?.profileImage"
+              v-if="userData?.profile_image"
+              :src="userData?.profile_image"
               class="object-cover rounded-full h-full w-full"
             />
             <img v-else src="@/assets/avatar.png" class="object-cover h-full w-full" />
@@ -40,10 +40,10 @@
         <div>
           <div
             @click="dropDownActive = !dropDownActive"
-            class="flex relative justify-between items-center border py-2 min-h-12 rounded-md px-4 cursor-pointer"
-            :class="categoryError ? 'border-red-main' : 'border-grey-main'"
+            class="flex relative justify-between items-center ring-1 py-2 min-h-12 rounded-md px-4 cursor-pointer"
+            :class="categoryError ? 'ring-red-main' : 'ring-grey-main'"
           >
-            <div v-if="categoriesChosen.length > 0" class="flex flex-wrap gap-1">
+            <ul v-if="categoriesChosen.length > 0" class="flex flex-wrap gap-1">
               <CategoryItem
                 @click.stop
                 @remove="removeItem"
@@ -52,22 +52,25 @@
                 :name="category.name[locale as Language]"
                 :id="category.id"
               />
-            </div>
+            </ul>
             <p v-else class="text-grey-main">
               {{ t('list.choose_category') }}
             </p>
-            <div>
-              <ArrowDown width="16" height="16" :class="dropDownActive && 'rotate-180'" />
-            </div>
+            <ArrowDown
+              width="16"
+              height="16"
+              class="shrink-0"
+              :class="dropDownActive && 'rotate-180'"
+            />
             <ul
               @click.stop
               v-if="dropDownActive"
-              class="absolute space-y-2 px-4 py-2 border-x border-b border-grey-main bg-[#0D0B14] mt-1 top-full rounded-b-md h-32 z-[100] w-full left-0 overflow-y-scroll scrollbar"
+              class="absolute space-y-2 py-2 border-x border-b border-grey-main bg-[#0D0B14] mt-1 top-full rounded-b-md h-36 z-[100] w-full left-0 overflow-y-scroll scrollbar"
             >
               <li
                 v-for="category in moviesStore.categories"
                 :key="category.id"
-                class="bg-grey-main/10 cursor-pointer lg:hover:brightness-75"
+                class="bg-grey-main/10 cursor-pointer lg:hover:brightness-75 px-4 py-1"
                 @click.stop="manageActiveCategories(category)"
               >
                 {{ category.name[locale as Language] }}
@@ -211,9 +214,7 @@ import * as yup from 'yup'
 import { computed } from 'vue'
 
 const { userData } = storeToRefs(useAuthStore())
-
 const moviesStore = useMoviesStore()
-
 const { t, locale } = useI18n()
 
 const emit = defineEmits<{
@@ -228,6 +229,7 @@ const dropDownActive = ref(false)
 const imageName = ref('')
 const MAX_NUM_CHARACTERS = 50
 const categoryError = ref(false)
+const categoriesChosen = ref<Category[]>([])
 
 const schema = computed(() =>
   yup.object().shape({
@@ -280,8 +282,6 @@ const schema = computed(() =>
 const { handleSubmit, errors, setFieldError, isSubmitting, setFieldValue } = useForm<MovieData>({
   validationSchema: schema
 })
-
-const categoriesChosen = ref<Category[]>([])
 
 function closeModal() {
   emit('close-modal')

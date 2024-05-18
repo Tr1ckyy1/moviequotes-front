@@ -28,6 +28,13 @@ export type TokenValidity = {
   token: string
 }
 
+export type User = {
+  username: string
+  email: string
+  google_id: string | null
+  profile_image: string | undefined
+}
+
 export type UserData = {
   username?: string
   password?: string
@@ -76,6 +83,36 @@ export type MovieData = {
   categories: number[]
   image: File
   year: number
+}
+
+export type Comment = {
+  id: number
+  // content: string
+  // user: User
+}
+
+export type Like = {
+  id: number
+  // user: User
+}
+
+export type Quote = {
+  quote: { [key in Language]: string }
+  image: string | File
+  movie: number
+}
+
+export type QuotesData = {
+  id: number
+  quote: {
+    en: string
+    ka: string
+  }
+  image: string
+  user: User
+  comments: Comment[]
+  movie: MovieData
+  likes: Like[]
 }
 
 export type Language = 'en' | 'ka'

@@ -5,28 +5,25 @@
     <div class="space-y-4">
       <div class="flex items-center gap-4">
         <div class="w-10 h-10 lg:w-[52px] lg:h-[52px]">
-          <img
-            src="@/assets/landing-image-1-desktop.png"
-            class="w-full h-full rounded-full object-cover"
-          />
+          <img :src="quote.user.profile_image" class="w-full h-full rounded-full object-cover" />
         </div>
-        <h1>Omar Jangavadze</h1>
+        <h1>{{ quote.user.username }}</h1>
       </div>
       <p class="font-semibold">
-        “Follow your dream.” movie- <span class="text-main">Billy Elliot.</span> (2000)
+        “{{ quote.quote[locale as Language] }}” {{ t('dashboard.movie_name') }}-
+        <span class="text-main">{{ quote.movie.name[locale as Language] }}.</span> ({{
+          quote.movie.year
+        }})
       </p>
-      <img
-        src="@/assets/landing-image-1-desktop.png"
-        class="rounded-llg min-h-[12rem] w-full object-cover max-h-[31rem]"
-      />
+      <img :src="quote.image" class="rounded-llg min-h-[12rem] w-full object-cover max-h-[31rem]" />
       <div class="flex items-center gap-6 border-b border-grey-rare pb-4">
         <div class="flex gap-4 items-center">
-          <span class="text-xl"> 3 </span>
+          <span class="text-xl">{{ quote.comments.length }}</span>
           <CommentsIcon />
         </div>
         <div class="flex gap-4 items-center">
-          <span class="text-xl"> 10 </span>
-          <LikesIcon />
+          <span class="text-xl"> {{ quote.likes.length }} </span>
+          <LikesIcon class="cursor-pointer" />
         </div>
       </div>
     </div>
@@ -40,8 +37,8 @@
     <div class="flex gap-4">
       <div class="w-10 h-10 lg:w-[52px] lg:h-[52px] shrink-0">
         <img
-          v-if="userData?.profileImage"
-          :src="userData?.profileImage"
+          v-if="userData?.profile_image"
+          :src="userData?.profile_image"
           class="object-cover rounded-full h-full w-full"
         />
         <img v-else src="@/assets/avatar.png" class="object-cover h-full w-full" />
@@ -62,7 +59,12 @@ import CommentItem from './CommentItem.vue'
 import { useAuthStore } from '@/stores/AuthStore'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
+import type { Language, QuotesData } from '@/types'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const { userData } = storeToRefs(useAuthStore())
+
+defineProps<{
+  quote: QuotesData
+}>()
 </script>

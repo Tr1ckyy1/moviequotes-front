@@ -1,21 +1,14 @@
-import type { Toast } from '@/types'
+import type { Toast, User } from '@/types'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 export const useAuthStore = defineStore('AuthStore', () => {
-  type UserData = {
-    username: string
-    email: string
-    profileImage: string | null
-    google: string | null
-  }
-
   const userLoggedIn = ref(false)
 
-  const userData = ref<UserData>({
+  const userData = ref<User>({
     username: '',
     email: '',
-    profileImage: null,
-    google: null
+    profile_image: undefined,
+    google_id: null
   })
 
   const toast = ref<Toast>({
@@ -43,7 +36,7 @@ export const useAuthStore = defineStore('AuthStore', () => {
     userLoggedIn.value = payload
   }
 
-  function setUserData(payload: UserData) {
+  function setUserData(payload: User) {
     userData.value = payload
   }
 

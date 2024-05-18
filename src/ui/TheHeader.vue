@@ -120,8 +120,8 @@ async function user() {
     setUserData({
       username: data.username,
       email: data.email,
-      profileImage: data.profile_image,
-      google: data.google_id
+      profile_image: data.profile_image,
+      google_id: data.google_id
     })
   } catch (err: any) {
     if (err.response?.status === 401) {
