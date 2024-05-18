@@ -1,5 +1,5 @@
 <template>
-  <div
+  <li
     class="py-7 px-7 lg:rounded-xl bg-dark-main lg:text-xl grid grid-rows-[1fr_auto_1fr] max-h-[52rem] lg:max-h-[70rem] gap-7"
   >
     <div class="space-y-4">
@@ -20,8 +20,14 @@
         class="rounded-llg min-h-[12rem] w-full object-cover max-h-[31rem]"
       />
       <div class="flex items-center gap-6 border-b border-grey-rare pb-4">
-        <span class="flex gap-4 items-center">3 <CommentsIcon /></span>
-        <span class="flex gap-4 items-center">10 <LikesIcon /></span>
+        <div class="flex gap-4 items-center">
+          <span class="text-xl"> 3 </span>
+          <CommentsIcon />
+        </div>
+        <div class="flex gap-4 items-center">
+          <span class="text-xl"> 10 </span>
+          <LikesIcon />
+        </div>
       </div>
     </div>
     <div class="overflow-y-auto scrollbar space-y-4">
@@ -46,7 +52,7 @@
         :placeholder="t('dashboard.write_comment')"
       />
     </div>
-  </div>
+  </li>
 </template>
 
 <script setup lang="ts">

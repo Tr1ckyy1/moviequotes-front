@@ -41,9 +41,41 @@ export type Toast = {
   mode: string
 }
 
-export type Movie = {
-  // url: string
-  title: string
-  year: string | number
-  totalQuotes: string | number
+export type Category = {
+  id: number
+  name: {
+    en: string
+    ka: string
+  }
 }
+
+export type Movies = {
+  id: number
+  description: { [key in Language]: string }
+  director: { [key in Language]: string }
+  name: { [key in Language]: string }
+  quotes: number
+  year: number
+  image: string
+  categories: Category[]
+}
+
+export type MovieData = {
+  description: {
+    en: string
+    ka: string
+  }
+  director: {
+    en: string
+    ka: string
+  }
+  name: {
+    en: string
+    ka: string
+  }
+  categories: number[]
+  image: File
+  year: number
+}
+
+export type Language = 'en' | 'ka'

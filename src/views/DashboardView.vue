@@ -25,20 +25,20 @@
         />
       </label>
     </div>
-    <div class="space-y-8">
+    <ul class="space-y-8">
       <PostItem />
       <PostItem />
       <PostItem />
       <PostItem />
-    </div>
-    <NewQuoteModal :modalOpen="quotesModal" @close-modal="closeQuotesModal" />
+    </ul>
+    <NewQuote :modalOpen="quotesModal" @close-modal="closeQuotesModal" />
   </section>
 </template>
 
 <script setup lang="ts">
 import NewQuoteIcon from '@/components/icons/NewQuoteIcon.vue'
 import SearchIcon from '@/components/icons/SearchIcon.vue'
-import NewQuoteModal from '@/components/dashboard/modals/NewQuoteModal.vue'
+import NewQuote from '@/components/NewQuote.vue'
 import PostItem from '@/components/dashboard/post/PostItem.vue'
 
 import { ref } from 'vue'

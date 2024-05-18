@@ -4,6 +4,7 @@ import MovieQuotes from '../views/MovieQuotes.vue'
 import DashboardView from '../views/DashboardView.vue'
 import ProfileEdit from '../views/ProfileEdit.vue'
 import MoviesList from '../views/MoviesList.vue'
+import MovieShow from '../views/MovieShow.vue'
 import GoogleAuth from '@/views/GoogleAuth.vue'
 import { useAuthStore } from '@/stores/AuthStore'
 
@@ -40,6 +41,11 @@ const router = createRouter({
           path: 'movies-list',
           name: 'movies-list',
           component: MoviesList
+        },
+        {
+          path: 'movies-list/:movieId',
+          name: 'movie-show',
+          component: MovieShow
         }
       ]
     }

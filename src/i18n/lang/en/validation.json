@@ -20,5 +20,26 @@
       "required": "Password confirmation is required",
       "password_mismatch": "Passwords do not match"
     }
+  },
+  "movie_form_validation": {
+    "regex_en": "English letters only",
+    "regex_ka": "Georgian letters only",
+    "name": {
+      "required": "Movie name is required"
+    },
+    "categories": "Please choose at least one category",
+    "year": {
+      "required": "Movie year is required",
+      "number": "Must be a number",
+      "min": "Must be at least from 1900",
+      "max": "Cannot exceed today's date"
+    },
+    "director": {
+      "required": "Director is required"
+    },
+    "description": {
+      "required": "Description is required"
+    },
+    "image": "Image is required"
   }
 }

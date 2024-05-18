@@ -1,5 +1,8 @@
 {
   "title": "My list of movies (Total {number})",
   "add_movie_button": "Add movie",
-  "search": "Search"
+  "edit_movie_button": "Edit movie",
+  "search": "Search",
+  "choose_category": "Choose Categories",
+  "replace_photo": "replace photo"
 }

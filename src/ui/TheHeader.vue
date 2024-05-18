@@ -1,6 +1,6 @@
 <template>
   <LoadingPage
-    v-if="pageLoading"
+    v-if="pageLoading || moviesStore.pageLoading"
     class="bg-gradient-to-r from-dark-main via-[#08080D] to-[#08080D] from-100% via-100% to-0%"
   />
   <header
@@ -69,6 +69,7 @@ import { onBeforeRouteUpdate, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { ref } from 'vue'
 import { useAuthStore } from '@/stores/AuthStore'
+import { useMoviesStore } from '@/stores/MoviesStore'
 import { getUser } from '@/services/api/user'
 import { onMounted } from 'vue'
 import { watchEffect } from 'vue'
@@ -82,7 +83,8 @@ const inputRef = ref<HTMLInputElement | null>(null)
 const { t } = useI18n()
 
 const router = useRouter()
-const authStore = useAuthStore()
+const { setToast, setUserData } = useAuthStore()
+const moviesStore = useMoviesStore()
 
 async function logout() {
   await logoutApi()
@@ -115,7 +117,7 @@ async function user() {
     const {
       data: { data }
     } = await getUser()
-    authStore.setUserData({
+    setUserData({
       username: data.username,
       email: data.email,
       profileImage: data.profile_image,
@@ -124,7 +126,7 @@ async function user() {
   } catch (err: any) {
     if (err.response?.status === 401) {
       logoutApi()
-      authStore.setToast({
+      setToast({
         open: true,
         text: t('auth.session_expired'),
         mode: 'error'
@@ -143,8 +145,11 @@ onBeforeRouteUpdate(() => {
   if (sidebarModal.value) closeSidebarModal()
 })
 
-onMounted(() => {
-  user()
+onMounted(async () => {
+  await user()
+  await moviesStore.getCategories()
+  await moviesStore.getMovies()
+
   watchEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 1024) {

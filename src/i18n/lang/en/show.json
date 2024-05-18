@@ -1,0 +1,6 @@
+{
+    "movie_description":"Movie Description",
+  "director": "Director",
+  "total_quotes": "All Quotes (Total {number})",
+  "add_quote": "Add Quote"
+}

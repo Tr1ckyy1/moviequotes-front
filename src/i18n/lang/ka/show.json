@@ -1,0 +1,6 @@
+{
+  "movie_description": "ფილმის აღწერა",
+  "director": "რეჟისორი",
+  "total_quotes": "ყველა ციტატა (სულ {number})",
+  "add_quote": "ციტატის დამატება"
+}

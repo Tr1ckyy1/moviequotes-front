@@ -1,14 +1,19 @@
 <template>
   <TheHeader />
   <main
-    class="pt-7 lg:px-14 bg-dark-secondary text-white lg:flex min-h-screen md:gap-20 xl:gap-0"
-    :class="route.name === 'movies-list' && ' overflow-y-scroll h-screen scrollbar-none no-scroll'"
+    class="pt-7 lg:px-14 bg-dark-secondary text-white lg:flex min-h-screen md:gap-20 xl:gap-4"
+    :class="
+      route.path.includes('movies-list') && ' overflow-y-scroll h-screen scrollbar-none no-scroll'
+    "
   >
     <TheSidebar
       class="hidden lg:block lg:w-1/4"
-      :class="route.name === 'movies-list' && 'sticky top-0'"
+      :class="route.path.includes('movies-list') && 'sticky top-0'"
     />
-    <RouterView :class="route.name !== 'movies-list' && 'lg:w-[55%]'" class="pb-7" />
+    <RouterView
+      :class="route.path.includes('movies-list') ? 'w-full' : 'lg:w-[55%]'"
+      class="pb-7"
+    />
   </main>
 </template>
 
