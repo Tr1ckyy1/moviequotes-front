@@ -28,6 +28,13 @@ export type TokenValidity = {
   token: string
 }
 
+export type User = {
+  username: string
+  email: string
+  google_id: string | null
+  profile_image: string | undefined
+}
+
 export type UserData = {
   username?: string
   password?: string
@@ -41,9 +48,71 @@ export type Toast = {
   mode: string
 }
 
-export type Movie = {
-  // url: string
-  title: string
-  year: string | number
-  totalQuotes: string | number
+export type Category = {
+  id: number
+  name: {
+    en: string
+    ka: string
+  }
 }
+
+export type Movies = {
+  id: number
+  description: { [key in Language]: string }
+  director: { [key in Language]: string }
+  name: { [key in Language]: string }
+  quotes: number
+  year: number
+  image: string
+  categories: Category[]
+}
+
+export type MovieData = {
+  description: {
+    en: string
+    ka: string
+  }
+  director: {
+    en: string
+    ka: string
+  }
+  name: {
+    en: string
+    ka: string
+  }
+  categories: number[]
+  image: File
+  year: number
+}
+
+export type Comment = {
+  id: number
+  // content: string
+  // user: User
+}
+
+export type Like = {
+  id: number
+  // user: User
+}
+
+export type Quote = {
+  quote: { [key in Language]: string }
+  image: string | File
+  movie: number
+}
+
+export type QuotesData = {
+  id: number
+  quote: {
+    en: string
+    ka: string
+  }
+  image: string
+  user: User
+  comments: Comment[]
+  movie: MovieData
+  likes: Like[]
+}
+
+export type Language = 'en' | 'ka'

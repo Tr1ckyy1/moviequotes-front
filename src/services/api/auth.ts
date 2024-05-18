@@ -28,8 +28,8 @@ export async function logout() {
   authStore.setUserData({
     username: '',
     email: '',
-    profileImage: null,
-    google: null
+    profile_image: undefined,
+    google_id: null
   })
 }
 

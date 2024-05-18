@@ -12,7 +12,7 @@
     >
       <img src="@/assets/landing-image-1-mobile.png" class="lg:hidden w-full object-cover" />
 
-      <img src="@/assets/landing-image-1-desktop.png" class="hidden lg:block" />
+      <img src="@/assets/landing-image-1-desktop.png" class="hidden lg:block w-full object-cover" />
     </HomeParallax>
     <HomeParallax
       :quote="t('landing.movies.royal_tenenbaums.quote')"
@@ -20,7 +20,7 @@
     >
       <img src="@/assets/landing-image-2-mobile.png" class="lg:hidden w-full object-cover" />
 
-      <img src="@/assets/landing-image-2-desktop.png" class="hidden lg:block" />
+      <img src="@/assets/landing-image-2-desktop.png" class="hidden lg:block w-full object-cover" />
     </HomeParallax>
     <HomeParallax
       :quote="t('landing.movies.lotr.quote')"
@@ -28,7 +28,7 @@
     >
       <img src="@/assets/landing-image-3-mobile.png" class="lg:hidden w-full object-cover" />
 
-      <img src="@/assets/landing-image-3-desktop.png" class="hidden lg:block" />
+      <img src="@/assets/landing-image-3-desktop.png" class="hidden lg:block w-full object-cover" />
     </HomeParallax>
   </main>
 

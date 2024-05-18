@@ -7,6 +7,7 @@ import dashboard from './dashboard.json'
 import sidebar from './sidebar.json'
 import profile from './profile.json'
 import list from './list.json'
+import show from './show.json'
 
 const translations = {
   auth,
@@ -18,6 +19,7 @@ const translations = {
   sidebar,
   profile,
   list,
+  show,
   loading: 'იტვირთება',
   error: 'შეცდომა'
 }
