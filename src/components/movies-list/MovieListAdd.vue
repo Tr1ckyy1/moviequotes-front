@@ -183,7 +183,7 @@
         </div>
 
         <button
-          class="flex justify-center gap-4 items-center bg-red-main w-full p-3 rounded-md lg:enabled:hover:bg-white lg:enabled:hover:text-red-main lg:enabled:hover:duration-300"
+          class="flex justify-center gap-4 items-center bg-red-main w-full p-3 rounded-md lg:enabled:hover:bg-white lg:enabled:hover:text-red-main lg:enabled:hover:duration-300 disabled:cursor-not-allowed"
           :disabled="isSubmitting"
         >
           <LoadingSpinnerMini v-if="isSubmitting" />

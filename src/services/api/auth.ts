@@ -26,6 +26,7 @@ export async function logout() {
   router.replace({ name: 'home' })
   authStore.setUser(false)
   authStore.setUserData({
+    id: null,
     username: '',
     email: '',
     profile_image: undefined,

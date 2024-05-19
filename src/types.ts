@@ -29,6 +29,7 @@ export type TokenValidity = {
 }
 
 export type User = {
+  id: number | null
   username: string
   email: string
   google_id: string | null
@@ -61,7 +62,7 @@ export type Movies = {
   description: { [key in Language]: string }
   director: { [key in Language]: string }
   name: { [key in Language]: string }
-  quotes: number
+  quotes: number | QuotesData[]
   year: number
   image: string
   categories: Category[]
@@ -87,13 +88,13 @@ export type MovieData = {
 
 export type Comment = {
   id: number
-  // content: string
-  // user: User
+  user: User
+  comment: string
 }
 
 export type Like = {
   id: number
-  // user: User
+  user_id: number
 }
 
 export type Quote = {

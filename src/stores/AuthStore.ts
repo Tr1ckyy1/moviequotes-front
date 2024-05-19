@@ -5,6 +5,7 @@ export const useAuthStore = defineStore('AuthStore', () => {
   const userLoggedIn = ref(false)
 
   const userData = ref<User>({
+    id: null,
     username: '',
     email: '',
     profile_image: undefined,

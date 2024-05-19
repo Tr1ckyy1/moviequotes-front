@@ -118,6 +118,7 @@ async function user() {
       data: { data }
     } = await getUser()
     setUserData({
+      id: data.id,
       username: data.username,
       email: data.email,
       profile_image: data.profile_image,

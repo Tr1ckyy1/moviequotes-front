@@ -1,5 +1,4 @@
-import type { Category } from '@/types'
-import type { Movies } from '@/types'
+import type { Category, Movies } from '@/types'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import {

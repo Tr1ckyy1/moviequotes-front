@@ -13,12 +13,13 @@
 
 <script setup lang="ts">
 import QuotesIcon from '@/components/icons/QuotesIcon.vue'
+import type { QuotesData } from '@/types'
 
 defineProps<{
   title: string
   id: number
   year: number
-  quotes: number
+  quotes: number | QuotesData[]
   image: string
 }>()
 </script>
