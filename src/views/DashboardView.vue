@@ -1,5 +1,5 @@
 <template>
-  <section class="lg:space-y-4 relative">
+  <section class="lg:space-y-4 relative" ref="container">
     <div class="flex gap-7">
       <div
         @click="openQuotesModal"
@@ -26,7 +26,7 @@
       </label>
     </div>
     <LoadingPageMini v-if="quotesStore.loading" />
-    <ul v-else class="space-y-8">
+    <ul class="space-y-8">
       <PostItem v-for="quote in quotesStore.quotes" :key="quote.id" :quote="quote" />
     </ul>
     <NewQuote v-if="quotesModal" :modalOpen="quotesModal" @close-modal="closeQuotesModal" />
@@ -43,13 +43,15 @@ import LoadingPageMini from '@/ui/LoadingPageMini.vue'
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useQuotesStore } from '@/stores/QuotesStore'
+import { onMounted } from 'vue'
+import { onUnmounted } from 'vue'
+
+const { t, locale } = useI18n()
+const quotesStore = useQuotesStore()
 
 const searchFocused = ref(false)
 const quotesModal = ref(false)
-
-const quotesStore = useQuotesStore()
-
-quotesStore.getQuotes()
+const container = ref<HTMLElement | null>(null)
 
 function openQuotesModal() {
   quotesModal.value = true
@@ -58,5 +60,18 @@ function openQuotesModal() {
 function closeQuotesModal() {
   quotesModal.value = false
 }
-const { t, locale } = useI18n()
+
+function handleScroll() {
+  if (container.value && container.value.getBoundingClientRect().bottom <= window.innerHeight)
+    quotesStore.loadMore()
+}
+
+onMounted(() => {
+  quotesStore.getQuotes()
+  window.addEventListener('scroll', handleScroll)
+  // Now you can perform operations on quotesScrollComponent.value
+})
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>

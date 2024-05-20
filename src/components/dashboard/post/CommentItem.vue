@@ -1,5 +1,5 @@
 <template>
-  <div class="border-b border-grey-rare space-y-4 pb-4">
+  <li class="border-b border-grey-rare space-y-4 pb-4">
     <div class="flex items-center gap-4">
       <div class="w-10 h-10 lg:w-12 lg:h-12 shrink-0">
         <img :src="comment.user.profile_image" class="w-full h-full rounded-full object-cover" />
@@ -9,7 +9,7 @@
       </h1>
     </div>
     <p class="font-semibold break-all">{{ comment.comment }}</p>
-  </div>
+  </li>
 </template>
 
 <script setup lang="ts">

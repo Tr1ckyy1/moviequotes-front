@@ -12,8 +12,10 @@
         />
         <img v-else src="@/assets/avatar.png" class="object-cover h-full w-full" />
       </div>
-      <div class="whitespace-nowrap">
-        <h1>{{ userData?.username }}</h1>
+      <div>
+        <h1 class="whitespace-normal break-all">
+          {{ userData?.username }}
+        </h1>
         <RouterLink
           :to="{ name: 'edit-profile' }"
           class="text-grey-secondary lg:cursor-pointer text-sm"

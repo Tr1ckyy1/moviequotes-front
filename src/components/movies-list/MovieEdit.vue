@@ -13,15 +13,15 @@
       </header>
       <main class="p-7 space-y-6">
         <section class="flex items-center gap-5">
-          <div class="w-10 h-10 lg:h-14 lg:w-14 shrink-0">
+          <div class="w-10 h-10 lg:h-14 lg:w-14 shrink-0 rounded-full">
             <img
               v-if="userData?.profile_image"
               :src="userData?.profile_image"
               class="object-cover rounded-full h-full w-full"
             />
-            <img v-else src="@/assets/avatar.png" class="object-cover h-full w-full" />
+            <img v-else src="@/assets/avatar.png" class="rounded-full object-cover h-full w-full" />
           </div>
-          <h2>{{ userData?.username }}</h2>
+          <h2 class="break-all">{{ userData?.username }}</h2>
         </section>
         <div>
           <div class="relative mb-2">
@@ -106,7 +106,7 @@
               class="absolute space-y-2 px-4 py-2 border-x border-b border-grey-main bg-[#0D0B14] mt-1 top-full rounded-b-md h-36 z-[100] w-full left-0 overflow-y-scroll scrollbar"
             >
               <li
-                v-for="category in categories"
+                v-for="category in moviesStore.categories"
                 :key="category.id"
                 class="bg-grey-main/10 cursor-pointer lg:hover:brightness-75"
                 @click.stop="manageActiveCategories(category)"
@@ -314,16 +314,16 @@ import { useAuthStore } from '@/stores/AuthStore'
 import * as yup from 'yup'
 import { computed } from 'vue'
 import { onMounted } from 'vue'
+import { useRoute } from 'vue-router'
 
 const { userData } = storeToRefs(useAuthStore())
 
-const { categories } = storeToRefs(useMoviesStore())
+const moviesStore = useMoviesStore()
 
 const { t, locale } = useI18n()
 
 const emit = defineEmits<{
   (e: 'close-modal'): void
-  (e: 'refetch'): void
 }>()
 
 const props = defineProps<{
@@ -334,6 +334,7 @@ const props = defineProps<{
 const dropDownActive = ref(false)
 const categoryError = ref(false)
 const imageRef = ref<HTMLImageElement | null>(null)
+const { params } = useRoute()
 
 const schema = computed(() =>
   yup.object().shape({
@@ -402,7 +403,7 @@ const submit = handleSubmit(async (values) => {
     const movieId = props.movie?.id ?? null
     await editMovie({ ...values, categories: categoryIds }, movieId)
     closeModal()
-    emit('refetch')
+    moviesStore.getMovie(params.movieId.toString())
   } catch (error: any) {
     if (error.response?.data?.errors) {
       if (error.response.data.errors.categories) categoryError.value = true

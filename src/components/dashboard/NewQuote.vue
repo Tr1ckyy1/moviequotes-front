@@ -12,21 +12,23 @@
       </header>
       <main class="p-7 space-y-6">
         <section class="flex items-center gap-5">
-          <div class="w-10 h-10 lg:h-14 lg:w-14 shrink-0">
+          <div class="w-10 h-10 lg:h-14 lg:w-14 shrink-0 rounded-full">
             <img
               v-if="userData?.profile_image"
               :src="userData?.profile_image"
               class="object-cover rounded-full h-full w-full"
             />
-            <img v-else src="@/assets/avatar.png" class="object-cover h-full w-full" />
+            <img v-else src="@/assets/avatar.png" class="rounded-full object-cover h-full w-full" />
           </div>
-          <h2>{{ userData?.username }}</h2>
+          <h2 class="break-all">
+            {{ userData?.username }}
+          </h2>
         </section>
 
         <div class="relative">
           <Field v-slot="{ field }" name="quote.en" :validateOnInput="true" :validateOnBlur="false">
             <textarea
-              id="new-quote-quote-en"
+              id="new-quote-en"
               v-bind="field"
               class="resize-none w-full bg-transparent border pl-4 pr-11 py-2 rounded-[4px] italic text-white placeholder:text-grey-main outline-none scrollbar-none"
               placeholder="New quote"
@@ -34,7 +36,7 @@
               :class="errors['quote.en'] ? 'border-red-main' : 'border-grey-main'"
             ></textarea>
           </Field>
-          <label for="add-movie-quote-en" class="absolute right-4 top-4 bg-transparent text-white"
+          <label for="new-quote-en" class="absolute right-4 top-4 bg-transparent text-grey-main"
             >Eng</label
           >
           <ErrorMessage class="text-red-main" name="quote.en" />
@@ -43,7 +45,7 @@
         <div class="relative">
           <Field v-slot="{ field }" name="quote.ka" :validateOnInput="true" :validateOnBlur="false">
             <textarea
-              id="new-quote-quote-ka"
+              id="new-quote-ka"
               v-bind="field"
               class="resize-none w-full bg-transparent border pl-4 pr-11 py-2 rounded-[4px] italic text-white placeholder:text-grey-main outline-none scrollbar-none"
               placeholder="ახალი ციტატა"
@@ -51,7 +53,7 @@
               :class="errors['quote.ka'] ? 'border-red-main' : 'border-grey-main'"
             ></textarea>
           </Field>
-          <label for="add-movie-quote-ka" class="absolute right-4 top-4 bg-transparent text-white"
+          <label for="new-quote-ka" class="absolute right-4 top-4 bg-transparent text-grey-main"
             >ქარ</label
           >
           <ErrorMessage class="text-red-main" name="quote.ka" />
@@ -136,8 +138,9 @@
             {{ t('validation.movie_form_validation.quote.movie') }}
           </p>
         </div>
+
         <button
-          class="flex justify-center gap-4 items-center bg-red-main w-full p-3 rounded-md enabled:lg:hover:bg-white enabled:lg:hover:text-red-main enabled:lg:hover:duration-300 disabled:cursor-not-allowed"
+          class="flex justify-center gap-4 bg-red-main w-full p-3 rounded-md lg:enabled:hover:bg-white lg:enabled:hover:text-red-main lg:enabled:hover:duration-300 disabled:cursor-not-allowed"
           :disabled="isSubmitting"
         >
           <LoadingSpinnerMini v-if="isSubmitting" />
@@ -174,13 +177,13 @@ defineProps<{
   modalOpen: boolean
 }>()
 const { t, locale } = useI18n()
-const { getQuotes } = useQuotesStore()
 
 const imageName = ref('')
 const MAX_NUM_CHARACTERS = 50
 const dropDownActive = ref(false)
 const { userData } = storeToRefs(useAuthStore())
 const { movies } = storeToRefs(useMoviesStore())
+const { getQuotes } = useQuotesStore()
 const movieChosen = ref<Movies | null>(null)
 const movieError = ref(false)
 

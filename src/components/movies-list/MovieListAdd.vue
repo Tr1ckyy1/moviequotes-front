@@ -13,15 +13,15 @@
       </header>
       <main class="p-7 space-y-6">
         <section class="flex items-center gap-5">
-          <div class="w-10 h-10 lg:h-14 lg:w-14 shrink-0">
+          <div class="w-10 h-10 lg:h-14 lg:w-14 shrink-0 rounded-full">
             <img
               v-if="userData?.profile_image"
               :src="userData?.profile_image"
               class="object-cover rounded-full h-full w-full"
             />
-            <img v-else src="@/assets/avatar.png" class="object-cover h-full w-full" />
+            <img v-else src="@/assets/avatar.png" class="rounded-full object-cover h-full w-full" />
           </div>
-          <h2>{{ userData?.username }}</h2>
+          <h2 class="break-all">{{ userData?.username }}</h2>
         </section>
         <MovieListInput
           name="name.en"

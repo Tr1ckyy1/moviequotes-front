@@ -9,16 +9,22 @@
     >
       <li
         class="flex items-center gap-4 lg:hover:brightness-75 cursor-pointer"
-        @click="handleClick"
+        @click="handleClick('view')"
       >
         <ViewQuoteIcon />
         <span>{{ t('show.view_quote') }}</span>
       </li>
-      <li class="flex items-center gap-4 lg:hover:brightness-75 cursor-pointer">
+      <li
+        @click="handleClick('edit')"
+        class="flex items-center gap-4 lg:hover:brightness-75 cursor-pointer"
+      >
         <EditIcon />
         <span>{{ t('show.edit') }}</span>
       </li>
-      <li class="flex items-center gap-4 lg:hover:brightness-75 cursor-pointer">
+      <li
+        @click="deleteQuote"
+        class="flex items-center gap-4 lg:hover:brightness-75 cursor-pointer"
+      >
         <TrashIcon />
         <span>{{ t('show.delete') }}</span>
       </li>
@@ -34,7 +40,10 @@ import TrashIcon from '../icons/TrashIcon.vue'
 import ThreeDotsIcon from '../icons/ThreeDotsIcon.vue'
 import { onMounted, ref } from 'vue'
 import { onBeforeUnmount } from 'vue'
+import { useQuotesStore } from '@/stores/QuotesStore'
+import { deleteQuote as deleteQuoteApi } from '@/services/api/quotes'
 import { useMoviesStore } from '@/stores/MoviesStore'
+import { useRoute } from 'vue-router'
 
 const props = defineProps<{
   id: number
@@ -44,10 +53,14 @@ const { t } = useI18n()
 
 const modalContainer = ref<HTMLDivElement | null>(null)
 const modalOpen = ref(false)
-const { openViewQuoteModal } = useMoviesStore()
+const { openViewQuoteModal, openEditQuoteModal } = useQuotesStore()
+const { getMovie } = useMoviesStore()
 
-function handleClick() {
-  openViewQuoteModal(props.id)
+const { params } = useRoute()
+
+function handleClick(mode: string) {
+  if (mode === 'view') openViewQuoteModal(props.id)
+  else openEditQuoteModal(props.id)
 }
 
 function triggerModal() {
@@ -58,6 +71,11 @@ function handleClickOutside(e: Event) {
   if (modalContainer.value && !modalContainer.value.contains(e.target as Node)) {
     modalOpen.value = false
   }
+}
+
+async function deleteQuote() {
+  await deleteQuoteApi(props.id)
+  getMovie(params.movieId.toString())
 }
 
 onMounted(() => {

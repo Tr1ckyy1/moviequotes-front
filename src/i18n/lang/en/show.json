@@ -3,7 +3,9 @@
   "director": "Director",
   "total_quotes": "All Quotes (Total {number})",
   "add_quote": "Add Quote",
+  "edit_quote": "Edit Quote",
   "view_quote": "View Quote",
   "edit": "Edit",
-  "delete": "Delete"
+  "delete": "Delete",
+  "change_photo": "Change Photo"
 }
