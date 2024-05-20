@@ -11,6 +11,24 @@ export const useMoviesStore = defineStore('MoviesStore', () => {
   const movies = ref<Movies[]>([])
   const pageLoading = ref(false)
   const moviesPageLoading = ref(false)
+  const viewQuoteModal = ref<{ visible: boolean; id: number | null }>({
+    visible: false,
+    id: null
+  })
+
+  function openViewQuoteModal(id: number) {
+    viewQuoteModal.value = {
+      visible: true,
+      id
+    }
+  }
+
+  function closeViewQuoteModal() {
+    viewQuoteModal.value = {
+      visible: false,
+      id: null
+    }
+  }
 
   async function getCategories() {
     try {
@@ -45,6 +63,9 @@ export const useMoviesStore = defineStore('MoviesStore', () => {
     movies,
     getMovies,
     pageLoading,
-    moviesPageLoading
+    moviesPageLoading,
+    viewQuoteModal,
+    openViewQuoteModal,
+    closeViewQuoteModal
   }
 })

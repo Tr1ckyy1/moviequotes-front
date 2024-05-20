@@ -9,7 +9,7 @@
     </p>
     <button
       @click="buttonAction"
-      class="flex justify-center gap-4 items-center w-full bg-red-main border border-red-main rounded-[4px] py-2 px-10 lg:enabled:hover:bg-white lg:enabled:hover:text-red-main lg:enabled:hover:duration-300 disabled:cursor-not-allowed"
+      class="flex justify-center gap-4 items-center w-full bg-red-main border border-red-main rounded-[4px] py-2 lg:enabled:hover:bg-white lg:enabled:hover:text-red-main lg:enabled:hover:duration-300 disabled:cursor-not-allowed"
       :disabled="buttonLoading"
     >
       <LoadingSpinnerMini v-if="buttonLoading" />

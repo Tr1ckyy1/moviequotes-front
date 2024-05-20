@@ -1,6 +1,7 @@
 <template>
   <LoadingPageMini v-if="loading" />
-  <section v-else-if="!loading && movie" class="">
+  <section v-else-if="!loading && movie">
+    <ViewQuoteModal v-if="viewQuoteModal.visible" />
     <MovieEdit
       v-if="editMovieModal"
       :modalOpen="editMovieModal"
@@ -98,6 +99,7 @@ import EditIcon from '@/components/icons/EditIcon.vue'
 import TrashIcon from '@/components/icons/TrashIcon.vue'
 import MovieEdit from '@/components/movies-list/MovieEdit.vue'
 import { useMoviesStore } from '@/stores/MoviesStore'
+import ViewQuoteModal from '@/components/movies-list/ViewQuoteModal.vue'
 
 const { t, locale } = useI18n()
 
@@ -106,7 +108,7 @@ const loading = ref(false)
 const editMovieModal = ref(false)
 const router = useRouter()
 const movie = ref<Movies | null>(null)
-const { getMovies } = useMoviesStore()
+const { getMovies, viewQuoteModal } = useMoviesStore()
 
 function isQuotesArray(quotes: number | QuotesData[]): quotes is QuotesData[] {
   return Array.isArray(quotes)

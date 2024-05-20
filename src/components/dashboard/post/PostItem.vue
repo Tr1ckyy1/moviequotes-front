@@ -88,8 +88,10 @@ async function updateLike() {
 }
 
 async function addComment() {
-  await addCommentApi(props.quote.id, commentInput.value)
-  await getQuotes(false)
-  commentInput.value = ''
+  if (commentInput.value) {
+    await addCommentApi(props.quote.id, commentInput.value)
+    await getQuotes(false)
+    commentInput.value = ''
+  }
 }
 </script>
