@@ -29,10 +29,10 @@ export async function addMovie(data: MovieData) {
 
 export async function editMovie(data: MovieData, movieId: number | null) {
   const formData = new FormData()
-  formData.append('image', data.image)
+  if (data.image) formData.append('image', data.image)
   await instance.post(
     `/api/edit-movie/${movieId}`,
-    { ...data, image: formData.get('image') },
+    { ...data, image: formData.get('image') ?? null },
     {
       headers: {
         'Content-Type': 'multipart/form-data'

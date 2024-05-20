@@ -25,9 +25,9 @@
         />
       </label>
     </div>
-    <LoadingPageMini v-if="loading" />
+    <LoadingPageMini v-if="quotesStore.loading" />
     <ul v-else class="space-y-8">
-      <PostItem v-for="quote in quotes" :key="quote.id" :quote="quote" />
+      <PostItem v-for="quote in quotesStore.quotes" :key="quote.id" :quote="quote" />
     </ul>
     <NewQuote v-if="quotesModal" :modalOpen="quotesModal" @close-modal="closeQuotesModal" />
   </section>
@@ -42,31 +42,14 @@ import LoadingPageMini from '@/ui/LoadingPageMini.vue'
 
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { getQuotes as getQuotesApi } from '@/services/api/quotes'
-
-import type { QuotesData } from '@/types'
+import { useQuotesStore } from '@/stores/QuotesStore'
 
 const searchFocused = ref(false)
 const quotesModal = ref(false)
-const loading = ref(false)
-const quotes = ref<QuotesData[]>([])
 
-async function getQuotes() {
-  try {
-    loading.value = true
-    const {
-      data: { data }
-    } = await getQuotesApi()
-    quotes.value = data
-    console.log(data)
-  } catch (err) {
-    //
-    console.log(err)
-  } finally {
-    loading.value = false
-  }
-}
-getQuotes()
+const quotesStore = useQuotesStore()
+
+quotesStore.getQuotes()
 
 function openQuotesModal() {
   quotesModal.value = true

@@ -285,7 +285,7 @@
         </div>
 
         <button
-          class="flex justify-center gap-4 items-center bg-red-main w-full p-3 rounded-md lg:enabled:hover:bg-white lg:enabled:hover:text-red-main lg:enabled:hover:duration-300"
+          class="flex justify-center gap-4 items-center bg-red-main w-full p-3 rounded-md lg:enabled:hover:bg-white lg:enabled:hover:text-red-main lg:enabled:hover:duration-300 disabled:cursor-not-allowed"
           :disabled="isSubmitting"
         >
           <LoadingSpinnerMini v-if="isSubmitting" />
@@ -378,8 +378,7 @@ const schema = computed(() =>
       .typeError(t('validation.movie_form_validation.year.number'))
       .required(t('validation.movie_form_validation.year.required'))
       .min(1900, t('validation.movie_form_validation.year.min'))
-      .max(new Date().getFullYear(), t('validation.movie_form_validation.year.max')),
-    image: yup.mixed().required(t('validation.movie_form_validation.image'))
+      .max(new Date().getFullYear(), t('validation.movie_form_validation.year.max'))
   })
 )
 

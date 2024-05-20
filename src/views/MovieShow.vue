@@ -1,6 +1,7 @@
 <template>
   <LoadingPageMini v-if="loading" />
-  <section v-else-if="!loading && movie" class="">
+  <section v-else-if="!loading && movie">
+    <ViewQuoteModal v-if="viewQuoteModal.visible" />
     <MovieEdit
       v-if="editMovieModal"
       :modalOpen="editMovieModal"
@@ -58,7 +59,11 @@
       </header>
       <div class="lg:flex lg:items-center lg:gap-4">
         <h1 class="text-2xl lg:border-r lg:border-grey-main lg:pr-4">
-          {{ t('show.total_quotes', { number: movie.quotes }) }}
+          {{
+            t('show.total_quotes', {
+              number: isQuotesArray(movie.quotes) ? movie.quotes.length : movie.quotes
+            })
+          }}
         </h1>
         <div
           class="hidden w-fit group lg:flex lg:cursor-pointer items-center gap-3 bg-red-main border border-red-main rounded-[4px] py-2 hover:bg-white hover:text-red-main hover:duration-300 px-4"
@@ -74,13 +79,8 @@
         </div>
       </div>
     </div>
-    <ul class="mt-6 space-y-8 pb-16 lg:w-[55%] lg:pb-[6.5rem]">
-      <QuoteItem :image="movie.image" />
-      <QuoteItem :image="movie.image" />
-      <QuoteItem :image="movie.image" />
-      <QuoteItem :image="movie.image" />
-      <QuoteItem :image="movie.image" />
-      <QuoteItem :image="movie.image" />
+    <ul v-if="isQuotesArray(movie.quotes)" class="mt-6 space-y-8 pb-16 lg:w-[55%] lg:pb-[6.5rem]">
+      <QuoteItem v-for="quote in movie.quotes" :key="quote.id" :quote="quote" />
     </ul>
   </section>
 </template>
@@ -91,7 +91,7 @@ import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import LoadingPageMini from '@/ui/LoadingPageMini.vue'
 import { useI18n } from 'vue-i18n'
-import type { Movies } from '@/types'
+import type { Movies, QuotesData } from '@/types'
 import type { Language } from '@/types'
 import CategoryItem from '@/components/movies-list/CategoryItem.vue'
 import QuoteItem from '@/components/movies-list/QuoteItem.vue'
@@ -99,6 +99,7 @@ import EditIcon from '@/components/icons/EditIcon.vue'
 import TrashIcon from '@/components/icons/TrashIcon.vue'
 import MovieEdit from '@/components/movies-list/MovieEdit.vue'
 import { useMoviesStore } from '@/stores/MoviesStore'
+import ViewQuoteModal from '@/components/movies-list/ViewQuoteModal.vue'
 
 const { t, locale } = useI18n()
 
@@ -107,7 +108,11 @@ const loading = ref(false)
 const editMovieModal = ref(false)
 const router = useRouter()
 const movie = ref<Movies | null>(null)
-const { getMovies } = useMoviesStore()
+const { getMovies, viewQuoteModal } = useMoviesStore()
+
+function isQuotesArray(quotes: number | QuotesData[]): quotes is QuotesData[] {
+  return Array.isArray(quotes)
+}
 
 function openEditMovie() {
   editMovieModal.value = true

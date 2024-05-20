@@ -18,3 +18,11 @@ export async function addQuote(data: Quote) {
     }
   )
 }
+
+export async function updateLike(quoteId: number) {
+  await instance.post(`api/update-like/${quoteId}`)
+}
+
+export async function addComment(quoteId: number, comment: string) {
+  await instance.post(`api/add-comment/${quoteId}`, { comment })
+}

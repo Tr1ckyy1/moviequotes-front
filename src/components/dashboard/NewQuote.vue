@@ -136,11 +136,12 @@
             {{ t('validation.movie_form_validation.quote.movie') }}
           </p>
         </div>
-
         <button
-          class="bg-red-main w-full p-3 rounded-md lg:hover:bg-white lg:hover:text-red-main lg:hover:duration-300"
+          class="flex justify-center gap-4 items-center bg-red-main w-full p-3 rounded-md enabled:lg:hover:bg-white enabled:lg:hover:text-red-main enabled:lg:hover:duration-300 disabled:cursor-not-allowed"
+          :disabled="isSubmitting"
         >
-          {{ t('modal.post') }}
+          <LoadingSpinnerMini v-if="isSubmitting" />
+          {{ isSubmitting ? t('loading') : t('modal.post') }}
         </button>
       </main>
     </form>
@@ -163,6 +164,7 @@ import { computed } from 'vue'
 import { useMoviesStore } from '@/stores/MoviesStore'
 import { addQuote } from '@/services/api/quotes'
 import type { Language, Movies, Quote } from '@/types'
+import { useQuotesStore } from '@/stores/QuotesStore'
 
 const emit = defineEmits<{
   (e: 'close-modal'): void
@@ -172,6 +174,7 @@ defineProps<{
   modalOpen: boolean
 }>()
 const { t, locale } = useI18n()
+const { getQuotes } = useQuotesStore()
 
 const imageName = ref('')
 const MAX_NUM_CHARACTERS = 50
@@ -199,7 +202,7 @@ const schema = computed(() =>
   })
 )
 
-const { handleSubmit, errors, setFieldError, setFieldValue } = useForm<Quote>({
+const { handleSubmit, errors, setFieldError, setFieldValue, isSubmitting } = useForm<Quote>({
   validationSchema: schema
 })
 
@@ -212,6 +215,8 @@ const submit = handleSubmit(async (values) => {
   try {
     const movieId = movieChosen.value?.id ?? null
     await addQuote({ ...values, movie: movieId })
+    closeModal()
+    getQuotes()
   } catch (error: any) {
     if (error.response?.data?.errors) {
       if (error.response.data.errors.movie) movieError.value = true
