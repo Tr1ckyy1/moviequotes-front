@@ -5,11 +5,9 @@ export async function getQuote(quoteId: number | null) {
   return await instance.get(`api/get-quote/${quoteId}`)
 }
 
-export async function getQuotes(page: number) {
+export async function getQuotes(params: Object) {
   return await instance.get('api/get-quotes', {
-    params: {
-      page
-    }
+    params
   })
 }
 

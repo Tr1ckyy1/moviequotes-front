@@ -60,10 +60,16 @@ export const useQuotesStore = defineStore('QuotesStore', () => {
     addQuoteModal.value = false
   }
 
-  async function getQuotes(showSpinner = true) {
+  async function getQuotes(showSpinner = true, query: Object = {}) {
     try {
       if (showSpinner) loading.value = true
-      const { data } = await getQuotesApi(page.value)
+      const { data } = await getQuotesApi({
+        page: page.value,
+        filter: {
+          ...query
+        }
+      })
+
       quotes.value = data.data
       totalPages.value = data.meta.last_page
     } catch (err) {
@@ -73,10 +79,15 @@ export const useQuotesStore = defineStore('QuotesStore', () => {
     }
   }
 
-  async function loadMore() {
+  async function loadMore(query: Object = {}) {
     if (page.value < totalPages.value) {
       page.value++
-      const { data } = await getQuotesApi(page.value)
+      const { data } = await getQuotesApi({
+        page: page.value,
+        filter: {
+          ...query
+        }
+      })
       if (page.value <= data.meta.last_page) {
         quotes.value.push(...data.data)
       }

@@ -66,7 +66,7 @@ import ControlLanguages from '@/components/ControlLanguages.vue'
 import HeaderModal from '@/components/dashboard/modals/HeaderModal.vue'
 import TheSidebar from './TheSidebar.vue'
 import { logout as logoutApi } from '@/services/api/auth'
-import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router'
+import { onBeforeRouteUpdate, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { ref } from 'vue'
 import { useAuthStore } from '@/stores/AuthStore'
@@ -75,7 +75,6 @@ import { getUser } from '@/services/api/user'
 import { onMounted } from 'vue'
 import { watchEffect } from 'vue'
 import { onUpdated } from 'vue'
-import { watch } from 'vue'
 
 const sidebarModal = ref(false)
 const searchModal = ref(false)
@@ -84,7 +83,6 @@ const inputRef = ref<HTMLInputElement | null>(null)
 
 const { t } = useI18n()
 
-const route = useRoute()
 const router = useRouter()
 const { setToast, setUserData } = useAuthStore()
 const moviesStore = useMoviesStore()
@@ -140,15 +138,12 @@ function filterQuotes(e: KeyboardEvent) {
   }
   router.push({
     query: {
-      movie: movieSearchTerm ?? null,
+      'movie.name': movieSearchTerm ?? null,
       quote: quoteSearchTerm ?? null
     }
   })
+  closeSearchModal()
 }
-
-watch(route, (val) => {
-  console.log(val.query)
-})
 
 async function user() {
   try {
