@@ -126,7 +126,11 @@ import { useForm, Field, ErrorMessage } from 'vee-validate'
 import * as yup from 'yup'
 import { computed } from 'vue'
 import CameraIcon from '../icons/CameraIcon.vue'
-import { editQuote, deleteQuote, getQuote as getQuoteApi } from '@/services/api/quotes'
+import {
+  editQuote,
+  deleteQuote as deleteQuoteApi,
+  getQuote as getQuoteApi
+} from '@/services/api/quotes'
 import { useRoute } from 'vue-router'
 import TrashIcon from '../icons/TrashIcon.vue'
 
@@ -137,7 +141,6 @@ const moviesStore = useMoviesStore()
 const { params } = useRoute()
 const quoteData = ref<QuotesData | null>(null)
 const imageRef = ref<HTMLImageElement | null>(null)
-
 const schema = computed(() =>
   yup.object().shape({
     quote: yup.object().shape({
@@ -145,12 +148,12 @@ const schema = computed(() =>
         .string()
         .trim()
         .required(t('validation.movie_form_validation.quote.required'))
-        .matches(/^[A-Za-z0-9\s.,:-]+$/, t('validation.movie_form_validation.regex_en')),
+        .matches(/^[A-Za-z0-9\s.,:;'"`-]+$/, t('validation.movie_form_validation.regex_en')),
       ka: yup
         .string()
         .trim()
         .required(t('validation.movie_form_validation.quote.required'))
-        .matches(/^[\u10A0-\u10FF0-9\s.,:-]+$/, t('validation.movie_form_validation.regex_ka'))
+        .matches(/^[\u10A0-\u10FF0-9\s.,:;'"`-]+$/, t('validation.movie_form_validation.regex_ka'))
     })
   })
 )
@@ -165,7 +168,6 @@ const submit = handleSubmit(async (values) => {
     closeModal()
     moviesStore.getMovie(params.movieId.toString())
   } catch (error: any) {
-    console.log(error)
     if (error.response?.data?.errors) {
       for (const fieldName in error.response.data.errors) {
         setFieldError(fieldName as keyof Quote, error.response.data.errors[fieldName])
@@ -176,6 +178,12 @@ const submit = handleSubmit(async (values) => {
 
 function closeModal() {
   quotesStore.closeEditQuoteModal()
+}
+
+async function deleteQuote() {
+  if (quoteData.value) await deleteQuoteApi(quoteData.value.id)
+  closeModal()
+  moviesStore.getMovie(params.movieId.toString())
 }
 
 async function getQuote() {

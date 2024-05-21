@@ -1,10 +1,13 @@
 <template>
-  <LoadingPageMini v-if="moviesPageLoading" />
-  <section v-else-if="!moviesPageLoading && !pageLoading" class="px-7 lg:px-0">
+  <LoadingPageMini v-if="moviesStore.moviesPageLoading" />
+  <section
+    v-else-if="!moviesStore.moviesPageLoading && !moviesStore.pageLoading"
+    class="px-7 lg:px-0"
+  >
     <MovieListAdd v-if="addMoviesModal" :modalOpen="addMoviesModal" @close-modal="closeAddMovies" />
 
     <header class="flex justify-between gap-10">
-      <h1 class="text-2xl">{{ t('list.title', { number: movies.length }) }}</h1>
+      <h1 class="text-2xl">{{ t('list.title', { number: moviesStore.movies.length }) }}</h1>
       <div class="flex min-w-fit gap-3">
         <label
           class="hidden lg:flex items-center gap-4"
@@ -45,7 +48,7 @@
         :year="movie.year"
         :quotes="movie.quotes"
         :image="movie.image"
-        :class="index === movies.length - 1 && 'pb-16 lg:pb-[6.5rem]'"
+        :class="index === moviesStore.movies.length - 1 && 'pb-16 lg:pb-[6.5rem]'"
       />
     </main>
   </section>
@@ -61,22 +64,22 @@ import type { Language } from '@/types'
 import { computed } from 'vue'
 import LoadingPageMini from '@/ui/LoadingPageMini.vue'
 import { useMoviesStore } from '@/stores/MoviesStore'
-import { storeToRefs } from 'pinia'
 
 const { t, locale } = useI18n()
 const searchFocused = ref(false)
 const addMoviesModal = ref(false)
 const search = ref('')
-const { movies, pageLoading, moviesPageLoading } = storeToRefs(useMoviesStore())
+const moviesStore = useMoviesStore()
 
 const searchedData = computed(() => {
   if (search.value)
-    return movies.value.filter((item) =>
+    return moviesStore.movies.filter((item) =>
       item.name[locale.value as Language].toLowerCase().includes(search.value.toLowerCase())
     )
-  return movies.value
+  return moviesStore.movies
 })
 
+moviesStore.getMovies(true)
 function openAddMovies() {
   addMoviesModal.value = true
 }

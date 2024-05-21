@@ -141,7 +141,6 @@ async function deleteMovie() {
       loading.value = true
       await deleteMovieApi(moviesStore.movie.id)
       router.replace({ name: 'movies-list' })
-      moviesStore.getMovies(true)
     } catch (err) {
       //
     } finally {

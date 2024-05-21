@@ -171,12 +171,12 @@ const schema = computed(() =>
         .string()
         .trim()
         .required(t('validation.movie_form_validation.quote.required'))
-        .matches(/^[A-Za-z0-9\s.,:-]+$/, t('validation.movie_form_validation.regex_en')),
+        .matches(/^[A-Za-z0-9\s.,:;'"`-]+$/, t('validation.movie_form_validation.regex_en')),
       ka: yup
         .string()
         .trim()
         .required(t('validation.movie_form_validation.quote.required'))
-        .matches(/^[\u10A0-\u10FF0-9\s.,:-]+$/, t('validation.movie_form_validation.regex_ka'))
+        .matches(/^[\u10A0-\u10FF0-9\s.,:;'"`-]+$/, t('validation.movie_form_validation.regex_ka'))
     }),
     image: yup.mixed().required(t('validation.movie_form_validation.image'))
   })
