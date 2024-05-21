@@ -103,7 +103,6 @@ watch(search, (value, oldValue) => {
   }
 
   if (value && value !== oldValue) {
-    console.log(value)
     clearTimeout(debounceTimer.value!)
     debounceTimer.value = setTimeout(() => {
       router.push({

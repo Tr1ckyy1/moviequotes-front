@@ -208,7 +208,10 @@ const upload = handleSubmit(async (values) => {
     if (editPasswordInput.value) editPasswordInput.value = false
     resetField('profile_image')
   } catch (error: any) {
-    if (error.response?.status === 413) {
+    if (
+      (error.response?.status && error.response?.status !== 403) ||
+      error.response?.status !== 422
+    ) {
       authStore.setToast({
         open: true,
         text: t('validation.auth.image_too_large'),
