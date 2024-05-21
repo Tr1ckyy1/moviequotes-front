@@ -12,11 +12,11 @@
     <div class="flex justify-between items-center">
       <div class="flex items-center gap-6 pb-4">
         <div class="flex gap-4 items-center">
-          <span class="text-xl">{{ quote.comments.length }}</span>
+          <span class="text-xl">{{ quote.comments }}</span>
           <CommentsIcon />
         </div>
         <div class="flex gap-4 items-center text-xl">
-          <span class="text-xl">{{ quote.likes.length }}</span>
+          <span class="text-xl">{{ quote.likes }}</span>
           <LikesIcon />
         </div>
       </div>

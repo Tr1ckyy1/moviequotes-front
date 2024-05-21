@@ -44,6 +44,7 @@
     <header class="flex border-b border-grey-rare px-7 py-5 items-center gap-6">
       <ArrowLeft width="16" height="16" @click="closeSearchModal" />
       <input
+        @keyup.enter="filterQuotes"
         ref="inputRef"
         type="text"
         class="outline-none bg-transparent placeholder:text-white w-full"
@@ -109,6 +110,39 @@ function openSearchModal() {
 
 function closeSearchModal() {
   searchModal.value = false
+}
+
+function filterQuotes(e: KeyboardEvent) {
+  const inputValue = e.target as HTMLInputElement
+  let movieSearchTerm = ''
+  let quoteSearchTerm = ''
+
+  const atIndex = inputValue.value.indexOf('@')
+  if (atIndex !== -1) {
+    const nextDelimiterIndex = inputValue.value.indexOf('#', atIndex)
+    if (nextDelimiterIndex !== -1) {
+      movieSearchTerm = inputValue.value.substring(atIndex + 1, nextDelimiterIndex).trim()
+    } else {
+      movieSearchTerm = inputValue.value.substring(atIndex + 1).trim()
+    }
+  }
+
+  const hashtagIndex = inputValue.value.indexOf('#')
+  if (hashtagIndex !== -1) {
+    const nextDelimiterIndex = inputValue.value.indexOf('@', hashtagIndex)
+    if (nextDelimiterIndex !== -1) {
+      quoteSearchTerm = inputValue.value.substring(hashtagIndex + 1, nextDelimiterIndex).trim()
+    } else {
+      quoteSearchTerm = inputValue.value.substring(hashtagIndex + 1).trim()
+    }
+  }
+  router.push({
+    query: {
+      'movie.name': movieSearchTerm ?? null,
+      quote: quoteSearchTerm ?? null
+    }
+  })
+  closeSearchModal()
 }
 
 async function user() {

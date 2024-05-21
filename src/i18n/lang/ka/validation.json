@@ -19,7 +19,8 @@
     "password_confirmation": {
       "required": "პაროლის დადასტურება სავალდებულოა",
       "password_mismatch": "პაროლები არ ემთხვევა ერთმანეთს"
-    }
+    },
+    "image_too_large": "ფაილის ზომა ძალიან დიდია"
   },
   "movie_form_validation": {
     "regex_en": "მხოლოდ ლათინური სიმბოლოები",

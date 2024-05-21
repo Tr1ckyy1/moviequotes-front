@@ -7,7 +7,7 @@
         <div class="w-10 h-10 lg:w-[52px] lg:h-[52px] shrink-0">
           <img :src="quote.user.profile_image" class="w-full h-full rounded-full object-cover" />
         </div>
-        <h1>
+        <h1 class="break-all">
           {{ quote.user.username }}
         </h1>
       </div>
@@ -33,9 +33,9 @@
         </div>
       </div>
     </div>
-    <div class="overflow-y-auto scrollbar space-y-4">
+    <ul class="overflow-y-auto scrollbar space-y-4">
       <CommentItem v-for="comment in quote.comments" :key="comment.id" :comment="comment" />
-    </div>
+    </ul>
     <div class="flex gap-4 h-fit">
       <div class="w-10 h-10 lg:w-[52px] lg:h-[52px] shrink-0">
         <img

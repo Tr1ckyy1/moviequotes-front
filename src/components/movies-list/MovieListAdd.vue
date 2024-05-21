@@ -13,15 +13,15 @@
       </header>
       <main class="p-7 space-y-6">
         <section class="flex items-center gap-5">
-          <div class="w-10 h-10 lg:h-14 lg:w-14 shrink-0">
+          <div class="w-10 h-10 lg:h-14 lg:w-14 shrink-0 rounded-full">
             <img
               v-if="userData?.profile_image"
               :src="userData?.profile_image"
               class="object-cover rounded-full h-full w-full"
             />
-            <img v-else src="@/assets/avatar.png" class="object-cover h-full w-full" />
+            <img v-else src="@/assets/avatar.png" class="rounded-full object-cover h-full w-full" />
           </div>
-          <h2>{{ userData?.username }}</h2>
+          <h2 class="break-all">{{ userData?.username }}</h2>
         </section>
         <MovieListInput
           name="name.en"
@@ -238,36 +238,36 @@ const schema = computed(() =>
         .string()
         .trim()
         .required(t('validation.movie_form_validation.name.required'))
-        .matches(/^[A-Za-z0-9\s.,:-]+$/, t('validation.movie_form_validation.regex_en')),
+        .matches(/^[A-Za-z0-9\s.,:;'"`-]+$/, t('validation.movie_form_validation.regex_en')),
       ka: yup
         .string()
         .trim()
         .required(t('validation.movie_form_validation.name.required'))
-        .matches(/^[\u10A0-\u10FF0-9\s.,:-]+$/, t('validation.movie_form_validation.regex_ka'))
+        .matches(/^[\u10A0-\u10FF0-9\s.,:;'"`-]+$/, t('validation.movie_form_validation.regex_ka'))
     }),
     director: yup.object().shape({
       en: yup
         .string()
         .trim()
         .required(t('validation.movie_form_validation.director.required'))
-        .matches(/^[A-Za-z0-9\s.,:-]+$/, t('validation.movie_form_validation.regex_en')),
+        .matches(/^[A-Za-z0-9\s.,:;'"`-]+$/, t('validation.movie_form_validation.regex_en')),
       ka: yup
         .string()
         .trim()
         .required(t('validation.movie_form_validation.director.required'))
-        .matches(/^[\u10A0-\u10FF0-9\s.,:-]+$/, t('validation.movie_form_validation.regex_ka'))
+        .matches(/^[\u10A0-\u10FF0-9\s.,:;'"`-]+$/, t('validation.movie_form_validation.regex_ka'))
     }),
     description: yup.object().shape({
       en: yup
         .string()
         .trim()
         .required(t('validation.movie_form_validation.description.required'))
-        .matches(/^[A-Za-z0-9\s.,:-]+$/, t('validation.movie_form_validation.regex_en')),
+        .matches(/^[A-Za-z0-9\s.,:;'"`-]+$/, t('validation.movie_form_validation.regex_en')),
       ka: yup
         .string()
         .trim()
         .required(t('validation.movie_form_validation.description.required'))
-        .matches(/^[\u10A0-\u10FF0-9\s.,:-]+$/, t('validation.movie_form_validation.regex_ka'))
+        .matches(/^[\u10A0-\u10FF0-9\s.,:;'"`-]+$/, t('validation.movie_form_validation.regex_ka'))
     }),
     year: yup
       .number()

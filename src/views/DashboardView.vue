@@ -1,5 +1,5 @@
 <template>
-  <section class="lg:space-y-4 relative">
+  <section class="lg:space-y-4 relative" ref="container">
     <div class="flex gap-7">
       <div
         @click="openQuotesModal"
@@ -16,6 +16,7 @@
       >
         <SearchIcon class="self-center" />
         <input
+          v-model="search"
           class="outline-none text-xl text-right bg-transparent focus:text-left focus:w-full text-grey-secondary placeholder:text-grey-secondary"
           :class="locale === 'ka' ? 'w-16' : 'w-24'"
           id="dashboard-search"
@@ -26,7 +27,7 @@
       </label>
     </div>
     <LoadingPageMini v-if="quotesStore.loading" />
-    <ul v-else class="space-y-8">
+    <ul class="space-y-8">
       <PostItem v-for="quote in quotesStore.quotes" :key="quote.id" :quote="quote" />
     </ul>
     <NewQuote v-if="quotesModal" :modalOpen="quotesModal" @close-modal="closeQuotesModal" />
@@ -40,16 +41,23 @@ import NewQuote from '@/components/dashboard/NewQuote.vue'
 import PostItem from '@/components/dashboard/post/PostItem.vue'
 import LoadingPageMini from '@/ui/LoadingPageMini.vue'
 
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useQuotesStore } from '@/stores/QuotesStore'
+import { onMounted } from 'vue'
+import { onUnmounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+
+const { t, locale } = useI18n()
+const quotesStore = useQuotesStore()
+const route = useRoute()
+const router = useRouter()
 
 const searchFocused = ref(false)
 const quotesModal = ref(false)
-
-const quotesStore = useQuotesStore()
-
-quotesStore.getQuotes()
+const container = ref<HTMLElement | null>(null)
+const search = ref('')
+const debounceTimer = ref<number | null>(null)
 
 function openQuotesModal() {
   quotesModal.value = true
@@ -58,5 +66,61 @@ function openQuotesModal() {
 function closeQuotesModal() {
   quotesModal.value = false
 }
-const { t, locale } = useI18n()
+
+function handleScroll() {
+  if (container.value && container.value.getBoundingClientRect().bottom <= window.innerHeight)
+    quotesStore.loadMore(route.query)
+}
+
+watch(
+  () => route.query,
+  (val) => {
+    quotesStore.getQuotes(true, val)
+  }
+)
+watch(search, (value, oldValue) => {
+  let movieSearchTerm = ''
+  let quoteSearchTerm = ''
+
+  const atIndex = value.indexOf('@')
+  if (atIndex !== -1) {
+    const nextDelimiterIndex = value.indexOf('#', atIndex)
+    if (nextDelimiterIndex !== -1) {
+      movieSearchTerm = value.substring(atIndex + 1, nextDelimiterIndex).trim()
+    } else {
+      movieSearchTerm = value.substring(atIndex + 1).trim()
+    }
+  }
+
+  const hashtagIndex = value.indexOf('#')
+  if (hashtagIndex !== -1) {
+    const nextDelimiterIndex = value.indexOf('@', hashtagIndex)
+    if (nextDelimiterIndex !== -1) {
+      quoteSearchTerm = value.substring(hashtagIndex + 1, nextDelimiterIndex).trim()
+    } else {
+      quoteSearchTerm = value.substring(hashtagIndex + 1).trim()
+    }
+  }
+
+  if (value && value !== oldValue) {
+    console.log(value)
+    clearTimeout(debounceTimer.value!)
+    debounceTimer.value = setTimeout(() => {
+      router.push({
+        query: {
+          'movie.name': movieSearchTerm ?? null,
+          quote: quoteSearchTerm ?? null
+        }
+      })
+    }, 500)
+  }
+})
+
+onMounted(() => {
+  quotesStore.getQuotes(true, route.query)
+  window.addEventListener('scroll', handleScroll)
+})
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>

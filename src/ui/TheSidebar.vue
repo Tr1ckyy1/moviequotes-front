@@ -12,8 +12,10 @@
         />
         <img v-else src="@/assets/avatar.png" class="object-cover h-full w-full" />
       </div>
-      <div class="whitespace-nowrap">
-        <h1>{{ userData?.username }}</h1>
+      <div>
+        <h1 class="whitespace-normal break-all">
+          {{ userData?.username }}
+        </h1>
         <RouterLink
           :to="{ name: 'edit-profile' }"
           class="text-grey-secondary lg:cursor-pointer text-sm"
@@ -22,6 +24,7 @@
       </div>
     </div>
     <RouterLink
+      @click="clearQueries"
       :to="{ name: 'dashboard' }"
       class="flex items-center gap-7 lg:cursor-pointer lg:pl-3 w-fit"
     >
@@ -45,9 +48,14 @@ import MovieListIcon from '@/components/icons/MovieListIcon.vue'
 import { useAuthStore } from '@/stores/AuthStore'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
+const router = useRouter()
 const { t } = useI18n()
 const { userData } = storeToRefs(useAuthStore())
+
+function clearQueries() {
+  if (route.name === 'dashboard') router.replace({ query: {} })
+}
 </script>

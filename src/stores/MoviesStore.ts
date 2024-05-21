@@ -3,32 +3,20 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import {
   getCategories as getCategoriesApi,
-  getMovies as getMoviesApi
+  getMovies as getMoviesApi,
+  getMovie as getMovieApi
 } from '@/services/api/movieList'
+import { useRouter } from 'vue-router'
 
 export const useMoviesStore = defineStore('MoviesStore', () => {
   const categories = ref<Category[]>([])
   const movies = ref<Movies[]>([])
   const pageLoading = ref(false)
   const moviesPageLoading = ref(false)
-  const viewQuoteModal = ref<{ visible: boolean; id: number | null }>({
-    visible: false,
-    id: null
-  })
+  const movie = ref<Movies | null>(null)
+  const movieLoading = ref(false)
 
-  function openViewQuoteModal(id: number) {
-    viewQuoteModal.value = {
-      visible: true,
-      id
-    }
-  }
-
-  function closeViewQuoteModal() {
-    viewQuoteModal.value = {
-      visible: false,
-      id: null
-    }
-  }
+  const router = useRouter()
 
   async function getCategories() {
     try {
@@ -40,6 +28,21 @@ export const useMoviesStore = defineStore('MoviesStore', () => {
       //
     } finally {
       pageLoading.value = false
+    }
+  }
+
+  async function getMovie(movieId: string, showSpinner = true) {
+    try {
+      if (showSpinner) movieLoading.value = true
+      const {
+        data: { data }
+      } = await getMovieApi(movieId.toString())
+      movie.value = data
+    } catch (err: any) {
+      if (err.response.status === 403 || err.response.status === 404)
+        router.replace({ name: 'movies-list' })
+    } finally {
+      movieLoading.value = false
     }
   }
 
@@ -64,8 +67,8 @@ export const useMoviesStore = defineStore('MoviesStore', () => {
     getMovies,
     pageLoading,
     moviesPageLoading,
-    viewQuoteModal,
-    openViewQuoteModal,
-    closeViewQuoteModal
+    movie,
+    getMovie,
+    movieLoading
   }
 })

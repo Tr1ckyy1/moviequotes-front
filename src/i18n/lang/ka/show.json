@@ -3,7 +3,9 @@
   "director": "რეჟისორი",
   "total_quotes": "ყველა ციტატა (სულ {number})",
   "add_quote": "ციტატის დამატება",
+  "edit_quote": "ციტატის რედაქტირება",
   "view_quote": "ციტატის ნახვა",
   "edit": "რედაქტირება",
-  "delete": "წაშლა"
+  "delete": "წაშლა",
+  "change_photo": "ფოტოს შეცვლა"
 }

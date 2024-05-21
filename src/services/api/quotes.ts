@@ -1,8 +1,14 @@
 import { instance } from '@/plugins/axios'
 import type { Quote } from '@/types'
 
-export async function getQuotes() {
-  return await instance.get('api/get-quotes')
+export async function getQuote(quoteId: number | null) {
+  return await instance.get(`api/get-quote/${quoteId}`)
+}
+
+export async function getQuotes(params: Object) {
+  return await instance.get('api/get-quotes', {
+    params
+  })
 }
 
 export async function addQuote(data: Quote) {
@@ -17,6 +23,27 @@ export async function addQuote(data: Quote) {
       }
     }
   )
+}
+
+export async function editQuote(data: Quote, quoteId: number) {
+  const formData = new FormData()
+  if (data.image) formData.append('image', data.image)
+  await instance.post(
+    `api/edit-quote/${quoteId}`,
+    { ...data, image: formData.get('image') ?? null },
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
+      params: {
+        _method: 'PATCH'
+      }
+    }
+  )
+}
+
+export async function deleteQuote(quoteId: number) {
+  await instance.delete(`api/delete-quote/${quoteId}`)
 }
 
 export async function updateLike(quoteId: number) {
