@@ -108,7 +108,7 @@
             <ul
               @click.stop
               v-if="dropDownActive && movies.length > 0"
-              class="absolute top-full left-0 w-full space-y-4 py-2 border-x mt-1 border-b bg-[#0D0B14] border-grey-secondary/20 rounded-b-md h-24 overflow-y-scroll scrollbar"
+              class="absolute top-full left-0 w-full space-y-4 py-2 border-x mt-1 border-b bg-[#0D0B14] border-grey-secondary/20 rounded-b-md min-h-14 max-h-24 overflow-y-scroll scrollbar"
             >
               <li
                 @click="addChosenMovie(movie)"
@@ -168,6 +168,7 @@ import { useMoviesStore } from '@/stores/MoviesStore'
 import { addQuote } from '@/services/api/quotes'
 import type { Language, Movies, Quote } from '@/types'
 import { useQuotesStore } from '@/stores/QuotesStore'
+import { useRoute } from 'vue-router'
 
 const emit = defineEmits<{
   (e: 'close-modal'): void
@@ -186,6 +187,7 @@ const { movies } = storeToRefs(useMoviesStore())
 const { getQuotes } = useQuotesStore()
 const movieChosen = ref<Movies | null>(null)
 const movieError = ref(false)
+const { query } = useRoute()
 
 const schema = computed(() =>
   yup.object().shape({
@@ -194,12 +196,15 @@ const schema = computed(() =>
         .string()
         .trim()
         .required(t('validation.movie_form_validation.quote.required'))
-        .matches(/^[A-Za-z0-9\s.,:;'"`-]+$/, t('validation.movie_form_validation.regex_en')),
+        .matches(/^[A-Za-z0-9\s.,:;'"?!`-]+$/, t('validation.movie_form_validation.regex_en')),
       ka: yup
         .string()
         .trim()
         .required(t('validation.movie_form_validation.quote.required'))
-        .matches(/^[\u10A0-\u10FF0-9\s.,:;'"`-]+$/, t('validation.movie_form_validation.regex_ka'))
+        .matches(
+          /^[\u10A0-\u10FF0-9\s.,:;'"?!`-]+$/,
+          t('validation.movie_form_validation.regex_ka')
+        )
     }),
     image: yup.mixed().required(t('validation.movie_form_validation.image'))
   })
@@ -219,7 +224,7 @@ const submit = handleSubmit(async (values) => {
     const movieId = movieChosen.value?.id ?? null
     await addQuote({ ...values, movie: movieId })
     closeModal()
-    getQuotes()
+    getQuotes(query)
   } catch (error: any) {
     if (error.response?.data?.errors) {
       if (error.response.data.errors.movie) movieError.value = true

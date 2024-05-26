@@ -138,7 +138,7 @@ const { t } = useI18n()
 const quotesStore = useQuotesStore()
 const { userData } = storeToRefs(useAuthStore())
 const moviesStore = useMoviesStore()
-const { params } = useRoute()
+const { name, params, query } = useRoute()
 const quoteData = ref<QuotesData | null>(null)
 const imageRef = ref<HTMLImageElement | null>(null)
 const schema = computed(() =>
@@ -148,12 +148,15 @@ const schema = computed(() =>
         .string()
         .trim()
         .required(t('validation.movie_form_validation.quote.required'))
-        .matches(/^[A-Za-z0-9\s.,:;'"`-]+$/, t('validation.movie_form_validation.regex_en')),
+        .matches(/^[A-Za-z0-9\s.,:;'"?!`-]+$/, t('validation.movie_form_validation.regex_en')),
       ka: yup
         .string()
         .trim()
         .required(t('validation.movie_form_validation.quote.required'))
-        .matches(/^[\u10A0-\u10FF0-9\s.,:;'"`-]+$/, t('validation.movie_form_validation.regex_ka'))
+        .matches(
+          /^[\u10A0-\u10FF0-9\s.,:;'"?!`-]+$/,
+          t('validation.movie_form_validation.regex_ka')
+        )
     })
   })
 )
@@ -165,8 +168,9 @@ const { handleSubmit, errors, setFieldError, setFieldValue, isSubmitting } = use
 const submit = handleSubmit(async (values) => {
   try {
     if (quoteData.value) await editQuote(values, quoteData.value.id)
+    if (name === 'dashboard') quotesStore.getQuotes(query)
     closeModal()
-    moviesStore.getMovie(params.movieId.toString())
+    if (name === 'movie-show') moviesStore.getMovie(params.movieId.toString())
   } catch (error: any) {
     if (error.response?.data?.errors) {
       for (const fieldName in error.response.data.errors) {
@@ -182,8 +186,9 @@ function closeModal() {
 
 async function deleteQuote() {
   if (quoteData.value) await deleteQuoteApi(quoteData.value.id)
+  if (name === 'dashboard') quotesStore.getQuotes(query)
   closeModal()
-  moviesStore.getMovie(params.movieId.toString())
+  if (name === 'movie-show') moviesStore.getMovie(params.movieId.toString())
 }
 
 async function getQuote() {

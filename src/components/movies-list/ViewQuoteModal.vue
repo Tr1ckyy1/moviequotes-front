@@ -5,7 +5,7 @@
     >
       <header class="flex items-center justify-between p-7 border-b border-[#EFEFEF33]">
         <div class="rounded-llg flex items-center justify-center gap-6">
-          <EditIcon class="lg:hover:brightness-75 cursor-pointer" />
+          <EditIcon @click="openEditModal" class="lg:hover:brightness-75 cursor-pointer" />
           <span class="bg-grey-main w-[1px] h-5"></span>
           <TrashIcon @click="deleteQuote" class="lg:hover:brightness-75 cursor-pointer" />
         </div>
@@ -20,9 +20,11 @@
         <section class="flex items-center gap-5">
           <div class="w-10 h-10 lg:h-14 lg:w-14 shrink-0 rounded-full">
             <img
+              v-if="quoteData.user.profile_image"
               :src="quoteData.user.profile_image"
-              class="rounded-full object-cover h-full w-full"
+              class="w-full h-full rounded-full object-cover"
             />
+            <img v-else src="@/assets/avatar.png" class="w-full h-full rounded-full object-cover" />
           </div>
           <h2 class="break-all">
             {{ quoteData.user.username }}
@@ -114,7 +116,7 @@ const { getMovie } = useMoviesStore()
 const quoteData = ref<QuotesData | null>(null)
 const loading = ref(false)
 const commentInput = ref('')
-const { params } = useRoute()
+const { name, params, query } = useRoute()
 const userHasLiked = computed(() => {
   return quoteData.value?.likes.find((item) => item.user_id === userData.value.id)
 })
@@ -126,7 +128,7 @@ function closeModal() {
 async function updateLike() {
   if (quoteData.value) await updateLikeApi(quoteData.value?.id)
   await getQuote(false)
-  getMovie(params.movieId.toString(), false)
+  if (name === 'movie-show') getMovie(params.movieId.toString(), false)
 }
 
 async function addComment() {
@@ -134,15 +136,21 @@ async function addComment() {
     if (quoteData.value) await addCommentApi(quoteData.value.id, commentInput.value)
 
     await getQuote(false)
-    getMovie(params.movieId.toString(), false)
+    if (name === 'movie-show') getMovie(params.movieId.toString(), false)
     commentInput.value = ''
   }
 }
 
+function openEditModal() {
+  closeModal()
+  if (quoteData.value) quotesStore.openEditQuoteModal(quoteData.value?.id)
+}
+
 async function deleteQuote() {
   if (quoteData.value) await deleteQuoteApi(quoteData.value?.id)
+  if (name === 'dashboard') quotesStore.getQuotes(query)
   closeModal()
-  getMovie(params.movieId.toString())
+  if (name === 'movie-show') getMovie(params.movieId.toString())
 }
 
 async function getQuote(showSpinner = true) {

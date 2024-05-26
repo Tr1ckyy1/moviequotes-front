@@ -28,7 +28,7 @@
     </div>
     <LoadingPageMini v-if="quotesStore.loading" />
     <ul class="space-y-8">
-      <PostItem v-for="quote in quotesStore.quotes" :key="quote.id" :quote="quote" />
+      <PostItem v-for="quote in computedQuotes" :key="quote.id" :quote="quote" />
     </ul>
     <NewQuote v-if="quotesModal" :modalOpen="quotesModal" @close-modal="closeQuotesModal" />
   </section>
@@ -47,6 +47,10 @@ import { useQuotesStore } from '@/stores/QuotesStore'
 import { onMounted } from 'vue'
 import { onUnmounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { computed } from 'vue'
+import { echo } from '@/echo'
+
+import type { BroadcastLike, BroadcastComment } from '@/types'
 
 const { t, locale } = useI18n()
 const quotesStore = useQuotesStore()
@@ -58,6 +62,8 @@ const quotesModal = ref(false)
 const container = ref<HTMLElement | null>(null)
 const search = ref('')
 const debounceTimer = ref<number | null>(null)
+
+const computedQuotes = computed(() => quotesStore.quotes)
 
 function openQuotesModal() {
   quotesModal.value = true
@@ -75,7 +81,8 @@ function handleScroll() {
 watch(
   () => route.query,
   (val) => {
-    quotesStore.getQuotes(true, val)
+    quotesStore.getQuotes(val)
+    if (!val.quote && !val['movie.name']) search.value = ''
   }
 )
 watch(search, (value, oldValue) => {
@@ -102,7 +109,7 @@ watch(search, (value, oldValue) => {
     }
   }
 
-  if (value && value !== oldValue) {
+  if (value !== oldValue) {
     clearTimeout(debounceTimer.value!)
     debounceTimer.value = setTimeout(() => {
       router.push({
@@ -115,11 +122,23 @@ watch(search, (value, oldValue) => {
   }
 })
 
+function handleQuoteLiked(data: BroadcastLike) {
+  quotesStore.updateQuoteLikes(data.data)
+}
+
+function handleQuoteCommented(data: BroadcastComment) {
+  quotesStore.updateQuoteComments(data.data)
+}
+
 onMounted(() => {
-  quotesStore.getQuotes(true, route.query)
+  echo.channel('quotes').listen('QuoteLiked', handleQuoteLiked)
+  echo.channel('quotes').listen('QuoteCommented', handleQuoteCommented)
+  quotesStore.getQuotes(route.query)
   window.addEventListener('scroll', handleScroll)
 })
 onUnmounted(() => {
+  echo.channel('quotes').stopListening('QuoteLiked', handleQuoteLiked)
+  echo.channel('quotes').stopListening('QuoteCommented', handleQuoteCommented)
   window.removeEventListener('scroll', handleScroll)
 })
 </script>

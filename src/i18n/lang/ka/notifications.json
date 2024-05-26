@@ -1,0 +1,13 @@
+{
+  "notifications": "ნოტიფიკაციები",
+  "mark_all": "ყველას წაკითხულად მონიშვნა",
+  "new": "ახალი",
+  "like_message": "მოიწონა თქვენი ციტატა",
+  "comment_message": "დააკომენტარა თქვენი ფილმის ციტატაზე",
+  "seconds_ago": "{count} წამის წინ",
+  "minutes_ago": "{count} წუთის წინ",
+  "hours_ago": "{count} საათის წინ",
+  "days_ago": "{count} დღის წინ",
+  "weeks_ago": "{count} კვირის წინ",
+  "months_ago": "{count} თვის წინ"
+}

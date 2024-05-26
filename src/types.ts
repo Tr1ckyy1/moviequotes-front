@@ -116,4 +116,35 @@ export type QuotesData = {
   likes: Like[]
 }
 
+export type BroadcastLike = {
+  data: {
+    quote_id: number
+    like_id?: number
+    like?: Like
+  }
+}
+
+export type BroadcastComment = {
+  data: {
+    quote_id: number
+    comment: Comment
+  }
+}
+
+export type Notification = {
+  id: number
+  quote_id: number
+  type: string
+  user_from: User
+  read_at: Date | null
+  created_at: Date
+}
+
 export type Language = 'en' | 'ka'
+
+declare global {
+  interface Window {
+    Echo: any
+    Pusher: any
+  }
+}

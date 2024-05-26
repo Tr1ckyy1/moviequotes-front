@@ -2,7 +2,7 @@
   <div
     ref="container"
     @click="toggleModal"
-    class="bg-transparent text-white relative cursor-pointer"
+    class="bg-transparent text-white relative cursor-pointer z-10"
   >
     <div class="flex items-center gap-4">
       <h1>{{ selectedOption }}</h1>
@@ -51,7 +51,9 @@ function toggleModal() {
 
 function selectOption(value: string) {
   locale.value = value
-  Cookies.set('locale', value)
+  Cookies.set('locale', value, {
+    domain: import.meta.env.VITE_SHARED_DOMAIN
+  })
   const selectedText = options.value.find((opt) => opt.value === value)?.text
   selectedOption.value = selectedText || 'En'
 }

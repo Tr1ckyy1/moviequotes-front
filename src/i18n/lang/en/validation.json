@@ -19,8 +19,7 @@
     "password_confirmation": {
       "required": "Password confirmation is required",
       "password_mismatch": "Passwords do not match"
-    },
-    "image_too_large": "Request Entity Too Large"
+    }
   },
   "movie_form_validation": {
     "regex_en": "English letters only",

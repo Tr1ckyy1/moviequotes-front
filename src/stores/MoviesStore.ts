@@ -19,16 +19,8 @@ export const useMoviesStore = defineStore('MoviesStore', () => {
   const router = useRouter()
 
   async function getCategories() {
-    try {
-      pageLoading.value = true
-
-      const { data } = await getCategoriesApi()
-      categories.value = data
-    } catch (err) {
-      //
-    } finally {
-      pageLoading.value = false
-    }
+    const { data } = await getCategoriesApi()
+    categories.value = data
   }
 
   async function getMovie(movieId: string, showSpinner = true) {
