@@ -23,10 +23,10 @@
           </div>
           <h2 class="break-all">{{ userData.username }}</h2>
         </section>
-        <section class="p-4 rounded flex gap-4 items-center">
+        <section class="bg-black p-2 lg:p-0 lg:bg-transparent rounded flex gap-4 items-center">
           <img
             :src="moviesStore.movie?.image"
-            class="h-20 w-1/3 object-cover rounded-llg shrink-0"
+            class="h-20 lg:h-40 w-1/3 object-cover rounded-llg shrink-0 lg:rounded-xl"
           />
           <div class="space-y-2">
             <h2 class="text-main">
@@ -171,12 +171,15 @@ const schema = computed(() =>
         .string()
         .trim()
         .required(t('validation.movie_form_validation.quote.required'))
-        .matches(/^[A-Za-z0-9\s.,:;'"`-]+$/, t('validation.movie_form_validation.regex_en')),
+        .matches(/^[A-Za-z0-9\s.,:;'"?!`-]+$/, t('validation.movie_form_validation.regex_en')),
       ka: yup
         .string()
         .trim()
         .required(t('validation.movie_form_validation.quote.required'))
-        .matches(/^[\u10A0-\u10FF0-9\s.,:;'"`-]+$/, t('validation.movie_form_validation.regex_ka'))
+        .matches(
+          /^[\u10A0-\u10FF0-9\s.,:;'"?!`-]+$/,
+          t('validation.movie_form_validation.regex_ka')
+        )
     }),
     image: yup.mixed().required(t('validation.movie_form_validation.image'))
   })

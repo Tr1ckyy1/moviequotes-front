@@ -1,6 +1,6 @@
-import type { QuotesData } from '@/types'
+import type { BroadcastComment, BroadcastLike, QuotesData } from '@/types'
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { getQuotes as getQuotesApi } from '@/services/api/quotes'
 
 export const useQuotesStore = defineStore('QuotesStore', () => {
@@ -60,16 +60,15 @@ export const useQuotesStore = defineStore('QuotesStore', () => {
     addQuoteModal.value = false
   }
 
-  async function getQuotes(showSpinner = true, query: Object = {}) {
+  async function getQuotes(query: Object = {}) {
     try {
-      if (showSpinner) loading.value = true
+      loading.value = true
       const { data } = await getQuotesApi({
         page: page.value,
         filter: {
           ...query
         }
       })
-
       quotes.value = data.data
       totalPages.value = data.meta.last_page
     } catch (err) {
@@ -93,6 +92,25 @@ export const useQuotesStore = defineStore('QuotesStore', () => {
       }
     }
   }
+
+  function updateQuoteLikes(data: BroadcastLike['data']) {
+    const quote = computed(() => quotes.value.find((item) => item.id === data.quote_id))
+    if (quote.value) {
+      if (data.like) {
+        quote.value.likes.push(data.like)
+      } else {
+        quote.value.likes = quote.value.likes.filter((like) => like.id !== data.like_id)
+      }
+    }
+  }
+
+  function updateQuoteComments(data: BroadcastComment['data']) {
+    const quote = quotes.value.find((q) => q.id === data.quote_id)
+    if (quote) {
+      quote.comments.push(data.comment)
+    }
+  }
+
   return {
     quotes,
     loading,
@@ -106,6 +124,8 @@ export const useQuotesStore = defineStore('QuotesStore', () => {
     editQuoteModal,
     openEditQuoteModal,
     closeEditQuoteModal,
-    loadMore
+    loadMore,
+    updateQuoteLikes,
+    updateQuoteComments
   }
 })

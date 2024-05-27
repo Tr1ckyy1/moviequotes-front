@@ -1,9 +1,7 @@
 <template>
   <LoadingPageMini v-if="moviesStore.movieLoading" />
   <section v-else-if="!moviesStore.movieLoading && moviesStore.movie">
-    <ViewQuoteModal v-if="quotesModal.viewQuoteModal.visible" />
-    <EditQuoteModal v-if="quotesModal.editQuoteModal.visible" />
-    <AddQuoteModal v-if="quotesModal.addQuoteModal" />
+    <AddQuoteModal v-if="quotesStore.addQuoteModal" />
     <MovieEdit
       v-if="editMovieModal"
       :modalOpen="editMovieModal"
@@ -48,7 +46,7 @@
             {{ moviesStore.movie.description[locale as Language] }}
           </p>
           <div
-            @click="quotesModal.openAddQuoteModal"
+            @click="quotesStore.openAddQuoteModal"
             class="lg:hidden w-fit group flex lg:cursor-pointer items-center gap-3 bg-red-main border border-red-main rounded-[4px] py-2 px-4"
           >
             <div
@@ -73,7 +71,7 @@
           }}
         </h1>
         <div
-          @click="quotesModal.openAddQuoteModal"
+          @click="quotesStore.openAddQuoteModal"
           class="hidden w-fit group lg:flex lg:cursor-pointer items-center gap-3 bg-red-main border border-red-main rounded-[4px] py-2 hover:bg-white hover:text-red-main hover:duration-300 px-4"
         >
           <div
@@ -89,7 +87,7 @@
     </div>
     <ul
       v-if="isQuotesArray(moviesStore.movie.quotes)"
-      class="mt-6 space-y-8 pb-16 lg:w-[55%] lg:pb-[6.5rem]"
+      class="mt-6 space-y-8 lg:w-[55%] pb-[6.5rem]"
     >
       <QuoteItem v-for="quote in moviesStore.movie.quotes" :key="quote.id" :quote="quote" />
     </ul>
@@ -110,9 +108,7 @@ import EditIcon from '@/components/icons/EditIcon.vue'
 import TrashIcon from '@/components/icons/TrashIcon.vue'
 import MovieEdit from '@/components/movies-list/MovieEdit.vue'
 import { useMoviesStore } from '@/stores/MoviesStore'
-import ViewQuoteModal from '@/components/movies-list/ViewQuoteModal.vue'
 import AddQuoteModal from '@/components/movies-list/AddQuoteModal.vue'
-import EditQuoteModal from '@/components/movies-list/EditQuoteModal.vue'
 import { useQuotesStore } from '@/stores/QuotesStore'
 const { t, locale } = useI18n()
 
@@ -121,7 +117,7 @@ const loading = ref(false)
 const editMovieModal = ref(false)
 const router = useRouter()
 const moviesStore = useMoviesStore()
-const quotesModal = useQuotesStore()
+const quotesStore = useQuotesStore()
 
 function isQuotesArray(quotes: number | QuotesData[]): quotes is QuotesData[] {
   return Array.isArray(quotes)

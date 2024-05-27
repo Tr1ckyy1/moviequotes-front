@@ -5,7 +5,12 @@
     <div class="space-y-4">
       <div class="flex items-center gap-4">
         <div class="w-10 h-10 lg:w-[52px] lg:h-[52px] shrink-0">
-          <img :src="quote.user.profile_image" class="w-full h-full rounded-full object-cover" />
+          <img
+            v-if="quote.user.profile_image"
+            :src="quote.user.profile_image"
+            class="w-full h-full rounded-full object-cover"
+          />
+          <img v-else src="@/assets/avatar.png" class="w-full h-full rounded-full object-cover" />
         </div>
         <h1 class="break-all">
           {{ quote.user.username }}
@@ -65,13 +70,11 @@ import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import type { Language, QuotesData } from '@/types'
 import { computed } from 'vue'
-import { useQuotesStore } from '@/stores/QuotesStore'
 import { updateLike as updateLikeApi, addComment as addCommentApi } from '@/services/api/quotes'
 import { ref } from 'vue'
 
 const { t, locale } = useI18n()
 const { userData } = storeToRefs(useAuthStore())
-const { getQuotes } = useQuotesStore()
 const props = defineProps<{
   quote: QuotesData
 }>()
@@ -84,13 +87,11 @@ const userHasLiked = computed(() => {
 
 async function updateLike() {
   await updateLikeApi(props.quote.id)
-  await getQuotes(false)
 }
 
 async function addComment() {
   if (commentInput.value) {
     await addCommentApi(props.quote.id, commentInput.value)
-    await getQuotes(false)
     commentInput.value = ''
   }
 }

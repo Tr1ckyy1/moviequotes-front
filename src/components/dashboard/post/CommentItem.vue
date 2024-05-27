@@ -1,8 +1,13 @@
 <template>
   <li class="border-b border-grey-rare space-y-4 pb-4">
     <div class="flex items-center gap-4">
-      <div class="w-10 h-10 lg:w-12 lg:h-12 shrink-0">
-        <img :src="comment.user.profile_image" class="w-full h-full rounded-full object-cover" />
+      <div class="w-10 h-10 lg:w-12 lg:h-12 shrink-0 rounded-full">
+        <img
+          v-if="comment.user.profile_image"
+          :src="comment.user.profile_image"
+          class="w-full h-full rounded-full object-cover"
+        />
+        <img v-else src="@/assets/avatar.png" class="w-full h-full rounded-full object-cover" />
       </div>
       <h1>
         {{ comment.user.username }}

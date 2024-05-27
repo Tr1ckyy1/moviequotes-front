@@ -8,7 +8,7 @@
 
     <header class="flex justify-between gap-10">
       <h1 class="text-2xl">{{ t('list.title', { number: moviesStore.movies.length }) }}</h1>
-      <div class="flex min-w-fit gap-3">
+      <div class="flex gap-3">
         <label
           class="hidden lg:flex items-center gap-4"
           :class="searchFocused && 'border-b border-grey-secondary'"
@@ -48,7 +48,7 @@
         :year="movie.year"
         :quotes="movie.quotes"
         :image="movie.image"
-        :class="index === moviesStore.movies.length - 1 && 'pb-16 lg:pb-[6.5rem]'"
+        :class="index === moviesStore.movies.length - 1 && 'pb-[6.5rem]'"
       />
     </main>
   </section>

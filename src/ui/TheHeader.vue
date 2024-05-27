@@ -1,6 +1,9 @@
 <template>
+  <ViewQuoteModal v-if="quotesStore.viewQuoteModal.visible" />
+  <EditQuoteModal v-if="quotesStore.editQuoteModal.visible" />
+
   <LoadingPage
-    v-if="pageLoading || moviesStore.pageLoading"
+    v-if="pageLoading"
     class="bg-gradient-to-r from-dark-main via-[#08080D] to-[#08080D] from-100% via-100% to-0%"
   />
   <header
@@ -28,8 +31,22 @@
         @click="openSearchModal"
         v-if="router.currentRoute.value.name === 'dashboard'"
       />
-
-      <NotificationIcon />
+      <div
+        class="relative"
+        :class="
+          notificationsModal &&
+          'before:absolute before:top-10 lg:before:top-12 before:w-10 before:h-10 before:left-1/2 before:-translate-x-1/2 before:bg-black before:rotate-45'
+        "
+      >
+        <div
+          v-if="notificationsStore.newNotificationsLength > 0"
+          class="absolute flex p-1 items-center justify-center text-white bg-red-main w-6 h-6 rounded-full top-0 left-0 translate-x-1/2 -translate-y-1/2 text-xs"
+        >
+          {{ notificationsStore.newNotificationsLength }}
+        </div>
+        <NotificationIcon class="cursor-pointer" @click.stop="triggerNotificationsModal" />
+        <NotificationsModal v-if="notificationsModal" @close-modal="closeNotificationsModal" />
+      </div>
     </div>
   </header>
 
@@ -75,18 +92,29 @@ import { getUser } from '@/services/api/user'
 import { onMounted } from 'vue'
 import { watchEffect } from 'vue'
 import { onUpdated } from 'vue'
+import NotificationsModal from '../ui/modals/NotificationsModal.vue'
+import { echo } from '@/echo'
+import { useNotificationsStore } from '@/stores/NotificationsStore'
+import { onUnmounted } from 'vue'
+import ViewQuoteModal from '@/components/movies-list/ViewQuoteModal.vue'
+import { useQuotesStore } from '@/stores/QuotesStore'
+
+import type { Notification } from '@/types'
+import EditQuoteModal from '@/components/movies-list/EditQuoteModal.vue'
 
 const sidebarModal = ref(false)
 const searchModal = ref(false)
 const pageLoading = ref(false)
 const inputRef = ref<HTMLInputElement | null>(null)
+const notificationsModal = ref(false)
 
 const { t } = useI18n()
 
 const router = useRouter()
-const { setToast, setUserData } = useAuthStore()
+const authStore = useAuthStore()
 const moviesStore = useMoviesStore()
-
+const notificationsStore = useNotificationsStore()
+const quotesStore = useQuotesStore()
 async function logout() {
   await logoutApi()
 }
@@ -94,6 +122,13 @@ async function logout() {
 function navigate() {
   if (router.currentRoute.value.name !== 'dashboard') router.push({ name: 'dashboard' })
   window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+function triggerNotificationsModal() {
+  notificationsModal.value = !notificationsModal.value
+}
+function closeNotificationsModal() {
+  notificationsModal.value = false
 }
 
 function openSidebarModal() {
@@ -151,7 +186,7 @@ async function user() {
     const {
       data: { data }
     } = await getUser()
-    setUserData({
+    authStore.setUserData({
       id: data.id,
       username: data.username,
       email: data.email,
@@ -161,7 +196,7 @@ async function user() {
   } catch (err: any) {
     if (err.response?.status === 401) {
       logoutApi()
-      setToast({
+      authStore.setToast({
         open: true,
         text: t('auth.session_expired'),
         mode: 'error'
@@ -170,6 +205,10 @@ async function user() {
   } finally {
     pageLoading.value = false
   }
+}
+
+function handleNotifications(data: { notification: Notification }) {
+  notificationsStore.updateNotifications(data.notification)
 }
 
 onUpdated(() => {
@@ -184,6 +223,7 @@ onMounted(async () => {
   await user()
   await moviesStore.getCategories()
   await moviesStore.getMovies()
+  await notificationsStore.getNotifications()
 
   watchEffect(() => {
     const handleResize = () => {
@@ -199,5 +239,24 @@ onMounted(async () => {
       window.removeEventListener('resize', handleResize)
     }
   })
+  if (authStore.userData.id) {
+    echo
+      .channel(`notifications.${authStore.userData.id}`)
+      .listen('QuoteLikeNotification', handleNotifications)
+    echo
+      .channel(`notifications.${authStore.userData.id}`)
+      .listen('QuoteCommentNotification', handleNotifications)
+  }
+})
+
+onUnmounted(() => {
+  if (authStore.userData.id) {
+    echo
+      .channel(`notifications.${authStore.userData.id}`)
+      .stopListening('QuoteLikeNotification', handleNotifications)
+    echo
+      .channel(`notifications.${authStore.userData.id}`)
+      .stopListening('QuoteCommentNotification', handleNotifications)
+  }
 })
 </script>

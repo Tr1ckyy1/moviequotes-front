@@ -8,6 +8,7 @@ import sidebar from './sidebar.json'
 import profile from './profile.json'
 import list from './list.json'
 import show from './show.json'
+import notifications from './notifications.json'
 
 const translations = {
   auth,
@@ -20,6 +21,7 @@ const translations = {
   profile,
   list,
   show,
+  notifications,
   loading: 'იტვირთება',
   error: 'შეცდომა'
 }
