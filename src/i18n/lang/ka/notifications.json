@@ -9,5 +9,6 @@
   "hours_ago": "{count} საათის წინ",
   "days_ago": "{count} დღის წინ",
   "weeks_ago": "{count} კვირის წინ",
-  "months_ago": "{count} თვის წინ"
+  "months_ago": "{count} თვის წინ",
+  "no_notifications": "თქვენ არ გაქვთ შეტყობინებები"
 }
