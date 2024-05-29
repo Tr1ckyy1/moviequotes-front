@@ -25,6 +25,8 @@ MovieQuotes is a social platform where users can sign up or log in to create the
 - **Yup**: A JavaScript schema builder for value parsing and validation.
 - **Tailwind CSS**: A utility-first CSS framework.
 - **Vue-i18n**: Internationalization plugin for Vue.js.
+- **Laravel Echo**: A JavaScript library that makes it easy to work with WebSockets in Laravel.
+- **Pusher**: A hosted service that makes it easy to add real-time data and functionality to web and mobile applications.
 
 ## Recommended IDE Setup
 
