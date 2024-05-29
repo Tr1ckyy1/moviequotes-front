@@ -6,6 +6,7 @@ import ProfileEdit from '../views/ProfileEdit.vue'
 import MoviesList from '../views/MoviesList.vue'
 import MovieShow from '../views/MovieShow.vue'
 import GoogleAuth from '@/views/GoogleAuth.vue'
+import ErrorPage from '@/views/ErrorPage.vue'
 import { useAuthStore } from '@/stores/AuthStore'
 
 const router = createRouter({
@@ -48,6 +49,11 @@ const router = createRouter({
           component: MovieShow
         }
       ]
+    },
+    {
+      name: 'error',
+      path: '/error/:status',
+      component: ErrorPage
     }
   ],
   scrollBehavior(_, _1, savedPosition) {

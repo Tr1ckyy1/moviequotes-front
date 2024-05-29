@@ -9,6 +9,7 @@ import profile from './profile.json'
 import list from './list.json'
 import show from './show.json'
 import notifications from './notifications.json'
+import errors from './errors.json'
 
 const translations = {
   auth,
@@ -22,6 +23,7 @@ const translations = {
   list,
   show,
   notifications,
+  errors,
   loading: 'იტვირთება',
   error: 'შეცდომა'
 }

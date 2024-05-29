@@ -6,7 +6,6 @@ import {
   getMovies as getMoviesApi,
   getMovie as getMovieApi
 } from '@/services/api/movieList'
-import { useRouter } from 'vue-router'
 
 export const useMoviesStore = defineStore('MoviesStore', () => {
   const categories = ref<Category[]>([])
@@ -15,8 +14,6 @@ export const useMoviesStore = defineStore('MoviesStore', () => {
   const moviesPageLoading = ref(false)
   const movie = ref<Movies | null>(null)
   const movieLoading = ref(false)
-
-  const router = useRouter()
 
   async function getCategories() {
     const { data } = await getCategoriesApi()
@@ -30,9 +27,8 @@ export const useMoviesStore = defineStore('MoviesStore', () => {
         data: { data }
       } = await getMovieApi(movieId.toString())
       movie.value = data
-    } catch (err: any) {
-      if (err.response.status === 403 || err.response.status === 404)
-        router.replace({ name: 'movies-list' })
+    } catch (err) {
+      //
     } finally {
       movieLoading.value = false
     }

@@ -58,11 +58,20 @@ function handleClickOutside(e: Event) {
   }
 }
 
+function handleScroll() {
+  if (
+    container.value &&
+    container.value.scrollTop + container.value.clientHeight >= container.value.scrollHeight
+  )
+    notificationsStore.loadMore()
+}
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
+  if (container.value) container.value.addEventListener('scroll', handleScroll)
 })
 
 onBeforeUnmount(() => {
   document.removeEventListener('click', handleClickOutside)
+  if (container.value) container.value.removeEventListener('scroll', handleScroll)
 })
 </script>

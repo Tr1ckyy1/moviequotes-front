@@ -105,7 +105,7 @@
           :disabled="isSubmitting"
         >
           <LoadingSpinnerMini v-if="isSubmitting" />
-          {{ isSubmitting ? t('loading') : t('show.add_quote') }}
+          {{ isSubmitting ? t('loading') : t('show.edit_quote') }}
         </button>
       </main>
     </form>

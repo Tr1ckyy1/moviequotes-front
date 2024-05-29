@@ -39,10 +39,10 @@
         "
       >
         <div
-          v-if="notificationsStore.newNotificationsLength > 0"
+          v-if="notificationsStore.unreadNotifications > 0"
           class="absolute flex p-1 items-center justify-center text-white bg-red-main w-6 h-6 rounded-full top-0 left-0 translate-x-1/2 -translate-y-1/2 text-xs"
         >
-          {{ notificationsStore.newNotificationsLength }}
+          {{ unreadNotifications }}
         </div>
         <NotificationIcon class="cursor-pointer" @click.stop="triggerNotificationsModal" />
         <NotificationsModal v-if="notificationsModal" @close-modal="closeNotificationsModal" />
@@ -85,7 +85,7 @@ import TheSidebar from './TheSidebar.vue'
 import { logout as logoutApi } from '@/services/api/auth'
 import { onBeforeRouteUpdate, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useAuthStore } from '@/stores/AuthStore'
 import { useMoviesStore } from '@/stores/MoviesStore'
 import { getUser } from '@/services/api/user'
@@ -115,8 +115,12 @@ const authStore = useAuthStore()
 const moviesStore = useMoviesStore()
 const notificationsStore = useNotificationsStore()
 const quotesStore = useQuotesStore()
+
+const unreadNotifications = computed(() => notificationsStore.unreadNotifications)
+
 async function logout() {
   await logoutApi()
+  router.replace({ name: 'home' })
 }
 
 function navigate() {
