@@ -20,9 +20,11 @@ export default {
         'grey-rare': '#EFEFEF4D',
         'profile-green': '#198754'
       },
-
       borderRadius: {
         llg: '10px'
+      },
+      fontSize: {
+        xxs: ['8px', { lineHeight: '12px' }]
       }
     }
   },

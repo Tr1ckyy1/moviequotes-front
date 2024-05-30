@@ -10,13 +10,13 @@
       :quote="t('landing.movies.interstellar.quote')"
       :movie="`${t('landing.movies.interstellar.name')}, 2014`"
     >
-      <div
-        class="lg:hidden w-full h-screen bg-[url('@/assets/landing-image-1-mobile.png')] bg-cover bg-center bg-no-repeat bg-fixed"
-      ></div>
-      <div
-        class="hidden lg:block bg-center w-full h-screen bg-[url('@/assets/landing-image-1-desktop.png')] bg-cover bg-no-repeat bg-fixed"
-      ></div>
+      <img src="@/assets/landing-image-1-mobile.png" class="lg:hidden w-full object-cover h-full" />
+      <img
+        src="@/assets/landing-image-1-desktop.png"
+        class="hidden lg:block w-full object-cover h-full"
+      />
     </HomeParallax>
+
     <HomeParallax
       :quote="t('landing.movies.royal_tenenbaums.quote')"
       :movie="`${t('landing.movies.royal_tenenbaums.name')}, 2001`"
@@ -42,7 +42,7 @@
   </main>
 
   <footer
-    class="text-main bg-gradient-to-r from-[#181623] via-dark-secondary to-[#0D0B14] py-4 px-7 lg:px-14 lg:text-lg text-base"
+    class="text-main bg-gradient-to-r from-[#181623] via-dark-secondary to-[#0D0B14] py-4 px-7 lg:px-14 lg:text-xs text-xxs uppercase"
   >
     © 2024 {{ t('footer.text') }}.
   </footer>

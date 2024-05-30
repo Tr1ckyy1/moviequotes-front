@@ -85,7 +85,10 @@ const schema = yup.object().shape({
   email: yup
     .string()
     .required(t('validation.auth.email.required'))
-    .email(t('validation.auth.email.valid_email')),
+    .matches(
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      t('validation.auth.email.valid_email')
+    ),
   password: yup.string().trim().required(t('validation.auth.password.required'))
 })
 
