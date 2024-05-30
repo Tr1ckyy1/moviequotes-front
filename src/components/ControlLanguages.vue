@@ -61,6 +61,7 @@ function selectOption(value: string) {
 watch(locale, (value) => {
   const selectedText = options.value.find((opt) => opt.value === value)?.text
   selectedOption.value = selectedText || 'En'
+  document.documentElement.lang = value
 })
 
 const localeCookie = Cookies.get('locale')

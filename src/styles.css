@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Helvetica Neue Roman';
+  src: url('@/assets/fonts/HelveticaNeueRoman.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Helvetica Neue LTW0697BlkCnObl';
+  src: url('@/assets/fonts/Helvetica Neue LTW0697BlkCnObl.ttf') format('truetype');
+}
+
+:root[lang='en'] {
+  font-family: 'Helvetica Neue Roman', sans-serif;
+}
+
+:root[lang='ka'] {
+  font-family: 'Helvetica Neue LTW0697BlkCnObl ', sans-serif;
+}
+
 :root:has(.no-scroll) {
   position: fixed;
   overflow-y: scroll;

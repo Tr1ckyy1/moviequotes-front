@@ -1,26 +1,51 @@
-# movies-app-vue
+# MovieQuotes - Frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+Welcome to the MovieQuotes frontend repository! This repository contains the frontend codebase for the MovieQuotes application, providing users with an engaging platform to create, share, and interact with movie quotes.
+
+## Overview
+
+MovieQuotes is a social platform where users can sign up or log in to create their own movie entries, add quotes to those movies, and interact with quotes added by others. Users can like and comment on quotes, and receive notifications for interactions on their quotes. The application supports both English and Georgian languages.
+
+## Features
+
+- **User Authentication**: Sign up, login, logout and profile edit functionalities.
+- **Movie and Quote Interaction**: Users can view,create,edit or delete their movies and add quotes to them.
+- **Interactive Quotes**: Users can create,edit,delete,view, like, and comment on quotes.
+- **Notifications**: Users receive notifications for likes and comments on their quotes.
+- **Multi-language Support**: The application supports both English and Georgian.
+- **Responsive Design**: A responsive and user-friendly interface.
+
+## Technologies Used
+
+- **Vue.js (Composition API)**: A progressive JavaScript framework for building user interfaces.
+- **Vue Router**: The official router for Vue.js applications.
+- **Pinia**: A state management library for Vue.js.
+- **Axios**: A promise-based HTTP client for making HTTP requests from the browser.
+- **VeeValidate**: A form validation library for Vue.js.
+- **Yup**: A JavaScript schema builder for value parsing and validation.
+- **Tailwind CSS**: A utility-first CSS framework.
+- **Vue-i18n**: Internationalization plugin for Vue.js.
+- **Laravel Echo**: A JavaScript library that makes it easy to work with WebSockets in Laravel.
+- **Pusher**: A hosted service that makes it easy to add real-time data and functionality to web and mobile applications.
 
 ## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+We recommend using Visual Studio Code (VSCode) with the Volar extension for an optimized Vue development experience and typescript support. Please disable the Vetur extension if you have it installed.
 
 ## Project Setup
 
+1. **Clone the repository:**
+
+````sh
+git clone https://github.com/RedberryInternship/front-movie-quotes-omar-jangavadze
+
+2. Install dependencies:
+
 ```sh
 npm install
-```
+````
 
-### Compile and Hot-Reload for Development
+## Development
 
 ```sh
 npm run dev
@@ -37,4 +62,7 @@ npm run build
 ```sh
 npm run lint
 ```
-# front-movie-quotes-omar-jangavadze
+
+### BACKEND
+
+<a href="https://github.com/RedberryInternship/back-movie-quotes-omar-jangavadze">MovieQuotes Backend</a>

@@ -208,7 +208,7 @@ const upload = handleSubmit(async (values) => {
     if (editPasswordInput.value) editPasswordInput.value = false
     resetField('profile_image')
   } catch (error: any) {
-    if (error.response?.data?.error && error.response?.status === 403) {
+    if (error.response?.data?.error && error.response?.status === 400) {
       authStore.setToast({
         open: true,
         text: error.response?.data?.error,

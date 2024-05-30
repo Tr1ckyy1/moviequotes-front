@@ -16,8 +16,8 @@
           {{ quote.user.username }}
         </h1>
       </div>
-      <p class="font-semibold break-all overflow-y-scroll max-h-32 scrollbar">
-        “{{ quote.quote[locale as Language] }}” {{ t('dashboard.movie_name') }}-
+      <p class="break-all overflow-y-scroll max-h-32 scrollbar">
+        {{ quote.quote[locale as Language] }} {{ t('dashboard.movie_name') }}-
         <span class="text-main">{{ quote.movie.name[locale as Language] }}.</span> ({{
           quote.movie.year
         }})

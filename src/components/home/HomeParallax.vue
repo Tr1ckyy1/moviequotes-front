@@ -1,6 +1,6 @@
 <template>
   <section
-    class="w-full before:bg-[linear-gradient(to_bottom,black_0%,transparent_50%),linear-gradient(to_right,black_0%,transparent_50%)] before:w-full before:h-full relative before:absolute before:top-0 before:left-0"
+    class="w-full before:bg-[linear-gradient(to_bottom,black_0%,transparent_50%),linear-gradient(to_right,black_0%,transparent_50%)] before:w-full before:h-full relative before:absolute before:-top-1 before:left-0"
   >
     <div
       class="absolute top-1/2 -translate-y-1/2 lg:-translate-y-0 lg:top-1/3 left-12 lg:left-32 space-y-4 w-1/2"

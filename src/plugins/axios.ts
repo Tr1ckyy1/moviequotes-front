@@ -33,3 +33,18 @@ instance.interceptors.response.use(
     return Promise.reject(error)
   }
 )
+
+instance.interceptors.response.use(
+  (response) => {
+    return response
+  },
+  (error) => {
+    if (error.response) {
+      const { status } = error.response
+      if (status === 404 || status === 403) {
+        router.replace({ name: 'error', params: { status } })
+      }
+    }
+    return Promise.reject(error)
+  }
+)
