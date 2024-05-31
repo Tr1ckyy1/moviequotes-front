@@ -12,6 +12,7 @@
         input="text"
         id="signup-username"
         :error="errors.username"
+        :value="values.username"
       />
       <BaseInput
         name="email"
@@ -20,6 +21,7 @@
         input="email"
         id="signup-email"
         :error="errors.email"
+        :value="values.email"
       />
       <BaseInput
         name="password"
@@ -28,6 +30,7 @@
         input="password"
         id="signup-password"
         :error="errors.password"
+        :value="values.password"
       />
       <BaseInput
         name="password_confirmation"
@@ -36,6 +39,7 @@
         input="password"
         id="signup-confirm-password"
         :error="errors.password_confirmation"
+        :value="values.password_confirmation"
       />
       <button
         class="flex justify-center gap-4 items-center mt-6 w-full bg-red-main border border-red-main text-white rounded-[4px] py-2 lg:enabled:hover:bg-white lg:enabled:hover:text-red-main lg:hover:duration-300 disabled:cursor-not-allowed"
@@ -115,7 +119,7 @@ function openLoginModal() {
   modalStore.openLoginModal()
 }
 
-const { handleSubmit, setFieldError, errors, isSubmitting } = useForm<Signup>({
+const { handleSubmit, setFieldError, errors, isSubmitting, values } = useForm<Signup>({
   validationSchema: schema
 })
 

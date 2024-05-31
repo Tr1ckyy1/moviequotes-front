@@ -7,10 +7,10 @@
         :type="inputType"
         :placeholder="placeholder"
         :name="name"
-        class="border-2 focus:border-grey-main peer text-grey-main placeholder:text-grey-main bg-grey-secondary pl-4 py-2 pr-9 outline-none rounded-[4px] placeholder-shown:border-grey-secondary"
+        class="border-2 focus:border-grey-main peer text-grey-main placeholder:text-grey-main bg-grey-secondary pl-4 py-2 pr-9 outline-none rounded-[4px]"
         :class="{
           'border-red-main': error,
-          'border-profile-green': !error,
+          'border-profile-green': !error && value,
           'pr-[60px]': input === 'password'
         }"
         :validateOnInput="true"
@@ -55,7 +55,8 @@ const {
   placeholder = '',
   input = 'text',
   name = '',
-  id
+  id,
+  value
 } = defineProps<{
   title: string
   placeholder?: string
@@ -63,6 +64,7 @@ const {
   name?: string
   id: string
   error?: string
+  value: string | undefined
 }>()
 
 const passwordIsVisible = ref(false)
