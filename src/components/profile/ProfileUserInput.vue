@@ -6,9 +6,11 @@
         id="username-profile-desktop"
         type="text"
         name="username"
-        class="outline-none shrink-0 text-[#212529] px-4 py-2 rounded-md border border-grey-secondary placeholder:text-grey-main bg-grey-secondary pr-9"
+        placeholder=""
+        class="outline-none shrink-0 text-[#212529] px-4 py-2 rounded-md border-2 placeholder:text-grey-main bg-grey-secondary pr-9 focus:border-grey-main"
         :class="{
-          'border-red-main': error
+          'border-red-main': error,
+          'border-profile-green': !error && value
         }"
         :validateOnInput="true"
         :validateOnBlur="false"
