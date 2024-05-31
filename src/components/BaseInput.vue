@@ -7,11 +7,10 @@
         :type="inputType"
         :placeholder="placeholder"
         :name="name"
-        class="border peer border-grey-secondary text-grey-main placeholder:text-grey-main bg-grey-secondary pl-4 py-2 pr-9 outline-none rounded-[4px]"
+        class="border-2 focus:border-grey-main peer text-grey-main placeholder:text-grey-main bg-grey-secondary pl-4 py-2 pr-9 outline-none rounded-[4px] placeholder-shown:border-grey-secondary"
         :class="{
           'border-red-main': error,
-          'focus:border-[rgba(13,110,253,0.25)]': !error,
-          'border-[#198754]': !error,
+          'border-profile-green': !error,
           'pr-[60px]': input === 'password'
         }"
         :validateOnInput="true"
