@@ -67,6 +67,7 @@ watch(locale, (value) => {
 const localeCookie = Cookies.get('locale')
 
 if (localeCookie) {
+  document.documentElement.lang = localeCookie
   locale.value = localeCookie
   selectedOption.value = options.value.find((opt) => opt.value === locale.value)?.text || 'En'
 }

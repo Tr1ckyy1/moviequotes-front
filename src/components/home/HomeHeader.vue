@@ -10,7 +10,7 @@
       </div>
     </nav>
     <section
-      class="flex flex-col items-center gap-8 justify-center py-10 lg:py-32 bg-gradient-to-r from-dark-main via-[#08080D] to-[#08080D]"
+      class="h-screen flex flex-col items-center gap-8 justify-center bg-gradient-to-r from-dark-main via-[#08080D] to-[#08080D]"
     >
       <h1 class="text-main font-bold text-2xl text-center flex flex-col lg:text-6xl gap-2">
         {{ headerText }}
