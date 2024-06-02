@@ -12,6 +12,7 @@
         input="password"
         id="signup-password"
         :error="errors.password"
+        :value="values.password"
       />
       <BaseInput
         name="password_confirmation"
@@ -20,6 +21,7 @@
         input="password"
         id="signup-confirm-password"
         :error="errors.password_confirmation"
+        :value="values.password_confirmation"
       />
 
       <button
@@ -74,7 +76,7 @@ const schema = yup.object().shape({
     .oneOf([yup.ref('password')], t('validation.auth.password_confirmation.password_mismatch'))
 })
 
-const { handleSubmit, errors, setFieldError, isSubmitting } = useForm<ResetPassword>({
+const { handleSubmit, errors, setFieldError, isSubmitting, values } = useForm<ResetPassword>({
   validationSchema: schema
 })
 

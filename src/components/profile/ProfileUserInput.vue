@@ -6,8 +6,7 @@
         id="username-profile-desktop"
         type="text"
         name="username"
-        placeholder=""
-        class="outline-none shrink-0 text-[#212529] px-4 py-2 rounded-md border-2 placeholder:text-grey-main bg-grey-secondary pr-9 focus:border-grey-main"
+        class="outline-none shrink-0 text-[#212529] px-4 py-2 rounded-md border-2 bg-grey-secondary pr-9 focus:border-grey-main"
         :class="{
           'border-red-main': error,
           'border-profile-green': !error && value

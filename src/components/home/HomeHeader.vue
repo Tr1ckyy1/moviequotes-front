@@ -10,14 +10,14 @@
       </div>
     </nav>
     <section
-      class="h-screen flex flex-col items-center gap-8 justify-center bg-gradient-to-r from-dark-main via-[#08080D] to-[#08080D]"
+      class="flex flex-col items-center gap-8 justify-center py-10 lg:py-32 bg-gradient-to-r from-dark-main via-[#08080D] to-[#08080D]"
     >
       <h1 class="text-main font-bold text-2xl text-center flex flex-col lg:text-6xl gap-2">
         {{ headerText }}
         <span>{{ headerTextSpan }}</span>
       </h1>
       <button
-        @click="modalStore.openSignupModal"
+        @click="modalStore.openLoginModal"
         class="bg-red-main border border-red-main text-white rounded-[4px] py-2 px-4 lg:hover:bg-white lg:hover:text-red-main lg:hover:duration-300"
       >
         {{ getStarted }}

@@ -6,12 +6,13 @@
   >
     <form class="lg:w-2/3 lg:mx-auto" @submit="login" novalidate>
       <BaseInput
-        name="email"
-        :title="t('auth.email_input.label')"
-        :placeholder="t('auth.email_input.placeholder')"
-        input="email"
-        id="login-email"
-        :error="errors.email"
+        name="user"
+        :title="t('auth.username_or_email')"
+        :placeholder="t('auth.username_or_email')"
+        input="text"
+        id="login-user"
+        :error="errors.user"
+        :value="values.user"
       />
       <BaseInput
         name="password"
@@ -20,6 +21,7 @@
         input="password"
         id="login-password"
         :error="errors.password"
+        :value="values.password"
       />
       <div class="flex justify-between">
         <div class="flex items-center gap-2">
@@ -82,17 +84,14 @@ const authStore = useAuthStore()
 const router = useRouter()
 
 const schema = yup.object().shape({
-  email: yup
+  user: yup
     .string()
     .required(t('validation.auth.email.required'))
-    .matches(
-      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-      t('validation.auth.email.valid_email')
-    ),
+    .min(3, t('validation.auth.username.min')),
   password: yup.string().trim().required(t('validation.auth.password.required'))
 })
 
-const { handleSubmit, errors, setFieldError, isSubmitting } = useForm<Login>({
+const { handleSubmit, errors, setFieldError, isSubmitting, values } = useForm<Login>({
   validationSchema: schema
 })
 

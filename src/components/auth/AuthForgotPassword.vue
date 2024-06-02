@@ -12,6 +12,7 @@
         input="email"
         id="forgot-password-email"
         :error="errors.email"
+        :value="values.email"
       />
 
       <button
@@ -57,7 +58,9 @@ const schema = yup.object().shape({
     )
 })
 
-const { handleSubmit, errors, setFieldError, isSubmitting } = useForm({ validationSchema: schema })
+const { handleSubmit, errors, setFieldError, isSubmitting, values } = useForm({
+  validationSchema: schema
+})
 
 function backToLogin() {
   modalStore.closeForgotPasswordModal()

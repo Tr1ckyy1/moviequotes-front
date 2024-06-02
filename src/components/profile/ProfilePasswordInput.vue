@@ -36,7 +36,7 @@
           id="password-profile-desktop"
           :type="passwordTypeComputed"
           name="password"
-          class="outline-none shrink-0 text-[#212529] px-4 py-2 rounded-md border-2 border-grey-secondary placeholder:text-grey-main bg-grey-secondary pr-[60px] placeholder-shown:border-grey-secondary focus:border-grey-main"
+          class="outline-none shrink-0 text-[#212529] px-4 py-2 rounded-md border-2 border-grey-secondary bg-grey-secondary pr-[60px] focus:border-grey-main"
           :class="{
             'border-red-main': passwordError,
             'border-profile-green': !passwordError && passwordValue
@@ -72,8 +72,7 @@
           id="password-confirm-profile-desktop"
           :type="confirmPasswordTypeComputed"
           name="password_confirmation"
-          placeholder=""
-          class="outline-none shrink-0 text-[#212529] px-4 py-2 rounded-md pr-[60px] border-2 placeholder-shown:border-grey-secondary focus:border-grey-main placeholder:text-grey-main bg-grey-secondary"
+          class="outline-none shrink-0 text-[#212529] px-4 py-2 rounded-md pr-[60px] border-2 focus:border-grey-main bg-grey-secondary"
           :class="{
             'border-red-main': confirmError,
             'border-profile-green': !confirmError && confirmValue
