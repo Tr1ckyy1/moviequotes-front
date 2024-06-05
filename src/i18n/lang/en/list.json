@@ -1,5 +1,6 @@
 {
-  "title": "My list of movies (Total {number})",
+  "title": "My list of movies",
+  "total": "Total {number}",
   "add_movie_button": "Add movie",
   "edit_movie_button": "Edit movie",
   "search": "Search",

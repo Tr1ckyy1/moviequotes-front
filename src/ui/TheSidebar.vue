@@ -13,12 +13,12 @@
         <img v-else src="@/assets/avatar.png" class="object-cover h-full w-full" />
       </div>
       <div>
-        <h1 class="whitespace-normal break-all">
+        <h1 class="whitespace-normal break-all text-xl lg:text-2xl">
           {{ userData?.username }}
         </h1>
         <RouterLink
           :to="{ name: 'edit-profile' }"
-          class="text-grey-secondary lg:cursor-pointer text-sm"
+          class="text-grey-secondary lg:cursor-pointer text-sm lg:-text-base"
           >{{ t('sidebar.edit_profile') }}</RouterLink
         >
       </div>
@@ -26,7 +26,7 @@
     <RouterLink
       @click="clearQueries"
       :to="{ name: 'dashboard' }"
-      class="flex items-center gap-7 lg:cursor-pointer lg:pl-3 w-fit"
+      class="flex items-center gap-7 lg:cursor-pointer lg:pl-3 w-fit text-xl lg:text-2xl"
     >
       <HomeIcon :currentPage="route.name === 'dashboard'" /><span>{{
         t('sidebar.news_feed')
@@ -34,7 +34,7 @@
     </RouterLink>
     <RouterLink
       :to="{ name: 'movies-list' }"
-      class="flex items-center gap-7 lg:cursor-pointer lg:pl-3 w-fit"
+      class="flex items-center gap-7 lg:cursor-pointer lg:pl-3 w-fit text-xl lg:text-2xl"
     >
       <MovieListIcon :currentPage="route.name === 'movies-list'" />
       <span>{{ t('sidebar.movies_list') }}</span>

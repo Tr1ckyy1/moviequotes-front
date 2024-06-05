@@ -1,5 +1,6 @@
 {
-  "title": "ჩემი ფილმების სია (სულ {number})",
+  "title": "ჩემი ფილმების სია",
+  "total": "სულ {number}",
   "add_movie_button": "ფილმის დამატება",
   "edit_movie_button": "ფილმის რედაქტირება",
   "search": "ძებნა",
