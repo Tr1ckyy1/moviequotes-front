@@ -126,11 +126,6 @@
             </div>
           </div>
         </div>
-        <div>
-          <div class="flex items-center px-4 h-24 bg-black">
-            <h2>{{ moviesStore.movie?.name[locale as Language] }}</h2>
-          </div>
-        </div>
         <button
           class="flex justify-center gap-4 bg-red-main w-full p-3 rounded-md lg:enabled:hover:bg-white lg:enabled:hover:text-red-main lg:enabled:hover:duration-300 disabled:cursor-not-allowed"
           :disabled="isSubmitting"
