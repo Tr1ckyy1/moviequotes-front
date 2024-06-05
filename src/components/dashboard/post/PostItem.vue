@@ -17,7 +17,7 @@
         </h1>
       </div>
       <p class="break-all overflow-y-scroll max-h-32 scrollbar">
-        {{ quote.quote[locale as Language] }} {{ t('dashboard.movie_name') }}-
+        "{{ quote.quote[locale as Language] }}" {{ t('dashboard.movie_name') }}-
         <span class="text-main">{{ quote.movie.name[locale as Language] }}.</span> ({{
           quote.movie.year
         }})
