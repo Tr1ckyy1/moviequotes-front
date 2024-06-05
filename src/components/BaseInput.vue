@@ -7,7 +7,7 @@
         :type="inputType"
         :placeholder="placeholder"
         :name="name"
-        class="border-2 focus:border-grey-main peer text-grey-main placeholder:text-grey-main bg-grey-secondary pl-4 py-2 pr-9 outline-none rounded-[4px]"
+        class="border-2 focus:border-grey-main peer text-grey-main placeholder:text-grey-main bg-grey-secondary pl-4 py-2 pr-9 outline-none rounded-[4px] text-[0.95rem] lg:text-base"
         :class="{
           'border-red-main': error,
           'border-profile-green': !error && value,
