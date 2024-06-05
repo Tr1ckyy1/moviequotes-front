@@ -7,7 +7,7 @@
         :class="searchFocused ? 'w-fit' : 'w-full'"
       >
         <NewQuoteIcon />
-        <p class="whitespace-nowrap">{{ t('dashboard.new_quote') }}</p>
+        <p class="whitespace-nowrap lg:text-xl">{{ t('dashboard.new_quote') }}</p>
       </div>
       <label
         class="hidden lg:flex lg:cursor-pointer gap-4"

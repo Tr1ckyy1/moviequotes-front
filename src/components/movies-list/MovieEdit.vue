@@ -343,13 +343,13 @@ const schema = computed(() =>
         .string()
         .trim()
         .required(t('validation.movie_form_validation.name.required'))
-        .matches(/^[A-Za-z0-9\s.,:;'"?!`-]+$/, t('validation.movie_form_validation.regex_en')),
+        .matches(/^[A-Za-z0-9\s.,:;'"?!`()-]+$/, t('validation.movie_form_validation.regex_en')),
       ka: yup
         .string()
         .trim()
         .required(t('validation.movie_form_validation.name.required'))
         .matches(
-          /^[\u10A0-\u10FF0-9\s.,:;'"?!`-]+$/,
+          /^[\u10A0-\u10FF0-9\s.,:;'"?!`()-]+$/,
           t('validation.movie_form_validation.regex_ka')
         )
     }),
@@ -358,13 +358,13 @@ const schema = computed(() =>
         .string()
         .trim()
         .required(t('validation.movie_form_validation.director.required'))
-        .matches(/^[A-Za-z0-9\s.,:;'"?!`-]+$/, t('validation.movie_form_validation.regex_en')),
+        .matches(/^[A-Za-z0-9\s.,:;'"?!`()-]+$/, t('validation.movie_form_validation.regex_en')),
       ka: yup
         .string()
         .trim()
         .required(t('validation.movie_form_validation.director.required'))
         .matches(
-          /^[\u10A0-\u10FF0-9\s.,:;'"?!`-]+$/,
+          /^[\u10A0-\u10FF0-9\s.,:;'"?!`()-]+$/,
           t('validation.movie_form_validation.regex_ka')
         )
     }),
@@ -373,13 +373,13 @@ const schema = computed(() =>
         .string()
         .trim()
         .required(t('validation.movie_form_validation.description.required'))
-        .matches(/^[A-Za-z0-9\s.,:;'"?!`-]+$/, t('validation.movie_form_validation.regex_en')),
+        .matches(/^[A-Za-z0-9\s.,:;'"?!`()-]+$/, t('validation.movie_form_validation.regex_en')),
       ka: yup
         .string()
         .trim()
         .required(t('validation.movie_form_validation.description.required'))
         .matches(
-          /^[\u10A0-\u10FF0-9\s.,:;'"?!`-]+$/,
+          /^[\u10A0-\u10FF0-9\s.,:;'"?!`()-]+$/,
           t('validation.movie_form_validation.regex_ka')
         )
     }),

@@ -7,7 +7,12 @@
     <MovieListAdd v-if="addMoviesModal" :modalOpen="addMoviesModal" @close-modal="closeAddMovies" />
 
     <header class="flex justify-between gap-10">
-      <h1 class="text-2xl">{{ t('list.title', { number: moviesStore.movies.length }) }}</h1>
+      <h1 class="text-2xl">
+        {{ t('list.title') }}
+        <span class="text-base lg:text-2xl"
+          >({{ t('list.total', { number: moviesStore.movies.length }) }})</span
+        >
+      </h1>
       <div class="flex gap-3">
         <label
           class="hidden lg:flex items-center gap-4"
@@ -16,7 +21,7 @@
         >
           <SearchIcon width="20" heigh="20" fill="#CED4DA" />
           <input
-            class="outline-none bg-transparent w-20 placeholder:text-grey-secondary text-white focus:w-full"
+            class="outline-none bg-transparent w-20 placeholder:text-grey-secondary text-white focus:w-full text-xl"
             :placeholder="t('list.search')"
             id="movies-list-search"
             @focus="searchFocused = true"
@@ -26,10 +31,10 @@
         </label>
         <div
           @click="openAddMovies"
-          class="group flex lg:cursor-pointer items-center gap-3 bg-red-main border border-red-main rounded-[4px] py-2 lg:hover:bg-white lg:hover:text-red-main lg:hover:duration-300 px-4 h-fit"
+          class="group flex lg:cursor-pointer items-center gap-3 bg-red-main border border-red-main rounded-[4px] py-2 lg:hover:bg-white lg:hover:text-red-main lg:hover:duration-300 px-4 h-fit lg:text-xl"
         >
           <div
-            class="border h-4 w-4 flex items-center justify-center rounded-sm lg:group-hover:border-red-main lg:hover:duration-300"
+            class="border h-4 w-4 flex items-center justify-center rounded-sm lg:group-hover:border-red-main lg:hover:duration-300 shrink-0"
           >
             <span class="text-lg">+</span>
           </div>

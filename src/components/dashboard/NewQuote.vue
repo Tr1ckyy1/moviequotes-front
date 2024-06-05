@@ -95,9 +95,8 @@
               <MovieListIcon />
               <p>{{ t('modal.choose_movie') }}</p>
             </div>
-            <div v-else class="gap-4 cursor-pointer w-full flex flex-col h-full">
+            <div v-else>
               <h2>{{ movieChosen.name[locale as Language] }}</h2>
-              <img :src="movieChosen.image" class="h-1/2 object-cover w-1/2" />
             </div>
             <ArrowDown
               width="16"
@@ -107,21 +106,21 @@
             />
             <ul
               @click.stop
-              v-if="dropDownActive && movies.length > 0"
+              v-if="dropDownActive && moviesStore.movies.length > 0"
               class="absolute top-full left-0 w-full space-y-4 py-2 border-x mt-1 border-b bg-[#0D0B14] border-grey-secondary/20 rounded-b-md min-h-14 max-h-24 overflow-y-scroll scrollbar"
             >
               <li
                 @click="addChosenMovie(movie)"
-                v-for="movie in movies"
+                v-for="movie in moviesStore.movies"
                 :key="movie.id"
                 class="space-y-4 bg-grey-main/10 cursor-pointer lg:hover:brightness-75 px-4 py-1"
               >
-                <h2 class="">{{ movie.name[locale as Language] }}</h2>
+                <h2>{{ movie.name[locale as Language] }}</h2>
               </li>
             </ul>
             <div
               @click.stop
-              v-if="dropDownActive && movies.length === 0"
+              v-if="dropDownActive && moviesStore.movies.length === 0"
               class="absolute px-4 py-5 top-full left-0 w-full space-y-4 text-lg border-x border-b bg-[#0D0B14] border-grey-secondary/20 rounded-b-md overflow-y-scroll scrollbar"
             >
               <p class="text-red-main">
@@ -183,11 +182,13 @@ const imageName = ref('')
 const MAX_NUM_CHARACTERS = 50
 const dropDownActive = ref(false)
 const { userData } = storeToRefs(useAuthStore())
-const { movies } = storeToRefs(useMoviesStore())
+const moviesStore = useMoviesStore()
 const { getQuotes } = useQuotesStore()
 const movieChosen = ref<Movies | null>(null)
 const movieError = ref(false)
 const { query } = useRoute()
+
+moviesStore.getMovies(true)
 
 const schema = computed(() =>
   yup.object().shape({
@@ -196,13 +197,13 @@ const schema = computed(() =>
         .string()
         .trim()
         .required(t('validation.movie_form_validation.quote.required'))
-        .matches(/^[A-Za-z0-9\s.,:;'"?!`-]+$/, t('validation.movie_form_validation.regex_en')),
+        .matches(/^[A-Za-z0-9\s.,:;'"?!`()-]+$/, t('validation.movie_form_validation.regex_en')),
       ka: yup
         .string()
         .trim()
         .required(t('validation.movie_form_validation.quote.required'))
         .matches(
-          /^[\u10A0-\u10FF0-9\s.,:;'"?!`-]+$/,
+          /^[\u10A0-\u10FF0-9\s.,:;'"?!`()-]+$/,
           t('validation.movie_form_validation.regex_ka')
         )
     }),
