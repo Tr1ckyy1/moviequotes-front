@@ -84,7 +84,10 @@
               {{ authStore.userData.email }}
             </p>
           </li>
-          <li class="border-b border-grey-secondary pb-3 lg:border-none">
+          <li
+            v-if="!authStore.userData.google_id"
+            class="border-b border-grey-secondary pb-3 lg:border-none"
+          >
             <p class="text-lg">
               {{ t('auth.password_input.label') }}
             </p>
@@ -181,6 +184,10 @@ const buttonsVisible = computed(() => {
 const upload = handleSubmit(async (values) => {
   try {
     const { data } = await updateUserProfile(values)
+    if (values.password && data.password_message) {
+      logout()
+      authStore.setToast({ open: true, text: data.password_message, mode: 'success' })
+    }
     const {
       data: { data: user }
     } = await getUser()
@@ -198,11 +205,6 @@ const upload = handleSubmit(async (values) => {
       username: user.username,
       profile_image: user.profile_image
     })
-
-    if (values.password && data.password_message) {
-      logout()
-      authStore.setToast({ open: true, text: data.password_message, mode: 'success' })
-    }
 
     if (editUsernameInput.value) editUsernameInput.value = false
     if (editPasswordInput.value) editPasswordInput.value = false
