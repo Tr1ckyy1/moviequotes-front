@@ -1,5 +1,9 @@
 <template>
-  <MainModal :modalOpen="quotesStore.viewQuoteModal.visible" @close-modal="closeModal">
+  <MainModal
+    :shouldCoverOtherModals="true"
+    :modalOpen="quotesStore.viewQuoteModal.visible"
+    @close-modal="closeModal"
+  >
     <div
       class="bg-[#0D0B14] h-full lg:max-h-[50rem] overflow-y-auto scrollbar-none lg:ml-[calc(25%_+80px)] xl:ml-[calc(25%_+16px)] lg:rounded-xl lg:w-[55%]"
     >

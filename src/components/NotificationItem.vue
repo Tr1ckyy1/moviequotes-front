@@ -64,7 +64,7 @@ const emit = defineEmits<{
 
 const { t } = useI18n()
 const notificationsStore = useNotificationsStore()
-const { openViewQuoteModal } = useQuotesStore()
+const quotesStore = useQuotesStore()
 
 function closeModal() {
   emit('close-modal')
@@ -75,8 +75,10 @@ async function markNotification() {
     await markAsRead(props.notification.id)
     notificationsStore.getNotifications()
   }
+  if (quotesStore.viewQuoteModal) await quotesStore.closeViewQuoteModal()
+
   closeModal()
-  openViewQuoteModal(props.notification.quote_id)
+  quotesStore.openViewQuoteModal(props.notification.quote_id)
 }
 
 const formattedRelativeDate = computed(() => formatDate(props.notification.created_at))
