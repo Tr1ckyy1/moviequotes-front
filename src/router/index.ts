@@ -1,12 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import MovieQuotes from '../views/MovieQuotes.vue'
-import DashboardView from '../views/DashboardView.vue'
-import ProfileEdit from '../views/ProfileEdit.vue'
-import MoviesList from '../views/MoviesList.vue'
-import MovieShow from '../views/MovieShow.vue'
-import GoogleAuth from '@/views/GoogleAuth.vue'
-import ErrorPage from '@/views/ErrorPage.vue'
 import { useAuthStore } from '@/stores/AuthStore'
 
 const router = createRouter({
@@ -15,45 +7,45 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView,
+      component: () => import('../views/HomeView.vue'),
       meta: { requiresUnAuth: true }
     },
     {
       path: '/auth/google/callback',
-      component: GoogleAuth
+      component: () => import('../views/GoogleAuth.vue')
     },
     {
       path: '/movie-quotes',
       name: 'movie-quotes',
-      component: MovieQuotes,
+      component: () => import('../views/MovieQuotes.vue'),
       meta: { requiresAuth: true },
       children: [
         {
           path: '',
           name: 'dashboard',
-          component: DashboardView
+          component: () => import('../views/DashboardView.vue')
         },
         {
           path: 'edit-profile',
           name: 'edit-profile',
-          component: ProfileEdit
+          component: () => import('../views/ProfileEdit.vue')
         },
         {
           path: 'movies-list',
           name: 'movies-list',
-          component: MoviesList
+          component: () => import('../views/MoviesList.vue')
         },
         {
           path: 'movies-list/:movieId',
           name: 'movie-show',
-          component: MovieShow
+          component: () => import('../views/MovieShow.vue')
         }
       ]
     },
     {
       name: 'error',
       path: '/error/:status',
-      component: ErrorPage
+      component: () => import('../views/ErrorPage.vue')
     }
   ],
   scrollBehavior(_, _1, savedPosition) {
