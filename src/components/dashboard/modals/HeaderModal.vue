@@ -7,7 +7,7 @@
   >
     <div
       @click.self="closeModal"
-      class="fixed inset-0 bg-black/50 z-[51] block lg:hidden no-scroll"
+      class="fixed inset-0 bg-black/50 z-[51] block lg:hidden"
       v-if="modalOpen"
     ></div>
   </Transition>
