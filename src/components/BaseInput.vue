@@ -1,13 +1,15 @@
 <template>
   <div class="flex flex-col gap-2.5 mb-4">
-    <label class="text-white" :for="id">{{ title }} <span class="text-red-main">*</span></label>
+    <label class="text-white text-sm xxs:text-base" :for="id"
+      >{{ title }} <span class="text-red-main">*</span></label
+    >
     <div class="flex flex-col relative gap-2">
       <Field
         :id="id"
         :type="inputType"
         :placeholder="placeholder"
         :name="name"
-        class="border-2 focus:border-grey-main peer text-grey-main placeholder:text-grey-main bg-grey-secondary pl-4 py-2 pr-9 outline-none rounded-[4px] text-[0.95rem] lg:text-base"
+        class="border-2 focus:border-grey-main peer text-grey-main placeholder:text-grey-main bg-grey-secondary pl-4 py-2 pr-9 outline-none rounded-[4px] text-xs xxs:text-[0.95rem] lg:text-base"
         :class="{
           'border-red-main': error,
           'border-profile-green': !error && value,
@@ -28,14 +30,14 @@
       />
 
       <ShowIcon
-        @click="passwordIsVisible = true"
+        @click="passwordIsVisible = false"
         class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
         v-if="input === 'password'"
       />
       <HideIcon
-        @click="passwordIsVisible = false"
+        @click="passwordIsVisible = true"
         class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
-        v-if="passwordIsVisible"
+        v-if="!passwordIsVisible && input === 'password'"
       />
     </div>
     <ErrorMessage class="text-red-main" :name="name" />

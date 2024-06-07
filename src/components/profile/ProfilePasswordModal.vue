@@ -38,14 +38,14 @@
             ref="passwordRef"
           />
           <ShowIcon
-            @click="passwordIsVisible = true"
-            class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
-            v-if="passwordTypeComputed === 'password'"
-          />
-          <HideIcon
             @click="passwordIsVisible = false"
             class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
             v-if="passwordIsVisible"
+          />
+          <HideIcon
+            @click="passwordIsVisible = true"
+            class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
+            v-else
           />
         </div>
       </label>
@@ -60,14 +60,14 @@
             ref="confirmPasswordRef"
           />
           <ShowIcon
-            @click="confirmPasswordIsVisible = true"
-            class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
-            v-if="confirmPasswordType === 'password'"
-          />
-          <HideIcon
             @click="confirmPasswordIsVisible = false"
             class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
             v-if="confirmPasswordIsVisible"
+          />
+          <HideIcon
+            @click="confirmPasswordIsVisible = true"
+            class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
+            v-else
           />
         </div>
       </label>

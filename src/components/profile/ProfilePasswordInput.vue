@@ -48,17 +48,17 @@
         <ErrorIcon class="absolute right-[38px] top-1/2 -translate-y-1/2" v-if="passwordError" />
         <CheckmarkIcon
           class="absolute right-[38px] top-1/2 -translate-y-1/2"
-          v-else-if="!passwordError && passwordValue"
+          v-if="!passwordError && passwordValue"
         />
         <ShowIcon
-          @click="passwordIsVisible = true"
-          class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
-          v-if="passwordTypeComputed === 'password'"
-        />
-        <HideIcon
           @click="passwordIsVisible = false"
           class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
           v-if="passwordIsVisible"
+        />
+        <HideIcon
+          @click="passwordIsVisible = true"
+          class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
+          v-else
         />
       </div>
       <ErrorMessage class="text-red-main mt-2 block w-3/4" name="password" />
@@ -84,18 +84,18 @@
         <ErrorIcon class="absolute top-1/2 -translate-y-1/2 right-[38px]" v-if="confirmError" />
         <CheckmarkIcon
           class="absolute right-[38px] top-1/2 -translate-y-1/2"
-          v-else-if="!confirmError && confirmValue"
+          v-if="!confirmError && confirmValue"
         />
 
         <ShowIcon
-          @click="confirmPasswordIsVisible = true"
-          class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
-          v-if="confirmPasswordType === 'password'"
-        />
-        <HideIcon
           @click="confirmPasswordIsVisible = false"
           class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
           v-if="confirmPasswordIsVisible"
+        />
+        <HideIcon
+          @click="confirmPasswordIsVisible = true"
+          class="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
+          v-else
         />
       </div>
       <ErrorMessage class="text-red-main mt-2 block w-3/4" name="password_confirmation" />
