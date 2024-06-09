@@ -10,7 +10,9 @@
       :quote="t('landing.movies.interstellar.quote')"
       :movie="`${t('landing.movies.interstellar.name')}, 2014`"
     >
-      <img src="@/assets/landing-image-1-mobile.png" class="lg:hidden" />
+      <div
+        class="lg:hidden w-full h-screen bg-[url('@/assets/landing-image-1-mobile.png')] bg-cover bg-top bg-no-repeat bg-fixed"
+      ></div>
 
       <div
         class="hidden lg:block bg-top w-full h-screen bg-[url('@/assets/landing-image-1-desktop.png')] bg-cover bg-no-repeat bg-fixed"
@@ -20,7 +22,9 @@
       :quote="t('landing.movies.royal_tenenbaums.quote')"
       :movie="`${t('landing.movies.royal_tenenbaums.name')}, 2001`"
     >
-      <img src="@/assets/landing-image-2-mobile.png" class="lg:hidden" />
+      <div
+        class="lg:hidden w-full h-screen bg-[url('@/assets/landing-image-2-mobile.png')] bg-cover bg-top bg-no-repeat bg-fixed"
+      ></div>
 
       <div
         class="hidden lg:block bg-top w-full h-screen bg-[url('@/assets/landing-image-2-desktop.png')] bg-cover bg-no-repeat bg-fixed"
@@ -30,7 +34,10 @@
       :quote="t('landing.movies.lotr.quote')"
       :movie="`${t('landing.movies.lotr.name')}, 2001`"
     >
-      <img src="@/assets/landing-image-3-mobile.png" class="lg:hidden" />
+      <div
+        class="lg:hidden w-full h-screen bg-[url('@/assets/landing-image-3-mobile.png')] bg-cover bg-top bg-no-repeat bg-fixed"
+      ></div>
+
       <div
         class="hidden lg:block bg-top w-full h-screen bg-[url('@/assets/landing-image-3-desktop.png')] bg-cover bg-no-repeat bg-fixed"
       ></div>
