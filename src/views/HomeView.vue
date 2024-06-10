@@ -13,6 +13,7 @@
       <div
         class="lg:hidden w-full h-screen bg-[url('@/assets/landing-image-1-mobile.png')] bg-cover bg-top bg-no-repeat bg-fixed"
       ></div>
+
       <div
         class="hidden lg:block bg-top w-full h-screen bg-[url('@/assets/landing-image-1-desktop.png')] bg-cover bg-no-repeat bg-fixed"
       ></div>
@@ -24,6 +25,7 @@
       <div
         class="lg:hidden w-full h-screen bg-[url('@/assets/landing-image-2-mobile.png')] bg-cover bg-top bg-no-repeat bg-fixed"
       ></div>
+
       <div
         class="hidden lg:block bg-top w-full h-screen bg-[url('@/assets/landing-image-2-desktop.png')] bg-cover bg-no-repeat bg-fixed"
       ></div>
@@ -35,6 +37,7 @@
       <div
         class="lg:hidden w-full h-screen bg-[url('@/assets/landing-image-3-mobile.png')] bg-cover bg-top bg-no-repeat bg-fixed"
       ></div>
+
       <div
         class="hidden lg:block bg-top w-full h-screen bg-[url('@/assets/landing-image-3-desktop.png')] bg-cover bg-no-repeat bg-fixed"
       ></div>
