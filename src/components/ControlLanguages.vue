@@ -66,12 +66,6 @@ watch(locale, (value) => {
 
 const localeCookie = Cookies.get('locale')
 
-if (localeCookie) {
-  document.documentElement.lang = localeCookie
-  locale.value = localeCookie
-  selectedOption.value = options.value.find((opt) => opt.value === locale.value)?.text || 'En'
-}
-
 function handleClickOutside(e: Event) {
   if (container.value && !container.value.contains(e.target as Node)) {
     modalShowing.value = false
@@ -79,6 +73,14 @@ function handleClickOutside(e: Event) {
 }
 
 onMounted(() => {
+  if (localeCookie) {
+    document.documentElement.lang = localeCookie
+    locale.value = localeCookie
+    selectedOption.value = options.value.find((opt) => opt.value === locale.value)?.text || 'En'
+  } else
+    Cookies.set('locale', 'en', {
+      domain: import.meta.env.VITE_SHARED_DOMAIN
+    })
   document.addEventListener('click', handleClickOutside)
 })
 

@@ -3,7 +3,7 @@
     class="bg-gradient-to-r from-dark-main via-[#08080D] to-[#08080D] from-100% via-100% to-0%"
   >
     <nav class="flex justify-between py-4 px-7 lg:px-14 items-center">
-      <h1 class="uppercase text-main font-semibold text-lg">movie quotes</h1>
+      <h1 class="uppercase text-main font-semibold lg:text-lg">movie quotes</h1>
       <div class="flex items-center gap-4">
         <ControlLanguages />
         <HomeAuthModals />

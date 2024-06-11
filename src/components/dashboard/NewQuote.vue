@@ -160,7 +160,7 @@ import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/AuthStore'
 import { useForm, Field, ErrorMessage } from 'vee-validate'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import * as yup from 'yup'
 import { computed } from 'vue'
 import { useMoviesStore } from '@/stores/MoviesStore'
@@ -168,6 +168,7 @@ import { addQuote } from '@/services/api/quotes'
 import type { Language, Movies, Quote } from '@/types'
 import { useQuotesStore } from '@/stores/QuotesStore'
 import { useRoute } from 'vue-router'
+import { MAX_FILE_SIZE } from '@/helpers/fileSize'
 
 const emit = defineEmits<{
   (e: 'close-modal'): void
@@ -207,7 +208,13 @@ const schema = computed(() =>
           t('validation.movie_form_validation.regex_ka')
         )
     }),
-    image: yup.mixed().required(t('validation.movie_form_validation.image'))
+    image: yup
+      .mixed()
+      .required(t('validation.movie_form_validation.image'))
+      .test('fileSize', t('size_too_big'), (value) => {
+        if (!value) return true
+        return (value as File).size <= MAX_FILE_SIZE
+      })
   })
 )
 
@@ -268,4 +275,8 @@ function onDrop(event: DragEvent) {
     setFieldValue('image', files[0])
   }
 }
+
+watch(errors, (val) => {
+  if (val.image && val.image === t('size_too_big')) console.error(val)
+})
 </script>

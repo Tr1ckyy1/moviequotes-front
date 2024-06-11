@@ -84,10 +84,7 @@ const authStore = useAuthStore()
 const router = useRouter()
 
 const schema = yup.object().shape({
-  user: yup
-    .string()
-    .required(t('validation.auth.email.required'))
-    .min(3, t('validation.auth.username.min')),
+  user: yup.string().required(t('auth.required_all')).min(3, t('validation.auth.username.min')),
   password: yup.string().trim().required(t('validation.auth.password.required'))
 })
 

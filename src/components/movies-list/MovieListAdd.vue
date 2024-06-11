@@ -212,6 +212,8 @@ import type { Category, Language, MovieData } from '@/types'
 import { useAuthStore } from '@/stores/AuthStore'
 import * as yup from 'yup'
 import { computed } from 'vue'
+import { MAX_FILE_SIZE } from '@/helpers/fileSize'
+import { watch } from 'vue'
 
 const { userData } = storeToRefs(useAuthStore())
 const moviesStore = useMoviesStore()
@@ -284,7 +286,13 @@ const schema = computed(() =>
       .required(t('validation.movie_form_validation.year.required'))
       .min(1900, t('validation.movie_form_validation.year.min'))
       .max(new Date().getFullYear(), t('validation.movie_form_validation.year.max')),
-    image: yup.mixed().required(t('validation.movie_form_validation.image'))
+    image: yup
+      .mixed()
+      .required(t('validation.movie_form_validation.image'))
+      .test('fileSize', t('size_too_big'), (value) => {
+        if (!value) return true
+        return (value as File).size <= MAX_FILE_SIZE
+      })
   })
 )
 
@@ -349,4 +357,8 @@ function onDrop(event: DragEvent) {
     setFieldValue('image', files[0])
   }
 }
+
+watch(errors, (val) => {
+  if (val.image && val.image === t('size_too_big')) console.error(val)
+})
 </script>

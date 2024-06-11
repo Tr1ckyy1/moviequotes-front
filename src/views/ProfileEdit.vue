@@ -155,6 +155,7 @@ import { computed } from 'vue'
 import LoadingPage from '@/ui/LoadingPage.vue'
 import defaultAvatar from '@/assets/avatar-big.png'
 import { logout } from '@/services/api/auth'
+import { MAX_FILE_SIZE } from '@/helpers/fileSize'
 
 const { t, locale } = useI18n()
 
@@ -269,16 +270,26 @@ function closeEditPassword() {
 }
 
 function changeImage(event: InputEvent) {
-  if (window.innerWidth > 1024) {
-    const target = event.target as HTMLInputElement
-    if (target.files && target.files[0]) {
+  const target = event.target as HTMLInputElement
+  if (target.files && target.files[0]) {
+    if (target.files[0].size > MAX_FILE_SIZE) {
+      authStore.setToast({
+        open: true,
+        text: t('size_too_big'),
+        mode: 'error'
+      })
+      resetField('profile_image')
+      if (imageRef.value) imageRef.value.src = authStore.userData?.profile_image ?? defaultAvatar
+      return
+    }
+    if (window.innerWidth > 1024) {
       const reader = new FileReader()
       reader.onload = function (e) {
         if (imageRef.value && e.target) imageRef.value.src = e.target.result as string
       }
       reader.readAsDataURL(target.files[0])
-    }
-  } else upload()
+    } else upload()
+  }
 }
 
 watch(locale, () => {

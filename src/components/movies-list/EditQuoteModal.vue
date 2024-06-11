@@ -133,6 +133,7 @@ import {
 } from '@/services/api/quotes'
 import { useRoute } from 'vue-router'
 import TrashIcon from '../icons/TrashIcon.vue'
+import { MAX_FILE_SIZE } from '@/helpers/fileSize'
 
 const { t } = useI18n()
 const quotesStore = useQuotesStore()
@@ -157,6 +158,10 @@ const schema = computed(() =>
           /^[\u10A0-\u10FF0-9\s.,:;'"?!`()-]+$/,
           t('validation.movie_form_validation.regex_ka')
         )
+    }),
+    image: yup.mixed().test('fileSize', t('size_too_big'), (value) => {
+      if (!value) return true
+      return (value as File).size <= MAX_FILE_SIZE
     })
   })
 )
