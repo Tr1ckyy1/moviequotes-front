@@ -3,13 +3,13 @@
   <div class="flex items-center gap-4">
     <button
       @click="modalStore.openSignupModal"
-      class="text-white border border-red-main bg-red-main py-1.5 px-3 rounded-[4px] whitespace-nowrap lg:hover:bg-white lg:hover:text-red-main lg:hover:duration-300"
+      class="text-white text-sm lg:text-base border border-red-main bg-red-main py-1.5 px-3 rounded-[4px] whitespace-nowrap lg:hover:bg-white lg:hover:text-red-main lg:hover:duration-300"
     >
       {{ $t('auth.header_signup_text') }}
     </button>
     <button
       @click="modalStore.openLoginModal"
-      class="text-white border border-white py-1.5 px-3 rounded-[4px] whitespace-nowrap lg:hover:bg-white lg:hover:text-black lg:duration-300"
+      class="text-white text-sm lg:text-base border border-white py-1.5 px-3 rounded-[4px] whitespace-nowrap lg:hover:bg-white lg:hover:text-black lg:duration-300"
     >
       {{ $t('auth.header_login_text') }}
     </button>

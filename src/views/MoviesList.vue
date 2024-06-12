@@ -38,7 +38,7 @@
           >
             <span class="text-lg">+</span>
           </div>
-          <button>
+          <button class="whitespace-nowrap">
             {{ t('list.add_movie_button') }}
           </button>
         </div>

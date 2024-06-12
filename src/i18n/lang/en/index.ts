@@ -25,6 +25,7 @@ const translations = {
   notifications,
   errors,
   loading: 'Loading',
+  size_too_big: 'Selected image size is too big',
   error: 'Error'
 }
 

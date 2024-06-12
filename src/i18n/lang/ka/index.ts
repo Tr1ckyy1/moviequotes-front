@@ -25,6 +25,8 @@ const translations = {
   notifications,
   errors,
   loading: 'იტვირთება',
+  size_too_big: 'არჩეული სურათის ზომა ძალიან დიდია',
+
   error: 'შეცდომა'
 }
 

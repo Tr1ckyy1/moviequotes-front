@@ -315,6 +315,8 @@ import * as yup from 'yup'
 import { computed } from 'vue'
 import { onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { MAX_FILE_SIZE } from '@/helpers/fileSize'
+import { watch } from 'vue'
 
 const { userData } = storeToRefs(useAuthStore())
 
@@ -388,7 +390,11 @@ const schema = computed(() =>
       .typeError(t('validation.movie_form_validation.year.number'))
       .required(t('validation.movie_form_validation.year.required'))
       .min(1900, t('validation.movie_form_validation.year.min'))
-      .max(new Date().getFullYear(), t('validation.movie_form_validation.year.max'))
+      .max(new Date().getFullYear(), t('validation.movie_form_validation.year.max')),
+    image: yup.mixed().test('fileSize', t('size_too_big'), (value) => {
+      if (!value) return true
+      return (value as File).size <= MAX_FILE_SIZE
+    })
   })
 )
 
@@ -463,5 +469,9 @@ onMounted(() => {
   if (props.movie && props.movie.categories) {
     categoriesChosen.value = props.movie.categories.slice()
   }
+})
+
+watch(errors, (val) => {
+  if (val.image && val.image === t('size_too_big')) console.error(val)
 })
 </script>
